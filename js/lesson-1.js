@@ -36,7 +36,8 @@ console.log(fruits.concat(arrayC)); //Метод concat(arr1, arr2, ..., arrN) �
 //* порожній масив, якщо в array немає елемента зі значенням value
 // підмасив, що починається з початку array і до елемента зі значенням value включно
 function getSlice(array, value) { return array.slice(0, (array.indexOf(value)) + 1) }
-console.log(getSlice(["Mango", "Poly", "Ajax"], "Poly")); // повертає `["Mango", "Poly", "Ajax"]`
+console.log(getSlice(["Mango", "Poly", "Ajax"], "Poly")); // повертає `["Mango", "Poly"]`
+
 
 /// array.push(element1, element2, ..., elementN);
 // array — це вихідний масив, до якого потрібно додати елементи;
@@ -60,3 +61,62 @@ function getEvenNumbers(start, end) {
 }
 
 console.log(getEvenNumbers(2,4)); // 6
+
+//
+// function getCommonElements(array1, array2) {
+//     const newArray = []
+//     for (const element1 of array1) {
+//         for (const element2 of array2) {
+//             element1 === element2 ? newArray.push(element1) : element1
+//         }
+//     }
+// return newArray
+// }
+// console.log(getCommonElements([1, 2, 3], [2, 1, 17, 19])); // повертає [1, 2]
+
+
+//* Створи порожній масив для зберігання нового масиву.
+// Використай цикл for для ітерації кожного елемента у array1.
+// У тілі циклу перевір, чи поточний елемент існує у array2 за допомогою методу includes.
+// Якщо він існує, то додай елемент до нового масиву.
+// Поверни наповнений масив спільних елементів як результат роботи функції.
+
+//
+function getCommonElements1(array1, array2) {
+    const newArray = []
+    for (const element of array1) { array2.includes(element) ? newArray.push(element) : element }
+return newArray
+}
+console.log(getCommonElements1([1, 2, 3], [2, 1, 17, 19, 1])); // повертає [1, 2]
+
+//
+function getCommonElements3(array1, array2) {
+    return array1.filter(function(element) { return array2.includes(element) })}
+
+console.log(getCommonElements3([1, 2, 3], [2, 1, 17, 19, 1])); // [1, 2]
+
+//
+function getCommonElements4(array1, array2) {
+    return array1.filter(function(element) { return array2.includes(element) })}
+
+console.log(getCommonElements4([1, 2, 3], [2, 1, 17, 19,1 ])); // [1, 2]
+
+// швидка перевірка через Set
+function getCommonElements5(array1, array2) {
+    var set2 = new Set(array2) // Тільки один Set для швидкого пошуку
+    return array1.filter(function(element) {
+        return set2.has(element) // O(1) перевірка наявності
+    })
+}
+console.log((getCommonElements5([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
+console.table((getCommonElements5([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
+
+// Якщо масиви дуже великі, можна повернути Set замість масиву
+function getCommonElements6(array1, array2) {
+    var set2 = new Set(array2) // Тільки один Set для швидкого пошуку
+    return new Set (array1.filter(function(element) {
+        return set2.has(element) // O(1) перевірка наявності
+    }))
+}
+console.log((getCommonElements6([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
+console.table((getCommonElements6([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
