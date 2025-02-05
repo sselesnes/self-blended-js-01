@@ -138,7 +138,11 @@ function calculateTotalPrice1(order) {
   }
 console.log(calculateTotalPrice1([12, 85, 37, 4]));
 
-// .map() .filter() .forEach() .reduce
+// .map()	Створює новий масив, трансформуючи кожен елемент
+// .filter()	Створює новий масив, відбираючи елементи за умовою
+// .forEach()	Виконує дію для кожного елемента, не повертає значення
+// .reduce()	Зводить масив до одного значення (сума, об'єкт, рядок тощо)
+
 // .reduce() - https://chatgpt.com/share/67a30b89-0f08-8006-9ac6-94a1638ae191
 function calculateTotalPrice2(order) {
     return order.reduce((total, element) => total + element, 0);
