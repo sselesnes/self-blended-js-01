@@ -10,6 +10,10 @@ const apartment = {
     email: "henry.carter@aptmail.com",
   },
 };
+const firstTag = apartment.tags[0];
+const aptRating = apartment["rating"];
+apartment.tags.push("trusted");
+apartment.rating = 4.7;
 apartment.area = 60;
 apartment.rooms = 3;
 apartment.location = {
