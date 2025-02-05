@@ -108,8 +108,8 @@ function getCommonElements5(array1, array2) {
         return set2.has(element) // O(1) перевірка наявності
     })
 }
-console.log((getCommonElements5([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
-console.table((getCommonElements5([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
+console.log((getCommonElements5([1, 5, 2], [2, 1,  17, 3, 19, 5]))); // [1, 2]
+console.table((getCommonElements5([1, 5, 2], [2, 1,  17, 3, 19, 5]))); // [1, 2]
 
 // Якщо масиви дуже великі, можна повернути Set замість масиву
 function getCommonElements6(array1, array2) {
@@ -118,5 +118,36 @@ function getCommonElements6(array1, array2) {
         return set2.has(element) // O(1) перевірка наявності
     }))
 }
-console.log((getCommonElements6([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
-console.table((getCommonElements6([1, 2, 3], [2, 1, 17, 19]))); // [1, 2]
+console.log((getCommonElements6([1, 5, 2], [2, 1,  17, 3, 19, 5]))); // [1, 2]
+console.table((getCommonElements6([1, 5, 2], [2, 1, 17, 3, 19, 5]))); // [1, 2]
+
+//
+function getCommonElements7(array1, array2) {
+const newSet = new Set(array2);
+    return array1.filter(newSet.has, newSet)
+}
+
+console.log((getCommonElements7([1, 5, 2], [2, 1, 17, 3, 19, 5]))); // [1, 2]
+console.table((getCommonElements7([1, 5, 2], [2, 1, 17, 3, 19, 5]))); // [1, 2]
+
+//
+function calculateTotalPrice1(order) {
+    let calc = 0
+    for (const element of order) { calc += element }
+    return calc
+  }
+console.log(calculateTotalPrice1([12, 85, 37, 4]));
+
+// .map() .filter() .forEach() .reduce
+// .reduce() - https://chatgpt.com/share/67a30b89-0f08-8006-9ac6-94a1638ae191
+function calculateTotalPrice2(order) {
+    return order.reduce((total, element) => total + element, 0);
+}
+console.log(calculateTotalPrice2([412, 371, 94, 63, 176]));
+
+//
+function calculateTotalPrice3(order) {
+    return order.reduce(function(accumulator, element) {return accumulator + element});}
+
+console.log(calculateTotalPrice3([412, 371, 94, 63, 176])); // 1116
+
