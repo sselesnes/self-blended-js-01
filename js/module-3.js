@@ -82,6 +82,8 @@ function getLastElementMeta(array) {
 // console.log(b); // ["Mango", "Jacob"]
 
 // == Два масиви ніколи не дорівнюють один одному, навіть якщо вони порожні або в них однакові елементи.
+alert(`//Два масиви ніколи не дорівнюють один одному`);
+//
 const arr1 = [1, 2, 3];
 const arr2 = [1, 2, 3];
 console.log(arr1 === arr2); // false
