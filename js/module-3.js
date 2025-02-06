@@ -1,7 +1,99 @@
+// init
+function alert(args) {
+  console.log(args);
+}
+
+//* Масиви
+alert(`// Масиви`);
+// numbers.push(calc); // Додаємо числа до масиву
+
+function getShippingCost(country) {
+  let price = null;
+  const countries = {
+    name: [`China`, `Chile`, `Australia`, `Jamaica`],
+    cost: [100, 250, 170, 120],
+  };
+
+  let count = 0;
+  while (countries.name[count]) {
+    switch (countries.name[count]) {
+      case country:
+        price = countries.cost[count];
+        return `Shipping to ${country} will cost ${price} credits`;
+      default:
+        count++;
+    }
+  }
+  return `Sorry, there is no delivery to your country`;
+}
+
+console.log(getShippingCost("Australia")); // "Shipping to Australia will cost 170 credits"
+console.log(getShippingCost("Germany")); // "Sorry, there is no delivery to your country"
+console.log(getShippingCost("China")); // "Shipping to China will cost 100 credits"
+console.log(getShippingCost("Chile")); // "Shipping to Chile will cost 250 credits"
+console.log(getShippingCost("Jamaica")); // "Shipping to Jamaica will cost 120 credits"
+console.log(getShippingCost("Sweden")); // "Sorry, there is no delivery to your country"
+
+// Масив — це впорядкована структура даних, яка використовується для зберігання колекції елементів. Масиви можуть містити елементи різних типів даних, таких як числа, рядки, булеві значення тощо.
+
+// == Для створення масиву в JavaScript використовується літерал масиву: квадратні дужки []. Усередині дужок перераховуються елементи масиву, розділені комами. Ось приклад створення масиву:
+
+//
+const planets = ["Earth", "Mars", "Venus", "Uranus"];
+console.log(planets[0]); // 'Earth'
+console.log(planets[1]); // 'Mars'
+console.log(planets[2]); // 'Venus'
+
+// == Спроба доступу до неіснуючого індексу поверне значення undefined.
+console.log(planets[3]); // undefined
+console.log(planets[999]); // undefined
+
+// == Перевизначення значення елемента
+
+// Елементи масиву можна змінювати, звернувшись до них за індексом і присвоївши нове значення. Цей процес називається "перевизначенням" значення елемента.
+
+planets[0] = "Jupiter";
+planets[2] = "Neptune";
+console.log(planets); // ['Jupiter', 'Mars', 'Neptune', 'Uranus']
+
+// == Довжина масиву
+
+// Довжина масиву, тобто кількість його елементів, зберігається у властивості length. Це динамічна величина, яка автоматично змінюється під час додавання або видалення елементів.
+
+// *** Функція getLastElementMeta(array) приймає один параметр array - масив довільних значень. Доповни код функції таким чином, щоб вона повертала новий масив з двох елементів:
+// перший елемент - це індекс останнього елементу у масиві array
+// другий елемент - це значення останнього елементу у масиві array
+function getLastElementMeta(array) {
+  return [array.length - 1, array[array.length - 1]];
+}
+
+// == Присвоєння за посиланням і за значенням
+// by value - примітиви: рядки, числа, буль, null і undefined, під час присвоювання копіюються цілком, за значенням (by value).
+
+// by reference - у змінній, якій, наприклад, присвоєно масив, зберігаються не самі значення елементів масиву, а адреса того місця в пам'яті, де цей масив розташовано. Іншими словами — посилання (покажчик) на нього.
+// Отже, вони передаються за посиланням (by reference).
+
+// const a = ["Mango", "Poly"];
+// const b = a;
+// console.log(a); // ["Mango", "Poly"]
+// console.log(b); // ["Mango", "Poly"]
+// a[1] = "Jacob";
+// console.log(a); // ["Mango", "Jacob"]
+// console.log(b); // ["Mango", "Jacob"]
+
+// == Два масиви ніколи не дорівнюють один одному, навіть якщо вони порожні або в них однакові елементи.
+alert(`//Два масиви ніколи не дорівнюють один одному`);
+//
+const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+console.log(arr1 === arr2); // false
+console.log([] === []); // false
+
 // message.toLowerCase();
 // message.toUpperCase();
 
 // split slice join trim
+alert(`// split slice join trim`);
 //
 const arrayB = [1, true, "Poly"];
 console.log(arrayB.length);
@@ -219,3 +311,21 @@ function filterArray2(numbers, value) {
   //   );
 }
 console.log(filterArray2([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+
+function foo(array) {
+  // порівнюються за посиланням, а не за вмістом
+  console.log(array === number);
+  // Порівняння масивів за вмістом
+  console.log(JSON.stringify(array) === JSON.stringify(number));
+  // const arr = Array.from(array);  // Створюємо копію масиву
+  const arr = array.slice(); // Створюємо копію масиву
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] *= 2; // Подвоюємо кожен елемент
+  }
+  return arr; // Повертаємо модифікований масив
+}
+const number = [1, 2, 3, 4, 5];
+console.log(foo(number)); // Виведе: [2, 4, 6, 8, 10]
+console.log(number); // Виведе: [1, 2, 3, 4, 5] (оригінальний масив не змінився)
+
+//
