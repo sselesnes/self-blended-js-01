@@ -132,3 +132,18 @@ copyHenry.nested.method(33);
 
 copyHenry.greet(); // 'Hello!' - доступ до методу через прототип
 console.log(copyHenry.nested.number); // 42 - доступ через прототип
+
+// Підрахувати всі values
+function countTotalSalary(salaries) {
+  return (
+    Object.keys(salaries).length && // якщо у об'єкті нема пар "ключ/значення" (key/value) , тобто `властивостей` або `записів`(property/entry) === {} повертаємо 0
+    (salaries.totalSalary = Object.values(salaries).reduce(
+      (acc, num) => acc + num
+    ))
+  );
+}
+
+console.log(countTotalSalary({ mango: 100, poly: 150, alfred: 80 }));
+console.log(countTotalSalary({})); // повертає 0
+
+///* Масив об’єктів
