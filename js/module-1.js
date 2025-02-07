@@ -94,3 +94,5 @@ console.log(someFunction(3, 5));
 
 // arrow function (фіксований this)
 const findNumber = (a, b, c) => {};
+
+x * y * z;
