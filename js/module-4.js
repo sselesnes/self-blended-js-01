@@ -109,6 +109,7 @@ console.log(`new ${copyHenry.fullName} vs old ${createHenry.fullName} `); // 'Jo
 copyHenry.greet = function () {
   console.log("Hello!");
 };
+copyHenry.greet(); // 'Hello!' - доступ до методу через прототип
 
 // Додавання вкладеного method (функція, яка є частиною вкладеного об'єкта, і викликається через цей вкладений об'єкт)
 // Різниця в тому, що вкладені методи організовані в більш складну структуру, що дозволяє краще групувати пов'язані дані й функції, тоді як функції, що додаються безпосередньо до об'єкта, є більш прямими та простими.
@@ -130,20 +131,45 @@ copyHenry.nested = {
 };
 copyHenry.nested.method(33);
 
-copyHenry.greet(); // 'Hello!' - доступ до методу через прототип
 console.log(copyHenry.nested.number); // 42 - доступ через прототип
 
-// Підрахувати всі values
-function countTotalSalary(salaries) {
-  return (
-    Object.keys(salaries).length && // якщо у об'єкті нема пар "ключ/значення" (key/value) , тобто `властивостей` або `записів`(property/entry) === {} повертаємо 0
-    (salaries.totalSalary = Object.values(salaries).reduce(
-      (acc, num) => acc + num
-    ))
-  );
-}
+// Сворюємо метод об'єкту (прототип) для підрахування всіх values об'єкту
+const salaries = { mango: 100, poly: 150, alfred: 80 };
 
-console.log(countTotalSalary({ mango: 100, poly: 150, alfred: 80 }));
-console.log(countTotalSalary({})); // повертає 0
+Object.defineProperty(salaries, "totalSalary", {
+  value: function () {
+    return (
+      Object.keys(salaries).length &&
+      Object.values(salaries).reduce((acc, num) => acc + num, 0)
+    );
+  },
+  enumerable: false, // Робить метод невидимим при логуванні і не включає його в Object.values()
+});
+
+const total = salaries.totalSalary();
+console.log(total); // Виведе: 330
+console.log(salaries); // Виведе: { mango: 100, poly: 150, alfred: 80 }
+
+// Object.prototype — це об'єкт, від якого успадковуються всі об'єкти в JavaScript.
+// Методи, додані до Object.prototype, стають доступними для всіх об'єктів. Наприклад, методи hasOwnProperty, toString і valueOf є методами Object.prototype.
+// Якщо ви додасте метод до Object.prototype, він буде доступний для всіх об'єктів, що може бути корисно, але також може призвести до конфліктів імен, якщо не бути обережним.
+
+Object.prototype.customMethod = function () {
+  console.log("Це власний метод для всіх об'єктів");
+};
+let obj = {};
+obj.customMethod(); // Це власний метод для всіх об'єктів
+
+// Object — це конструктор, який використовується для створення нових об'єктів.
+// Методи, додані безпосередньо до Object, не успадковуються об'єктами, створеними цим конструктором. Ці методи зазвичай є статичними і використовуються для виконання операцій на об'єктах.
+// Приклади таких методів включають Object.keys, Object.assign, Object.create тощо.
+
+let obj = Object.create({});
+Object.myStaticMethod = function () {
+  console.log("Це статичний метод об'єкта");
+};
+
+// Object.myStaticMethod(); // Це статичний метод об'єкта
+// obj.myStaticMethod(); // Помилка: obj.myStaticMethod не є функцією
 
 ///* Масив об’єктів
