@@ -157,19 +157,18 @@ console.log(salaries); // Виведе: { mango: 100, poly: 150, alfred: 80 }
 Object.prototype.customMethod = function () {
   console.log("Це власний метод для всіх об'єктів");
 };
-let obj = {};
-obj.customMethod(); // Це власний метод для всіх об'єктів
+let objC = {};
+objC.customMethod(); // Це власний метод для всіх об'єктів
 
 // Object — це конструктор, який використовується для створення нових об'єктів.
 // Методи, додані безпосередньо до Object, не успадковуються об'єктами, створеними цим конструктором. Ці методи зазвичай є статичними і використовуються для виконання операцій на об'єктах.
 // Приклади таких методів включають Object.keys, Object.assign, Object.create тощо.
 
-let obj = Object.create({});
+let objS = Object.create({});
 Object.myStaticMethod = function () {
   console.log("Це статичний метод об'єкта");
 };
-
-// Object.myStaticMethod(); // Це статичний метод об'єкта
+Object.myStaticMethod(); // Це статичний метод об'єкта
 // obj.myStaticMethod(); // Помилка: obj.myStaticMethod не є функцією
 
 ///* Масив об’єктів
