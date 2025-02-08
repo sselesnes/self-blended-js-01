@@ -1,6 +1,6 @@
 // init
 function alert(args) {
-  console.log(args);
+  console.log(`%c${args}`, "color: yellow;");
 }
 
 //* Масиви

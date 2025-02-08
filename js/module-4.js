@@ -1,6 +1,6 @@
 // init
 function alert(args) {
-  console.log(args);
+  console.log(`%c${args}`, "color: yellow;");
 }
 
 // короткі властивості (shorthand properties)
@@ -52,7 +52,16 @@ createHenry.credentials = {
   [passwordInputName]: "jqueryismyjam",
 };
 
-//* Цикл for...in // for (key in object) { інструкції }
+//* Цикл for...in
+// for (key in object) { інструкції }
+// використовується для ітерації по ключах (властивостях) об'єкта.
+// перебирає всі перераховані властивості об'єкта, включаючи успадковані властивості (якщо вони перераховані) та Object.prototype.
+
+//* Цикл for...of
+// for (value of iterable) { інструкції }
+// використовується для ітерації по значеннях ітерованих об'єктів - масиви, рядки, Map, Set тощо.
+// перебирає значення (values) колекції, а не її ключі (keys).
+
 alert(`// Цикл for...in`);
 //
 
@@ -160,6 +169,10 @@ Object.prototype.customMethod = function () {
 let objC = {};
 objC.customMethod(); // Це власний метод для всіх об'єктів
 
+// Якщо Ви не хочете, щоб customMethod впливав на всі об'єкти, видаліть його:
+// delete Object.prototype.customMethod;
+// Але якщо customMethod потрібен для інших об'єктів, краще використовувати методи for...of або hasOwnProperty.
+
 // Object — це конструктор, який використовується для створення нових об'єктів.
 // Методи, додані безпосередньо до Object, не успадковуються об'єктами, створеними цим конструктором. Ці методи зазвичай є статичними і використовуються для виконання операцій на об'єктах.
 // Приклади таких методів включають Object.keys, Object.assign, Object.create тощо.
@@ -172,3 +185,37 @@ Object.myStaticMethod(); // Це статичний метод об'єкта
 // obj.myStaticMethod(); // Помилка: obj.myStaticMethod не є функцією
 
 ///* Масив об’єктів
+
+// Перебери масив об'єктів colors, використовуючи цикл for...of. Додай у масив hexColors значення властивостей hex, а в масив rgbColors - значення властивостей rgb з усіх об'єктів масиву colors.
+//
+const colors = [
+  { hex: "#f44336", rgb: "244,67,54" },
+  { hex: "#2196f3", rgb: "33,150,243" },
+  { hex: "#4caf50", rgb: "76,175,80" },
+  { hex: "#ffeb3b", rgb: "255,235,59" },
+];
+
+//
+alert(`for value of object => Colors1`);
+const hexColors1 = [];
+const rgbColors1 = [];
+
+for (const color of colors) {
+  console.log(color);
+  if ("hex" in color) hexColors1.push(color.hex);
+  if ("rgb" in color) rgbColors1.push(color.rgb);
+}
+
+//
+alert(`for index in array => Colors2`);
+const hexColors2 = [];
+const rgbColors2 = [];
+
+for (const color in colors) {
+  if (Object.prototype.hasOwnProperty.call(colors, color)) {
+    console.log(color);
+    if ("hex" in colors[color]) hexColors2.push(colors[color].hex);
+    if ("rgb" in colors[color]) rgbColors2.push(colors[color].rgb);
+  }
+}
+alert(`Colors1 [${hexColors1.length}] == Colors2 [${hexColors2.length}]`);

@@ -1,6 +1,6 @@
 // init
 function alert(args) {
-  console.log(args);
+  console.log(`%c${args}`, "color: yellow;");
 }
 
 //* вивчити принцип роботи розгалужень та розрізняти інструкції з if, оператор switch, if {} // else if {}

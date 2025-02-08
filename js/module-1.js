@@ -1,6 +1,6 @@
 // init
 function alert(args) {
-  console.log(args);
+  console.log(`%c${args}`, "color: yellow;");
 }
 
 //* змінна та вміти оголошувати за допомогою const та let і перевизначати змінні;
