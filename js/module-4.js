@@ -249,10 +249,11 @@ function getProduct(productName, func) {
 
 switch (func) {
     case `avgPrice`:      
-        const filteredProducts = products.filter((product) => product.name === productName);
+        let filteredProducts = products.filter((product) => product.name === productName);
+        if (filteredProducts.length == 0) {filteredProducts = products;}
         const total = filteredProducts.reduce((acc, product) => acc + product.price, 0);
         const count = filteredProducts.length;
-                return count > 0 ? Math.floor(total / count) : null;
+        return count > 0 ? Math.floor(total / count) : null;
        
     case `price` :
         return (products.find((product) => product.name === productName) || { price: null }).price;
@@ -278,9 +279,9 @@ const products = [
   { name: "Droid", price: 700, quantity: 3 },
 ];
 
-alert(`object. find filter map reduce`)
+alert(`object. filter reduce find map`)
 console.log(getProduct("Droid", `price`)); // повертає ціну)
 console.log(getProduct("Grip", `name`)); // повертає всі записи name)
 console.log(getProduct("Droid", 1000)); // змінює всі ціни name )
-console.log(getProduct("Grip", `avgPrice`)); // обчислення середньої ціни
+console.log(getProduct("Gripp", `avgPrice`)); // обчислення середньої ціни
 
