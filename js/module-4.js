@@ -365,13 +365,16 @@ function getAllPropValues(propName) {
   //
   // products.map(object => object[propName]) ми сворюємо масив з object[propName] або з undefined якщо у масиві об'єктів нема propName і одразу передаємо цей масив до .filter - який створює з нього новий масив але без undefined
   
+  // exaple 1.1
+  // const result = []
+  // for (const object of products) {      
+  //       (propName in object) && (result.push(object[propName]))}
+
   // exaple 1
   // const result = []
   // for (const object of products) {
-  //      (object[propName] !== undefined) && result.push(object[propName])
-  ///       (propName in object) && (result.push(object[propName]))
-  // }
-  // return result
+  //      (object[propName] !== undefined) && result.push(object[propName])}
+  return result
 }
 console.log(getAllPropValues("name")); //    повертає ["Radar", "Scanner", "Droid", "Grip"]
 console.log(getAllPropValues("price")); //    повертає [1300, 2700, 400, 1200]
