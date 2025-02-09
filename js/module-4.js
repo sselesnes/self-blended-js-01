@@ -249,7 +249,7 @@ function getProduct(productName, func) {
 
 switch (func) {
     case `avgPrice`:      
-    // деструктуризація об'єкта - ми відразу отримуємо total та count в окремій змінній
+    // ми отримуємо відповідь у вигляді об'єкта та робимо деструктуризацію total та count у окремі змінні
     const { total, count } = products.reduce((acc, product) => {
           if (product.name === productName || acc.count === 0) {acc.total += product.price; acc.count += 1;}
           return acc;
