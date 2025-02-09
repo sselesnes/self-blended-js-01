@@ -249,14 +249,14 @@ function getProduct(productName, func) {
 
 switch (func) {
     case `avgPrice`:      
-    // ми отримуємо відповідь у вигляді об'єкта та робимо деструктуризацію total та count у окремі змінні
+    // ми отримуємо відповідь у вигляді об'єкта та робимо його деструктуризацію у окремі змінні total та count
     const { total, count } = products.reduce((acc, product) => {
-          if (product.name === productName || acc.count === 0) {acc.total += product.price; acc.count += 1;}
-          return acc;
+      if (product.name === productName) {acc.total += product.price; acc.count += 1;}
+      return acc;
       },
-    // перший аргумент .reduce це аккумулятор acc, другий це масив
-    // .reduce (acc, product) => {expression}, {початковий акумулятор acc}
-    // тобто { total: 0, count: 0 } це буде acc на виході .reduce та він піде у const { total, count } наприкінці
+    // .reduce (acc, product) => {expression}, {акумулятор acc},
+    // другий аргумент .reduce це аккумулятор acc, якому на початку метода .reduce присвоюється 
+    // значення acc = {total: 0, count: 0}, а на виході .reduce він через деструктурізацію піде у const {total, count}
       { total: 0, count: 0 }
   );
   return Math.floor(total / count);
@@ -303,7 +303,7 @@ const { count: countA, total: totalA } = (() => {
   let count = 10;
   let total = 0;
   for (; count > 0; total += count--) {}
-  return { count, total }; // Повертаємо об'єкт для деструктуризації
+  return { count, total }; // Повертаємо результати у вигляді об'єкта
 })();
 
 console.log(countA, totalA); //
