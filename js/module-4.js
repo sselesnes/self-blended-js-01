@@ -364,10 +364,11 @@ function getAllPropValues(propName) {
   // }
   // return result
 }
-
 console.log(getAllPropValues("name")); //    повертає ["Radar", "Scanner", "Droid", "Grip"]
 console.log(getAllPropValues("price")); //    повертає [1300, 2700, 400, 1200]
 
+//
+alert(`calculateTotalPrice`)
 function calculateTotalPrice(productName) {
   const products = [
     { name: "Radar", price: 1300, quantity: 4 },
@@ -381,5 +382,5 @@ function calculateTotalPrice(productName) {
       // reduce() працює так, що кожна ітерація змінює акумулятор (в даному випадку — totalAmount), і якщо після першого збігу акумулятор вже змінився від дефолтного, який задаємо у .reduce(accumulator, key) => (expression), accumulatorDefault - то на наступних ітераціях accumulator вже не змінюється. Таким чином, якщо перший продукт знайдений, він тримає результат і в нашому випадку в наступних ітераціях не змінюється (адже вони вже не оновлюматимуть accumulator бо не буде збігов по productName).
   );
 }
-
-console.log(calculateTotalPrice("Radar"));
+console.log(calculateTotalPrice("Grip"));
+console.log(calculateTotalPrice("Mordor"));
