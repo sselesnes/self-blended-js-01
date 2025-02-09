@@ -219,3 +219,68 @@ for (const color in colors) {
   }
 }
 alert(`Colors1 [${hexColors1.length}] == Colors2 [${hexColors2.length}]`);
+
+// JSON (JavaScript Object Notation), XML (eXtensible Markup Language), бінарна серіалізація.
+// Серіалізація дозволяє зберігати складні об'єкти в текстовому або бінарному форматі, який можна легко передати або зберегти.
+// JSON.parse не може обробити функції, undefined, або спеціальні типи даних, такі як Date або RegExp.Якщо ваш об'єкт містить такі дані, вони будуть втрачені при серіалізації та десеріалізації.
+
+// Серіалізація об'єкта у string для передачі
+const objectUser = { name: "Alice", age: 25 };
+const jsonString = JSON.stringify(objectUser);
+console.log(jsonString); // {"name":"Alice","age":25}
+
+// Десеріалізація - серіалізованому string повернуто формат об'єкта
+const objectParse = JSON.parse(jsonString);
+console.log(objectParse); // {name: `Alice`, age: 25}
+
+// шукає об'єкт продукту з певним ім'ям (властивість name) в масиві products і повертала його ціну (властивість price). Якщо продукт з такою назвою не знайдений, функція повинна повертати null.
+//
+function getProduct(productName, func) {
+    
+  // example 1
+  //   for (const product of products) {
+  //     if (product.name === productName) return product.price;
+  //   }
+  //   return null;
+
+  // example 2
+  // const product = products.find((product) => product.name === productName);
+  // return product ? product.price : null;
+
+switch (func) {
+    case `avgPrice`:      
+        const filteredProducts = products.filter((product) => product.name === productName);
+        const total = filteredProducts.reduce((acc, product) => acc + product.price, 0);
+        const count = filteredProducts.length;
+                return count > 0 ? Math.floor(total / count) : null;
+       
+    case `price` :
+        return (products.find((product) => product.name === productName) || { price: null }).price;
+
+    case `name` :
+        return (products.filter((product) => product.name === productName));
+
+    default:
+        if (typeof func === "number") { 
+        products.map((product) => {if (product.name === productName) {product.price = func;} });
+        }      
+        return getProduct(productName, `name`)
+  } 
+}
+
+const products = [
+  { name: "Radar", price: 1300, quantity: 4 },
+  { name: "Grip", price: 1100, quantity: 3 },
+  { name: "Scanner", price: 2700, quantity: 3 },
+  { name: "Grip", price: 1500, quantity: 4 },
+  { name: "Droid", price: 400, quantity: 7 },
+  { name: "Grip", price: 1200, quantity: 9 },
+  { name: "Droid", price: 700, quantity: 3 },
+];
+
+alert(`object. find filter map reduce`)
+console.log(getProduct("Droid", `price`)); // повертає ціну)
+console.log(getProduct("Grip", `name`)); // повертає всі записи name)
+console.log(getProduct("Droid", 1000)); // змінює всі ціни name )
+console.log(getProduct("Grip", `avgPrice`)); // обчислення середньої ціни
+
