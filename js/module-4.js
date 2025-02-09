@@ -184,8 +184,7 @@ Object.myStaticMethod = function () {
 Object.myStaticMethod(); // Це статичний метод об'єкта
 // obj.myStaticMethod(); // Помилка: obj.myStaticMethod не є функцією
 
-///* Масив об’єктів
-
+///* Масиви об’єктів
 // Перебери масив об'єктів colors, використовуючи цикл for...of. Додай у масив hexColors значення властивостей hex, а в масив rgbColors - значення властивостей rgb з усіх об'єктів масиву colors.
 //
 const colors = [
@@ -299,7 +298,7 @@ console.log(getProduct("Grip", `avgPrice`)); // обчислення серед�
 // const { count, total }
 // та переназначення внутрішніх змінніх на зовнішні, якщо є потреба
 // const { count: countA, total: totalA }
-alert(`деструктурізація `)
+alert(`Деструктурізація `)
 // Стрілкова самовиконувана функція (IIFE - Immediately Invoked Function Expression).
 // Ця функція створюється і одразу викликається, тому її ще називають самовиконуваною функцією (IIFE).
 // (() => { Тіло функції } )();
@@ -311,3 +310,76 @@ const { count: countA, total: totalA } = (() => {
 })();
 
 console.log(countA, totalA); //
+
+// Числа Фібоначчі — це послідовність, у якій: Перші два числа — 0 і 1. Кожне наступне число дорівнює сумі двох попередніх.
+// Напиши функцію fibonacci(n), яка приймає число n і повертає масив із перших n чисел Фібоначчі.
+// (c)chatgpt
+alert(`fibonacci`);
+const fibonacci = n => [...Array(n)].map((_, i, arr) => arr[i] = i && arr[i-1] + arr[i-2] || i);
+// function fibonacci(n) {
+//   let arr = []; 
+//   for (let i = 0; i < n; i++) {
+//     arr.push(i < 2 ? i : arr.at(-1) + arr.at(-2));
+//   }
+//   return arr;
+// }
+console.log(fibonacci(8)); // [0, 1, 1, 2, 3, 5, 8, 13]
+
+// Напиши функцію maxDigit(n), яка приймає додатне ціле число n і повертає його найбільшу цифру.
+// Вимоги: Використовуй цикл (while або for). Не перетворюй число в рядок (без .toString() або .split() тощо).
+// (c)chatgpt
+alert(`maxDigit`);
+function maxDigit(n) {
+  const last = n % 10;
+  const next = Math.floor(n / 10);
+  return (next == 0 && last) || Math.max(last, maxDigit(next)); // Рекурсія
+}
+// function maxDigit(n) {
+//   let max = 0;
+//   while (n > 0) {
+//     n % 10 > max ? (max = n % 10) : (n = Math.floor(n / 10));
+//   }
+//   return max;
+// }
+console.log(maxDigit(123456789)); // 9
+
+// Функція приймає один параметр propName - ім'я (ключ) властивості. Функція повинна повернути масив усіх значень властивості з таким ім'ям з кожного об'єкта в масиві products. Якщо в об'єктах відсутні властивості з таким ім'ям, функція повинна повернути порожній масив.
+//
+alert(`getAllPropValues`)
+function getAllPropValues(propName) {
+  const products = [
+    { name: "Radar", price: 1300, quantity: 4 },
+    { name: "Scanner", price: 2700, quantity: 3 },
+    { name: "Droid", price: 400, quantity: 7 },
+    { name: "Grip", price: 1200, quantity: 9 },
+  ];
+
+  return products.map(key => key[propName]).filter(value => value !== undefined);
+      // products.map(key => key[propName]) ми сворюємо масив з key[propName] або з undefined якщо у масиві об'єктів нема propName
+      // і одразу передаємо цей масив до .filter - який створює з нього новий масив але без undefined
+
+  // const result = []
+  // for (const key of products) {
+  //      (key[propName] !== undefined) && result.push(key[propName])
+  // }
+  // return result
+}
+
+console.log(getAllPropValues("name")); //    повертає ["Radar", "Scanner", "Droid", "Grip"]
+console.log(getAllPropValues("price")); //    повертає [1300, 2700, 400, 1200]
+
+function calculateTotalPrice(productName) {
+  const products = [
+    { name: "Radar", price: 1300, quantity: 4 },
+    { name: "Scanner", price: 2700, quantity: 3 },
+    { name: "Droid", price: 400, quantity: 7 },
+    { name: "Grip", price: 1200, quantity: 9 },
+  ];
+  return products.reduce((totalAmount, product) => 
+      product.name === productName ? product.price * product.quantity : totalAmount, 
+      `Product ${productName} not found!`
+      // reduce() працює так, що кожна ітерація змінює акумулятор (в даному випадку — totalAmount), і якщо після першого збігу акумулятор вже змінився від дефолтного, який задаємо у .reduce(accumulator, key) => (expression), accumulatorDefault - то на наступних ітераціях accumulator вже не змінюється. Таким чином, якщо перший продукт знайдений, він тримає результат і в нашому випадку в наступних ітераціях не змінюється (адже вони вже не оновлюматимуть accumulator бо не буде збігов по productName).
+  );
+}
+
+console.log(calculateTotalPrice("Radar"));

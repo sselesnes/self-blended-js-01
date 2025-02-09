@@ -110,14 +110,3 @@ alert(`// maxDigit`);
 //   return max;
 // }
 
-// рекурсія
-function maxDigit(n) {
-  const last = n % 10;
-  const next = Math.floor(n / 10);
-  return (next == 0 && last) || Math.max(last, maxDigit(next));
-}
-
-console.log(maxDigit(829)); // 9
-console.log(maxDigit(4825)); // 8
-console.log(maxDigit(123456789)); // 9
-console.log(maxDigit(305)); // 5
