@@ -378,9 +378,8 @@ function calculateTotalPrice(productName) {
   ];
   return products.reduce((totalAmount, product) => 
       product.name === productName ? product.price * product.quantity : totalAmount, 
-      `Product ${productName} not found!`
-      // reduce() працює так, що кожна ітерація змінює акумулятор (в даному випадку — totalAmount), і якщо після першого збігу акумулятор вже змінився від дефолтного, який задаємо у .reduce(accumulator, key) => (expression), accumulatorDefault - то на наступних ітераціях accumulator вже не змінюється. Таким чином, якщо перший продукт знайдений, він тримає результат і в нашому випадку в наступних ітераціях не змінюється (адже вони вже не оновлюматимуть accumulator бо не буде збігов по productName).
-  );
+      `Product ${productName} not found!`);
+      // Accumulator - це змінна яка задається другим параметром метода .reduce (.reduce(accumulator, key) => (expression), accumulatorDefault). Кожна ітерація .reduce() _може_ змінити акумулятор (в даному випадку це totalAmount) і якщо після першого збігу акумулятор змінився то його значення зберігається до останньої ітерації. Таким чином, якщо перший продукт знайдений, accumulator тримає результат, а в нашому випадку в наступних ітераціях вже не змінюється адже не буде збігов по productName. 
 }
 console.log(calculateTotalPrice("Grip"));
 console.log(calculateTotalPrice("Mordor"));
