@@ -249,11 +249,17 @@ function getProduct(productName, func) {
 
 switch (func) {
     case `avgPrice`:      
-        let filteredProducts = products.filter((product) => product.name === productName);
-        if (filteredProducts.length == 0) {filteredProducts = products;}
-        const total = filteredProducts.reduce((acc, product) => acc + product.price, 0);
-        const count = filteredProducts.length;
-        return count > 0 ? Math.floor(total / count) : null;
+    // деструктуризація об'єкта - ми відразу отримуємо total та count в окремій змінній
+    const { total, count } = products.reduce((acc, product) => {
+          if (product.name === productName || acc.count === 0) {acc.total += product.price; acc.count += 1;}
+          return acc;
+      },
+    // перший аргумент .reduce це аккумулятор acc, другий це масив
+    // .reduce (acc, product) => {expression}, {початковий акумулятор acc}
+    // тобто { total: 0, count: 0 } це буде acc на виході .reduce та він піде у const { total, count } наприкінці
+      { total: 0, count: 0 }
+  );
+  return Math.floor(total / count);
        
     case `price` :
         return (products.find((product) => product.name === productName) || { price: null }).price;
@@ -283,5 +289,21 @@ alert(`object. filter reduce find map`)
 console.log(getProduct("Droid", `price`)); // повертає ціну)
 console.log(getProduct("Grip", `name`)); // повертає всі записи name)
 console.log(getProduct("Droid", 1000)); // змінює всі ціни name )
-console.log(getProduct("Gripp", `avgPrice`)); // обчислення середньої ціни
+console.log(getProduct("Grip", `avgPrice`)); // обчислення середньої ціни
 
+// Деструктурізація - це синтаксис, який дозволяє розпакувати властивості об'єкта або елементи масиву в окремі змінні
+// const { count, total }
+// та переназначення внутрішніх змінніх на зовнішні, якщо є потреба
+// const { count: countA, total: totalA }
+alert(`деструктурізація `)
+// Стрілкова самовиконувана функція (IIFE - Immediately Invoked Function Expression).
+// Ця функція створюється і одразу викликається, тому її ще називають самовиконуваною функцією (IIFE).
+// (() => { Тіло функції } )();
+const { count: countA, total: totalA } = (() => {
+  let count = 10;
+  let total = 0;
+  for (; count > 0; total += count--) {}
+  return { count, total }; // Повертаємо об'єкт для деструктуризації
+})();
+
+console.log(countA, totalA); //
