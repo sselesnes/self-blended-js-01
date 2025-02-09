@@ -256,14 +256,17 @@ switch (func) {
       },
     // .reduce (acc, product) => {expression}, {акумулятор acc},
     // другий аргумент .reduce це аккумулятор acc, якому на початку метода .reduce присвоюється 
-    // значення acc = {total: 0, count: 0}, а на виході .reduce він через деструктурізацію піде у const {total, count}
+    // значення acc = {total: 0, count: 0}, а на виході .reduce він через деструктурізацію повернесться у змінні total та count
       { total: 0, count: 0 }
   );
   return Math.floor(total / count);
        
     case `price` :
         return (products.find((product) => product.name === productName) || { price: null }).price;
-
+          // якщо знайдено
+          // return {product}.price з запису / entity, наприклад {name: "Radar", price: 1300, quantity: 4} - тобто price (typeof number)
+          // якщо незнайдено
+          // return {price: null}.price - тобто null 
     case `name` :
         return (products.filter((product) => product.name === productName));
 
@@ -272,6 +275,7 @@ switch (func) {
         products.map((product) => {if (product.name === productName) {product.price = func;} });
         }      
         return getProduct(productName, `name`)
+          // змінили всі ціни з name та робимо рекурсівний запит всіх записів name щоб поврнути у вигляді відповіді при typeof func = number
   } 
 }
 
