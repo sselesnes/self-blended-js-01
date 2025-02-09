@@ -314,7 +314,7 @@ console.log(countA, totalA); //
 // Числа Фібоначчі — це послідовність, у якій: Перші два числа — 0 і 1. Кожне наступне число дорівнює сумі двох попередніх.
 // Напиши функцію fibonacci(n), яка приймає число n і повертає масив із перших n чисел Фібоначчі.
 // (c)chatgpt
-alert(`fibonacci`);
+alert(`fibonacci !розібрати`);
 const fibonacci = n => [...Array(n)].map((_, i, arr) => arr[i] = i && arr[i-1] + arr[i-2] || i);
 // function fibonacci(n) {
 //   let arr = []; 
@@ -328,7 +328,7 @@ console.log(fibonacci(8)); // [0, 1, 1, 2, 3, 5, 8, 13]
 // Напиши функцію maxDigit(n), яка приймає додатне ціле число n і повертає його найбільшу цифру.
 // Вимоги: Використовуй цикл (while або for). Не перетворюй число в рядок (без .toString() або .split() тощо).
 // (c)chatgpt
-alert(`maxDigit`);
+alert(`maxDigit %10 та рекурсия`);
 function maxDigit(n) {
   const last = n % 10;
   const next = Math.floor(n / 10);
@@ -354,13 +354,22 @@ function getAllPropValues(propName) {
     { name: "Grip", price: 1200, quantity: 9 },
   ];
 
-  return products.map(key => key[propName]).filter(value => value !== undefined);
-      // products.map(key => key[propName]) ми сворюємо масив з key[propName] або з undefined якщо у масиві об'єктів нема propName
-      // і одразу передаємо цей масив до .filter - який створює з нього новий масив але без undefined
+  // example 4
+  return products.reduce((AllPropValues, object) => (propName in object) ? [...AllPropValues, object[propName]] : AllPropValues, []);
 
+  // example 3 
+  // return products.reduce((AllPropValues, object) => {(propName in object) && AllPropValues.push(object[propName]); return AllPropValues;}, []);
+  
+  // example 2
+  // return products.map(object => object[propName]).filter(value => value !== undefined);
+  //
+  // products.map(object => object[propName]) ми сворюємо масив з object[propName] або з undefined якщо у масиві об'єктів нема propName і одразу передаємо цей масив до .filter - який створює з нього новий масив але без undefined
+  
+  // exaple 1
   // const result = []
-  // for (const key of products) {
-  //      (key[propName] !== undefined) && result.push(key[propName])
+  // for (const object of products) {
+  //      (object[propName] !== undefined) && result.push(object[propName])
+  ///       (propName in object) && (result.push(object[propName]))
   // }
   // return result
 }
@@ -368,7 +377,7 @@ console.log(getAllPropValues("name")); //    повертає ["Radar", "Scanner
 console.log(getAllPropValues("price")); //    повертає [1300, 2700, 400, 1200]
 
 //
-alert(`calculateTotalPrice`)
+alert(`calculateTotalPrice .reduce`)
 function calculateTotalPrice(productName) {
   const products = [
     { name: "Radar", price: 1300, quantity: 4 },
@@ -377,8 +386,9 @@ function calculateTotalPrice(productName) {
     { name: "Grip", price: 1200, quantity: 9 },
   ];
   return products.reduce((totalAmount, product) => 
-      product.name === productName ? product.price * product.quantity : totalAmount, 
-      `Product ${productName} not found!`);
+      product.name === productName
+      ? product.price * product.quantity
+      : totalAmount, `Product ${productName} not found!`);
       // Accumulator - це змінна яка задається другим параметром метода .reduce (.reduce(accumulator, key) => (expression), accumulatorDefault). Кожна ітерація .reduce() _може_ змінити акумулятор (в даному випадку це totalAmount) і якщо після першого збігу акумулятор змінився то його значення зберігається до останньої ітерації. Таким чином, якщо перший продукт знайдений, accumulator тримає результат, а в нашому випадку в наступних ітераціях вже не змінюється адже не буде збігов по productName. 
 }
 console.log(calculateTotalPrice("Grip"));
