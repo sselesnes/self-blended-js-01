@@ -425,3 +425,25 @@ atTheOldToad.addPotion({ name: "Power potion", price: 270 });
 atTheOldToad.updatePotionName(`Stone skin`, `May flower`);
 console.log(atTheOldToad.getPotions());
 alert(atTheOldToad.getTotalPrice());
+
+///* spread та rest
+//
+alert(`// spread та rest`)
+//
+function addOverNum(value, ...args) {
+  // example 1
+  // function addOverNum(value, ...args) {
+  //   let total = 0
+  //   for (const index of args) {
+  //       index > value && (total += index)
+  //   }
+  //   return total
+  // }
+  
+  // example 2
+  // return args.reduce((total, currentNum) => value < currentNum ? total + currentNum : total, 0)}
+  
+  // example 2.1
+  return args.reduce((total, currentNum) => value < currentNum && total + currentNum || total, 0)
+}
+  console.log(addOverNum(20, 74, 11, 62, 46, 12, 36)); // 218
