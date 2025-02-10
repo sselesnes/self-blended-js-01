@@ -395,4 +395,33 @@ function calculateTotalPrice(productName) {
       // Accumulator - це змінна яка задається другим параметром метода .reduce (.reduce(accumulator, key) => (expression), accumulatorDefault). Кожна ітерація .reduce() _може_ змінити акумулятор (в даному випадку це totalAmount) і якщо після першого збігу акумулятор змінився то його значення зберігається до останньої ітерації. Таким чином, якщо перший продукт знайдений, accumulator тримає результат, а в нашому випадку в наступних ітераціях вже не змінюється адже не буде збігов по productName. 
 }
 console.log(calculateTotalPrice("Grip"));
-console.log(calculateTotalPrice("Mordor"));
+console.log(calculateTotalPrice("Robot"));
+
+///* Методи об'єкта
+//
+alert(`atTheOldToad`)
+const atTheOldToad = {
+  potions: [
+    { name: "Speed potion", price: 460 },
+    { name: "Stone skin", price: 520 },
+  ],
+  getPotions() {
+    return this.potions;
+  },
+  addPotion(newPotion) {
+    this.potions.push(newPotion);
+  },
+  getTotalPrice() {
+    return this.potions.reduce((totalPrice, potion) => 
+    totalPrice + potion.price, 0);
+  },
+  updatePotionName(oldName, newName) {
+    for (const potion of this.potions) {
+    (potion.name == oldName) && (potion.name = newName)
+  };
+}
+}
+atTheOldToad.addPotion({ name: "Power potion", price: 270 });
+atTheOldToad.updatePotionName(`Stone skin`, `May flower`);
+console.log(atTheOldToad.getPotions());
+alert(atTheOldToad.getTotalPrice());
