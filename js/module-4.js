@@ -474,31 +474,18 @@ const car2Params = {
   model: "Maverick",
   year: 1996,
   greetings: function(args) {
-    console.log(`Вітання функції ${args}`)
-    return `Результат виконання функції`;
-  }
-}
-
-function safeCall(obj, objName, methodName, args) {
-  console.log(objName, 'це', obj instanceof Car, 'instanceof Car'); 
-  if (obj && typeof obj[methodName] === 'function') {
-    try {
-      console.log(objName, obj[methodName](args)); 
-    } catch (error) {
-      console.log(`Error in ${methodName} for ${objName}: ${error.message}`);
-    }
-  } else {
-    console.log(`Методу ${methodName} нема в ${objName}`);
+    console.log(`Вітання ${args}`)
+    return `Результат ${this instanceof Car}`;
   }
 }
 
 const car1 = new Car('Eagle', 'Talon TSi', 1993);
 const car2 = {...car1, ...car2Params};
-const car3 = Object.assign(new Car(), car1, car2Params);
-const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, car2Params);
+const car3 = Object.assign(new Car(), car1, car2Params); car3.make = "Sonic"; 
+const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, car2Params); car4.make = "Stellar";
 
 alert(`// перевірка методу Object після створення`)
-safeCall(car1, 'car1', 'greetings', 'Hello!');
-safeCall(car2, 'car2', 'greetings', 'Hello!');
-safeCall(car3, 'car3', 'greetings', 'Hello!');
-safeCall(car4, 'car4', 'greetings', 'Hello!');
+console.log(car1, `instance of Car`, car1 instanceof Car);
+console.log(car2, car2.greetings(`car2`));
+console.log(car3, car3.greetings(`car3`));
+console.log(car4, car4.greetings(`car4`));
