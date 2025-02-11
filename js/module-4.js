@@ -475,19 +475,55 @@ const carNewParams = {
   model: "DMC-12",
   year: 1981,
   greetings: function(args) {
-    console.log(`Вітання ${args}`)
-    return `Результат ${this instanceof Car}`;
+    console.log(`\rВітання ${args}`)
+    return  //`Результат ${this instanceof Car}`;
   }
 }
 
+const cars = [];
 const car1 = new Car('Eagle', 'Talon TSi', 1993);
-const car2 = {...car1, ...carNewParams};
-const car3 = Object.assign(new Car(), car1, carNewParams); car3.make = "Sonic"; 
-const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams); car4.make = "Stellar"; car4.year = car1.year; car4.model = car1.model;
+cars.push(car1);
+
+const car2 = { ...car1, ...carNewParams };
+cars.push(car2);
+
+const car3 = Object.assign(new Car(), car1, carNewParams);
+car3.make = "Sonic";
+cars.push(car3);
+
+const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams);
+car4.make = "Stellar";
+car4.year = car1.year;
+car4.model = car1.model;
+cars.push(car4);
 
 alert(`// перевірка методу Object після створення`)
+console.log(`Average year of car ${(cars.reduce((acc, car, carIndex) => {
+  console.log(`\rCar ${carIndex} ${car instanceof Car} instanceof Car`)
 // Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
-console.log(car1, `instance of Car`, car1 instanceof Car);
-console.log(car2, car2.greetings(`car2`));
-console.log(car3, car3.greetings(`car3`));
-console.log(car4, car4.greetings(`car4`));
+
+  if (car.greetings) {
+    car.greetings(`World!`); // Викликаємо метод greetings, якщо він існує
+  }
+  return acc + car.year}, 0) / cars.length)
+}`)
+
+//
+alert(`days.reduce`)
+function calcAverageCalories(days) {
+  return days.length === 0 ? 0 : days.reduce((sumCalories, currentDay) => sumCalories + currentDay.calories, 0) / days.length;
+}
+
+console.log(
+  calcAverageCalories([
+    { day: 'monday', calories: 2040 },
+    { day: 'tuesday', calories: 2270 },
+    { day: 'wednesday', calories: 2420 },
+    { day: 'thursday', calories: 1900 },
+    { day: 'friday', calories: 2370 },
+    { day: 'saturday', calories: 2280 },
+    { day: 'sunday', calories: 2610 },
+  ])
+);
+
+console.log(calcAverageCalories([]));
