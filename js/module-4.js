@@ -53,12 +53,12 @@ createHenry.credentials = {
 };
 
 //* Цикл for...in
-// for (key in object) { інструкції }
+// for (key in object) { інструкції } перебирає Ключі властивостей в об'єктах {}
 // використовується для ітерації по ключах (властивостях) об'єкта.
 // перебирає всі перераховані властивості об'єкта, включаючи успадковані властивості (якщо вони перераховані) та Object.prototype.
 
 //* Цикл for...of
-// for (value of iterable) { інструкції }
+// for (value of iterable) { інструкції } перебирає Значення масивів [], Set, Map, рядків
 // використовується для ітерації по значеннях ітерованих об'єктів - масиви, рядки, Map, Set тощо.
 // перебирає значення (values) колекції, а не її ключі (keys).
 
@@ -444,6 +444,53 @@ function addOverNum(value, ...args) {
   // return args.reduce((total, currentNum) => value < currentNum ? total + currentNum : total, 0)}
   
   // example 2.1
-  return args.reduce((total, currentNum) => value < currentNum && total + currentNum || total, 0)
+return args.reduce((total, currentNum) => value < currentNum && total + currentNum || total, 0)
 }
-  console.log(addOverNum(20, 74, 11, 62, 46, 12, 36)); // 218
+console.log(addOverNum(20, 74, 11, 62, 46, 12, 36)); // 218
+//
+alert(`// getExtremeScores`)
+//
+function getExtremeScores(scores) {
+      const max = Math.max(...scores)
+      const min = Math.min(...scores)
+      const object = {best: max, worst: min};
+      const array = [...scores, max, min];  
+      console.log(array);
+      console.log(object);
+return object
+  }
+  getExtremeScores([89, 64, 42, 17, 93, 51, 26]);
+
+//
+alert(`// конструктор`)
+//
+function Car(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+}
+const car1 = new Car('Eagle', 'Talon TSi', 1993);
+const car2 = car1;
+console.log(car1.constructor.name, car1.constructor.prototype); 
+car2.model = "Maverick"
+car2.year = 1996
+console.log(car2); 
+
+//
+function finalSettings () {
+  const defaultSettings = {
+    theme: "light",
+    public: true,
+    withPassword: false,
+    minNumberOfQuestions: 10,
+    timePerQuestion: 60,
+  };
+  const overrideSettings = {
+    public: false,
+    withPassword: true,
+    timePerQuestion: 30,
+  };
+  const finalSettings = {...defaultSettings, ...overrideSettings}
+  return finalSettings
+}
+console.log(finalSettings())
