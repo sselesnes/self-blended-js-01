@@ -469,8 +469,6 @@ function Car(make, model, year) {
   this.model = model;
   this.year = year;
   }
-const car1 = new Car('Eagle', 'Talon TSi', 1993);
-console.log(`car1`, car1, car1 instanceof Car, `instanceof Car`); // false); 
 
 const car2Params = {
   model: "Maverick",
@@ -481,16 +479,8 @@ const car2Params = {
   }
 }
 
-const car2 = {...car1, ...car2Params};
-console.log(`car2`, car2, car2 instanceof Car, `instanceof Car`); // false); 
-
-const car3 = Object.assign(new Car(), car1, car2Params);
-console.log(`car3`, car3, car3 instanceof Car, `instanceof Car`); // true
-
-const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, car2Params);
-console.log(`car4`, car4, car4 instanceof Car, `instanceof Car`); // true
-
 function safeCall(obj, objName, methodName, args) {
+  console.log(objName, obj instanceof Car, 'instanceof Car'); 
   if (obj && typeof obj[methodName] === 'function') {
     try {
       console.log(objName, obj[methodName](args)); // викликаємо метод, якщо він існує
@@ -501,6 +491,11 @@ function safeCall(obj, objName, methodName, args) {
     console.log(`Method ${methodName} does not exist in ${objName}`);
   }
 }
+
+const car1 = new Car('Eagle', 'Talon TSi', 1993);
+const car2 = {...car1, ...car2Params};
+const car3 = Object.assign(new Car(), car1, car2Params);
+const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, car2Params);
 
 alert(`// перевірка методу Object після створення`)
 safeCall(car1, 'car1', 'greetings', 'Hello!');
