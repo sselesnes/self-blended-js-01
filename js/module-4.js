@@ -474,21 +474,21 @@ const car2Params = {
   model: "Maverick",
   year: 1996,
   greetings: function(args) {
-    console.log(`Car greetings method message ${args}`)
-    return `Car method variable return`;
+    console.log(`Вітання функції ${args}`)
+    return `Результат виконання функції`;
   }
 }
 
 function safeCall(obj, objName, methodName, args) {
-  console.log(objName, obj instanceof Car, 'instanceof Car'); 
+  console.log(objName, 'це', obj instanceof Car, 'instanceof Car'); 
   if (obj && typeof obj[methodName] === 'function') {
     try {
-      console.log(objName, obj[methodName](args)); // викликаємо метод, якщо він існує
+      console.log(objName, obj[methodName](args)); 
     } catch (error) {
       console.log(`Error in ${methodName} for ${objName}: ${error.message}`);
     }
   } else {
-    console.log(`Method ${methodName} does not exist in ${objName}`);
+    console.log(`Методу ${methodName} нема в ${objName}`);
   }
 }
 
