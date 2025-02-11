@@ -462,35 +462,48 @@ return object
   getExtremeScores([89, 64, 42, 17, 93, 51, 26]);
 
 //
-alert(`// конструктор`)
+alert(`// Object конструктор`)
 //
 function Car(make, model, year) {
-    this.make = make;
-    this.model = model;
-    this.year = year;
-}
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  }
 const car1 = new Car('Eagle', 'Talon TSi', 1993);
-const car2 = car1;
-console.log(car1.constructor.name, car1.constructor.prototype); 
-car2.model = "Maverick"
-car2.year = 1996
-console.log(car2); 
+console.log(`car1`, car1, car1 instanceof Car, `instanceof Car`); // false); 
 
-//
-function finalSettings () {
-  const defaultSettings = {
-    theme: "light",
-    public: true,
-    withPassword: false,
-    minNumberOfQuestions: 10,
-    timePerQuestion: 60,
-  };
-  const overrideSettings = {
-    public: false,
-    withPassword: true,
-    timePerQuestion: 30,
-  };
-  const finalSettings = {...defaultSettings, ...overrideSettings}
-  return finalSettings
+const car2Params = {
+  model: "Maverick",
+  year: 1996,
+  greetings: function(args) {
+    console.log(`Car greetings method message ${args}`)
+    return `Car method variable return`;
+  }
 }
-console.log(finalSettings())
+
+const car2 = {...car1, ...car2Params};
+console.log(`car2`, car2, car2 instanceof Car, `instanceof Car`); // false); 
+
+const car3 = Object.assign(new Car(), car1, car2Params);
+console.log(`car3`, car3, car3 instanceof Car, `instanceof Car`); // true
+
+const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, car2Params);
+console.log(`car4`, car4, car4 instanceof Car, `instanceof Car`); // true
+
+function safeCall(obj, objName, methodName, args) {
+  if (obj && typeof obj[methodName] === 'function') {
+    try {
+      console.log(objName, obj[methodName](args)); // викликаємо метод, якщо він існує
+    } catch (error) {
+      console.log(`Error in ${methodName} for ${objName}: ${error.message}`);
+    }
+  } else {
+    console.log(`Method ${methodName} does not exist in ${objName}`);
+  }
+}
+
+alert(`// перевірка методу Object після створення`)
+safeCall(car1, 'car1', 'greetings', 'Hello!');
+safeCall(car2, 'car2', 'greetings', 'Hello!');
+safeCall(car3, 'car3', 'greetings', 'Hello!');
+safeCall(car4, 'car4', 'greetings', 'Hello!');
