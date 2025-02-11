@@ -486,6 +486,7 @@ const car3 = Object.assign(new Car(), car1, carNewParams); car3.make = "Sonic";
 const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams); car4.make = "Stellar"; car4.year = car1.year; car4.model = car1.model;
 
 alert(`// перевірка методу Object після створення`)
+// Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
 console.log(car1, `instance of Car`, car1 instanceof Car);
 console.log(car2, car2.greetings(`car2`));
 console.log(car3, car3.greetings(`car3`));
