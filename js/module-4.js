@@ -471,8 +471,9 @@ function Car(make, model, year) {
   }
 
 const carNewParams = {
-  model: "Maverick",
-  year: 1996,
+  make: "DeLorean",
+  model: "DMC-12",
+  year: 1981,
   greetings: function(args) {
     console.log(`Вітання ${args}`)
     return `Результат ${this instanceof Car}`;
@@ -482,7 +483,7 @@ const carNewParams = {
 const car1 = new Car('Eagle', 'Talon TSi', 1993);
 const car2 = {...car1, ...carNewParams};
 const car3 = Object.assign(new Car(), car1, carNewParams); car3.make = "Sonic"; 
-const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams); car4.make = "Stellar";
+const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams); car4.make = "Stellar"; car4.year = car1.year; car4.model = car1.model;
 
 alert(`// перевірка методу Object після створення`)
 console.log(car1, `instance of Car`, car1 instanceof Car);
