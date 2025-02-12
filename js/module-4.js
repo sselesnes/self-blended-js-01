@@ -495,8 +495,11 @@ function carsTest () {
   return cars.reduce((acc, entry, entryIndex, inputArray) => {    
     acc++;
     console.log(`Запис ${entryIndex} / ${inputArray.length - 1}`);
-      if (entry.greetings) {console.log(`Повернула ${entry.greetings(`світ!`)}`)}
-      return acc}, 0)
+    if (typeof entry.greetings === "function") {
+      console.log(`Повернула ${entry.greetings(`світ!`)}`);
+    }
+      return acc;
+    }, 0);
 }
 
 //
