@@ -475,46 +475,44 @@ const carNewParams = {
   model: "DMC-12",
   year: 1981,
   greetings: function(args) {
-    console.log(`\rВітання ${args}`)
-    return  //`Результат ${this instanceof Car}`;
+    console.log(`Привіт ${args}`)
+    return this instanceof Car;
+// Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
   }
 }
 
 const cars = [];
-const car1 = new Car('Eagle', 'Talon TSi', 1993);
-cars.push(car1);
+cars.push(new Car('Eagle', 'Talon TSi', 1993));
+cars.push({ ...cars[0], ...carNewParams });
+cars.push(Object.assign(new Car(), cars[0], carNewParams, { make: "Sonic" }));
+cars.push(Object.assign(Object.create(Object.getPrototypeOf(cars[0])), cars[0], carNewParams,
+{ make: "Stellar", year: cars[0].year, model: cars[0].model }
+));
 
-const car2 = { ...car1, ...carNewParams };
-cars.push(car2);
-
-const car3 = Object.assign(new Car(), car1, carNewParams);
-car3.make = "Sonic";
-cars.push(car3);
-
-const car4 = Object.assign(Object.create(Object.getPrototypeOf(car1)), car1, carNewParams);
-car4.make = "Stellar";
-car4.year = car1.year;
-car4.model = car1.model;
-cars.push(car4);
-
-alert(`// перевірка методу Object після створення`)
-console.log(`Average year of car ${(cars.reduce((acc, car, carIndex) => {
-  console.log(`\rCar ${carIndex} ${car instanceof Car} instanceof Car`)
-// Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
-
-  if (car.greetings) {
-    car.greetings(`World!`); // Викликаємо метод greetings, якщо він існує
-  }
-  return acc + car.year}, 0) / cars.length)
-}`)
+alert(`// Перевірка методу Object після створення`)
+//
+function carsTest () {
+  return cars.reduce((acc, car, carIndex) => {    
+    acc++;
+      if (car.greetings) {console.log(`Повернула ${car.greetings(`світ! ${carIndex}`)}`)}
+      return acc}, 0)
+}
 
 //
-alert(`days.reduce`)
+function carsAvgYear () {
+  return (cars.reduce((acc, car) => acc + car.year, 0) / cars.length
+    )
+}
+
+alert(`Total cars entries ${carsTest()}`);
+alert(`The average year of the cars is ${carsAvgYear()}`);
+
+//
 function calcAverageCalories(days) {
   return days.length === 0 ? 0 : days.reduce((sumCalories, currentDay) => sumCalories + currentDay.calories, 0) / days.length;
 }
 
-console.log(
+alert(`// Calories average per day: ${
   calcAverageCalories([
     { day: 'monday', calories: 2040 },
     { day: 'tuesday', calories: 2270 },
@@ -524,6 +522,6 @@ console.log(
     { day: 'saturday', calories: 2280 },
     { day: 'sunday', calories: 2610 },
   ])
-);
+}`);
+alert(`// Calories average with empty object: ${calcAverageCalories([])}`)
 
-console.log(calcAverageCalories([]));
