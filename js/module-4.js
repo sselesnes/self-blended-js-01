@@ -492,9 +492,10 @@ cars.push(Object.assign(Object.create(Object.getPrototypeOf(cars[0])), cars[0], 
 alert(`// Перевірка методу Object після створення`)
 //
 function carsTest () {
-  return cars.reduce((acc, car, carIndex) => {    
+  return cars.reduce((acc, entry, entryIndex, inputArray) => {    
     acc++;
-      if (car.greetings) {console.log(`Повернула ${car.greetings(`світ! ${carIndex}`)}`)}
+    console.log(`Запис ${entryIndex} / ${inputArray.length - 1}`);
+      if (entry.greetings) {console.log(`Повернула ${entry.greetings(`світ!`)}`)}
       return acc}, 0)
 }
 
