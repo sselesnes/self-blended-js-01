@@ -511,6 +511,24 @@ function carsAvgYear () {
 alert(`Total cars entries ${carsTest()}`);
 alert(`The average year of the cars is ${carsAvgYear()}`);
 
+const carsSorted1 = cars.sort((a,b) => a.year - b.year);
+console.log(carsSorted1.every(car => car instanceof Car)); // false
+
+const carsSorted4 = [...cars].sort((a, b) => a.year - b.year);
+console.log(carsSorted4.every(car => car instanceof Car)); // false
+
+const carsSorted2 = cars.map(car => Object.assign(new Car(), car));
+// Метод map() проходить по кожному елементу cars і повертає новий масив.
+// Object.assign(new Car(), car) cтворює новий об'єкт Car() (без аргументів make, model, year)
+// Копіює всі властивості car у новий об'єкт Car.
+
+const carsSorted3 = carsSorted2.sort((a, b) => a.year - b.year);
+// sort((a, b) => a.year - b.year) відсортовує новий масив за year у порядку зростання.
+// Масив вже містить нові об'єкти Car, тому .sort() працює без змін.
+
+console.log(carsSorted3.every(car => car instanceof Car)); // true
+// Всі об'єкти залишаються instanceof Car, тому every(car => car instanceof Car) === true.
+
 //
 function calcAverageCalories(days) {
   return days.length === 0 ? 0 : days.reduce((sumCalories, currentDay) => sumCalories + currentDay.calories, 0) / days.length;
