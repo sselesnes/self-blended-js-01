@@ -468,7 +468,10 @@ function Car(make, model, year) {
   this.make = make;
   this.model = model;
   this.year = year;
+  this.greetings = function(args) {
+    return `xxx`;
   }
+}
 
 const carNewParams = {
   make: "DeLorean",
@@ -528,6 +531,9 @@ const carsSorted3 = carsSorted2.sort((a, b) => a.year - b.year);
 
 console.log(carsSorted3.every(car => car instanceof Car)); // true
 // Всі об'єкти залишаються instanceof Car, тому every(car => car instanceof Car) === true.
+console.log(new Car().greetings()); // xxx
+console.log(carsSorted4[0].greetings()); // Привіт undefined
+console.log(carsSorted2[0].greetings(`console`)); // Привіт console 
 
 //
 function calcAverageCalories(days) {
