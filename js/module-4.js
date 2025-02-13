@@ -462,8 +462,28 @@ return object
   getExtremeScores([89, 64, 42, 17, 93, 51, 26]);
 
 //
+//
+function calcAverageCalories(days) {
+  return days.length === 0 ? 0 : days.reduce((sumCalories, currentDay) => sumCalories + currentDay.calories, 0) / days.length;
+}
+
+alert(`Calories average per day: ${
+  calcAverageCalories([
+    { day: 'monday', calories: 2040 },
+    { day: 'tuesday', calories: 2270 },
+    { day: 'wednesday', calories: 2420 },
+    { day: 'thursday', calories: 1900 },
+    { day: 'friday', calories: 2370 },
+    { day: 'saturday', calories: 2280 },
+    { day: 'sunday', calories: 2610 },
+  ])
+}`);
+alert(`Calories average with empty object: ${calcAverageCalories([])}`)
+
+//
 alert(`// Object конструктор`)
 //
+// Car - це конструктор
 function Car(make, model, year) {
   this.make = make;
   this.model = model;
@@ -473,6 +493,7 @@ function Car(make, model, year) {
   }
 }
 
+// carNewParams - це об'єкт, який не є прототипом
 const carNewParams = {
   make: "DeLorean",
   model: "DMC-12",
@@ -480,10 +501,25 @@ const carNewParams = {
   greetings: function(args) {
     console.log(`Привіт ${args}`)
     return this instanceof Car;
-// Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
   }
 }
+// Оператор instanceof перевіряє ланцюг прототипів: Якщо об'єкт є екземпляром конструктора, то в нього є посилання на прототип конструктора в ланцюзі прототипів. Якщо в ланцюгу прототипів знайдеться зазначений конструктор, то перевірка повертає true, в іншому випадку — false.
 
+// Додавання методу до прототипу конструктора Car
+Car.prototype.goodEvening = function(args) {
+  console.log(`Доброго вечора ${args}`);
+  return;
+};
+
+// console.log(Car.greetings("world")); // 
+// Метод, доданий до прототипу через Car.prototype.greetings, доступний лише для екземплярів конструктора, а не для самого конструктора.
+
+//
+const carTemp = new Car("Tesla", "Model S", 2020);
+alert(carTemp.greetings("world")); // xxx 
+alert(carTemp.goodEvening("time traveler")); // Доброго вечора time traveler
+ 
+//
 const cars = [];
 cars.push(new Car('Eagle', 'Talon TSi', 1993));
 cars.push({ ...cars[0], ...carNewParams });
@@ -511,14 +547,11 @@ function carsAvgYear () {
     )
 }
 
-alert(`Total cars entries ${carsTest()}`);
-alert(`The average year of the cars is ${carsAvgYear()}`);
+alert(`Total cars entries ${carsTest()}`); // Total cars entries 4
+alert(`The average year of the cars is ${carsAvgYear()}`); // The average year of the cars is 1987
 
 const carsSorted1 = cars.sort((a,b) => a.year - b.year);
 console.log(carsSorted1.every(car => car instanceof Car)); // false
-
-const carsSorted4 = [...cars].sort((a, b) => a.year - b.year);
-console.log(carsSorted4.every(car => car instanceof Car)); // false
 
 const carsSorted2 = cars.map(car => Object.assign(new Car(), car));
 // Метод map() проходить по кожному елементу cars і повертає новий масив.
@@ -529,27 +562,16 @@ const carsSorted3 = carsSorted2.sort((a, b) => a.year - b.year);
 // sort((a, b) => a.year - b.year) відсортовує новий масив за year у порядку зростання.
 // Масив вже містить нові об'єкти Car, тому .sort() працює без змін.
 
+const carsSorted4 = [...cars].sort((a, b) => a.year - b.year);
+console.log(carsSorted4.every(car => car instanceof Car)); // false
+//При використанні оператору spread (...) для копіювання масиву об'єктів, ви не копіюєте методи, що знаходяться в прототипі. Але, оскільки метод greetings знаходиться безпосередньо в кожному об'єкті (в середині конструктора), він все одно буде доступний після копіювання об'єктів, навіть якщо ви використовуєте spread.
+
 console.log(carsSorted3.every(car => car instanceof Car)); // true
 // Всі об'єкти залишаються instanceof Car, тому every(car => car instanceof Car) === true.
 console.log(new Car().greetings()); // xxx
-console.log(carsSorted4[0].greetings()); // Привіт undefined
+console.log(carsSorted1[0].greetings()); // Привіт undefined
 console.log(carsSorted2[0].greetings(`console`)); // Привіт console 
+console.log(carsSorted3[0].greetings()); // Привіт undefined
+console.log(carsSorted4[0].greetings()); // Привіт undefined
 
-//
-function calcAverageCalories(days) {
-  return days.length === 0 ? 0 : days.reduce((sumCalories, currentDay) => sumCalories + currentDay.calories, 0) / days.length;
-}
-
-alert(`// Calories average per day: ${
-  calcAverageCalories([
-    { day: 'monday', calories: 2040 },
-    { day: 'tuesday', calories: 2270 },
-    { day: 'wednesday', calories: 2420 },
-    { day: 'thursday', calories: 1900 },
-    { day: 'friday', calories: 2370 },
-    { day: 'saturday', calories: 2280 },
-    { day: 'sunday', calories: 2610 },
-  ])
-}`);
-alert(`// Calories average with empty object: ${calcAverageCalories([])}`)
-
+console.log(carsSorted4);
