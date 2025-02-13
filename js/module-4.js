@@ -573,5 +573,19 @@ console.log(carsSorted1[0].greetings()); // Привіт undefined
 console.log(carsSorted2[0].greetings(`console`)); // Привіт console 
 console.log(carsSorted3[0].greetings()); // Привіт undefined
 console.log(carsSorted4[0].greetings()); // Привіт undefined
-
 console.log(carsSorted4);
+
+
+// Додавання методу до прототипу конструктора Car
+Car.prototype.goodEvening = function(args) {
+  return `Bad ${args}`;
+};
+
+const car1 = new Car("Tesla", "Model S", 2020);
+const car2 = Object.assign(new Car(), car1, carNewParams);
+const car3 = {...car2} // Spread не копіює прототипи об'єкту
+
+console.log(car1.greetings(), "world!"); // Good world!
+console.log(car1.goodEvening("time traveler")); // Bad time traveler
+console.log(car2.greetings()); // Ugly car 
+// console.log(car3.goodEvening()); // car3.goodEvening is not a function
