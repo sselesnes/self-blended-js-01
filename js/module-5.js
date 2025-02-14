@@ -28,7 +28,7 @@ function calculateTotalPrice(orderedItems) {
 alert(calculateTotalPrice([412, 371, 94, 63, 176]));
 
 ///* Метод reduce(callback)
-// array.reduce(callback, initialValue);
+// array.reduce((acc, entity) => (expression, result), initialValue)
 // callback - це функція, яка приймає чотири аргументи:
 // accumulator (акумулятор): значення, яке повертається з попереднього виклику функції callback. На першому виклику це initialValue, якщо він заданий, або перший елемент масиву, якщо initialValue не заданий.
 // currentValue (поточний елемент): поточний елемент масиву, який обробляється.
@@ -62,5 +62,33 @@ console.log(multiply1(5, 10));
 const add = (...args) => args.reduce((acc, num) => (acc += num), 0);
 console.log(add(1, 2, 3));
 
-///* Методи map і flatMap
+///* Метод map: array.map((element, index, array) => {expression});
+// Метод map(callback) використовується для трансформації масиву. Він викликає колбек-функцію для кожного елемента вихідного масиву, а результат її роботи записує в новий масив, який і буде результатом виконання методу.
 //
+const changeEven = (array, value) =>
+  array.map((number) => (number % 2 ? number : number + value));
+console.log(changeEven([2, 8, 3, 7, 4, 6], 10));
+
+// example 1
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+const planetsLengths = planets.map((planet) => planet.length);
+
+// example 2
+// const planetsLengths = planets.reduce((acc, planet) => {
+//   acc.push(planet.length);
+//   return acc;
+// }, []);
+
+// example 3
+// const planetsLengths = planets.reduce(
+//   (acc, planet) => (acc.push(planet.length), acc),
+//   []
+// );
+
+alert(planetsLengths);
+
+console.log(
+  [...Array(14)].map((_, i) =>
+    "Iceland".replace("c", String.fromCharCode(99 + i))
+  )
+);
