@@ -69,17 +69,17 @@ const changeEven = (array, value) =>
   array.map((number) => (number % 2 ? number : number + value));
 console.log(changeEven([2, 8, 3, 7, 4, 6], 10));
 
-// example 1
+// example 1 map
 const planets = ["Earth", "Mars", "Venus", "Jupiter"];
 const planetsLengths = planets.map((planet) => planet.length);
 
-// example 2
+// example 2 reduce explicit
 // const planetsLengths = planets.reduce((acc, planet) => {
 //   acc.push(planet.length);
 //   return acc;
 // }, []);
 
-// example 3
+// example 3 reduce implicit
 // const planetsLengths = planets.reduce(
 //   (acc, planet) => (acc.push(planet.length), acc),
 //   []
@@ -91,4 +91,37 @@ console.log(
   [...Array(14)].map((_, i) =>
     "Iceland".replace("c", String.fromCharCode(99 + i))
   )
+);
+
+///* Метод flatMap()
+//
+const students = [
+  { name: "Mango", courses: ["mathematics", "physics"] },
+  { name: "Poly", courses: ["science", "mathematics"] },
+  { name: "Kiwi", courses: ["physics", "biology"] },
+];
+
+const mappedCourses = students.map((student) => student.courses);
+console.log(mappedCourses); // (3) [["mathematics", "physics"], ["science", "mathematics"], ["physics", "biology"]]
+
+const flattenedCourses = students.flatMap((student) => student.courses);
+console.log(flattenedCourses); // (6) ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
+console.log([...new Set(flattenedCourses)]); // (4) ['mathematics', 'physics', 'science', 'biology']
+
+const getUserEmails = (users) => users.map((user) => user.email);
+
+console.log(
+  getUserEmails([
+    {
+      name: "Moore Hensley",
+      email: "moorehensley@indexia.com",
+      eyeColor: "blue",
+      friends: ["Sharron Pace"],
+      isActive: false,
+      balance: 2811,
+      skills: ["ipsum", "lorem"],
+      gender: "male",
+      age: 37,
+    },
+  ])
 );
