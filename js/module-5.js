@@ -65,9 +65,30 @@ console.log(add(1, 2, 3));
 ///* Метод map: array.map((element, index, array) => {expression});
 // Метод map(callback) використовується для трансформації масиву. Він викликає колбек-функцію для кожного елемента вихідного масиву, а результат її роботи записує в новий масив, який і буде результатом виконання методу.
 //
-const changeEven = (array, value) =>
-  array.map((number) => (number % 2 ? number : number + value));
-console.log(changeEven([2, 8, 3, 7, 4, 6], 10));
+//
+// Чиста функція (pure function) - не змінює значення аргументів (мутація вихідних даних). За умови однакових аргументів вона завжди повертає один і той самий результат.
+//
+const changeEven1 = (numbersArray, value) =>
+  numbersArray.map((number) => (number % 2 ? number : number + value));
+
+function changeEven(numbersArray, value) {
+  return numbersArray.reduce(
+    (calculatedArray, number) =>
+      calculatedArray.concat(number % 2 ? number : number + value),
+    []
+  );
+}
+
+function changeEven0(numbersArray, value) {
+  return numbersArray.reduce((calculatedArray, number) => {
+    calculatedArray.push(number % 2 ? number : number + value);
+    return calculatedArray;
+  }, []);
+}
+
+console.log(changeEven([2, 8, 3, 7, 4, 6], 10)); // [12, 18, 3, 7, 14, 16]
+console.log(changeEven0([2, 8, 3, 7, 4, 6], 10)); // [12, 18, 3, 7, 14, 16]
+console.log(changeEven1([2, 8, 3, 7, 4, 6], 10)); // [12, 18, 3, 7, 14, 16]
 
 // example 1 map
 const planets = ["Earth", "Mars", "Venus", "Jupiter"];
