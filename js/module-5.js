@@ -27,14 +27,14 @@ function calculateTotalPrice(orderedItems) {
 }
 alert(calculateTotalPrice([412, 371, 94, 63, 176]));
 
-///* Метод reduce(callback)
-// array.reduce((acc, entity) => (expression, result), initialValue)
+///* Метод reduce(callback, initialValue) - array.reduce((acc, entity) => (expression, result), initialValue)
 // callback - це функція, яка приймає чотири аргументи:
 // accumulator (акумулятор): значення, яке повертається з попереднього виклику функції callback. На першому виклику це initialValue, якщо він заданий, або перший елемент масиву, якщо initialValue не заданий.
 // currentValue (поточний елемент): поточний елемент масиву, який обробляється.
 // currentIndex (індекс): індекс поточного елемента в масиві.
 // array(масив): масив, над яким виконується reduce.
 //
+
 const calculateTotalPrice1 = (orderedItems) =>
   orderedItems.reduce((acc, num, index, orderedItems) => (acc += num), 0);
 alert(calculateTotalPrice1([412, 371, 94, 63, 176]));
@@ -147,4 +147,150 @@ console.log(
   ])
 );
 
-///* Метод filter()
+///* Метод filter() викликає колбек-функцію для кожного елемента вихідного масиву. Якщо результат її виконання true, поточний елемент додається в новий масив.
+//
+const numbers = [17, 24, 82, 61, 36, 18, 47, 52, 73];
+const evenNumbers = numbers.filter((number) => !(number % 2));
+const oddNumbers = numbers.filter((number) => number % 2);
+
+//
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+const MIN_RATING = 8;
+const AUTHOR = "Bernard Cornwell";
+
+const topRatedBooks = books.filter((book) => book.rating >= MIN_RATING);
+const booksByAuthor = books.filter((book) => book.author === AUTHOR);
+
+///* Метод find(callback) використовується для пошуку першого елемента, який задовольняє умову, повертає undefined якщо не знайшов
+//
+
+///* Метод every(callback) перевіряє, чи задовольняють _УСІ_ елементи умову колбек-функції. Повертає true, якщо всі елементи масиву задовольняють умову.
+//
+
+const users6 = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: true,
+    balance: 2811,
+    gender: "male",
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: false,
+    balance: 3821,
+    gender: "female",
+  },
+];
+const isEveryUserActive = (users) => {
+  return users.every((user) => user.isActive === true);
+};
+console.log(isEveryUserActive(users6));
+
+///* Метод some(callback) перевіряє, чи задовольняє хоча б _ОДИН_ елемент умову колбек-функції.
+///* Метод reduce(callback) перевіряє, чи задовольняє хоча б _ОДИН_ елемент умову колбек-функції.
+//
+const players = {
+  mango: 1270,
+  poly: 468,
+  ajax: 710,
+  kiwi: 244,
+};
+const playtimes = Object.values(players); // [1270, 468, 710, 244]
+const totalPlayTime = playtimes.reduce((acc, hours) => acc + hours, 0);
+const averagePlayTime = totalPlayTime / playtimes.length;
+
+//
+const players56 = [
+  { name: "Mango", playtime: 1270, gamesPlayed: 4 },
+  { name: "Poly", playtime: 469, gamesPlayed: 2 },
+  { name: "Ajax", playtime: 690, gamesPlayed: 3 },
+  { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+];
+const totalAveragePlaytimePerGame = players56.reduce(
+  (acc, player) => acc + player.playtime / player.gamesPlayed,
+  0
+);
+alert(totalAveragePlaytimePerGame);
+
+///* Метод toSorted(compareFn) сортує елементи масиву повертачи новий масив. За замовчуванням сортує за зростанням.
+// numbers.toSorted((a, b) => a - b) - за зростанням, або numbers.toSorted((a, b) => b - a) - за спаданням чисел
+// sort() сортує масив "на місці", тобто змінює оригінальний масив.
+//
+const students58 = ["Jacob", "Artemis", "Solomon", "Adrian", "Kai", "Ganymede"];
+const inAlphabetOrder = students58.toSorted((a, b) => a.localeCompare(b));
+
+//
+const students57 = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+];
+const inAscendingScoreOrder = students57.toSorted(
+  (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+);
+
+//
+const books58 = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  {
+    title: "Redder Than Blood",
+    author: "Tanith Lee",
+    rating: 7.94,
+  },
+  {
+    title: "Enemy of God",
+    author: "Bernard Cornwell",
+    rating: 8.67,
+  },
+];
+
+const sortedByAuthorName = books.toSorted((a, b) =>
+  a.author.localeCompare(b.author)
+);
+const sortedByReversedAuthorName = books.toSorted((a, b) =>
+  b.author.localeCompare(a.author)
+);
+const sortedByAscendingRating = books.toSorted((a, b) => a.rating - b.rating);
+const sortedByDescentingRating = books.toSorted((a, b) => b.rating - a.rating);
+
+console.log(sortedByAuthorName);
+console.log(sortedByReversedAuthorName);

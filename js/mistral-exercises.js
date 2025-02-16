@@ -201,10 +201,10 @@ console.log(removeDuplicates(numbers17));
 
 //18
 const numbers18 = [1, 2, 3, 4, 5, 6];
-function filterEvenNumbers(numbers18) {
+function filterEvenNumbers2(numbers18) {
   return numbers18.filter((number) => !(number % 2));
 }
-console.log(filterEvenNumbers(numbers18));
+console.log(filterEvenNumbers2(numbers18));
 
 //19
 const numbers19 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
