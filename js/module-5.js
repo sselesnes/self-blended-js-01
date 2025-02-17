@@ -18,6 +18,11 @@ makePizza("Ultracheese", function eatPizza(pizzaName) {
 
 ///* Метод forEach(callback)
 //
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const arrEach = array => array.forEach(number => console.log(number));
+arrEach(arr);
+
+//
 function calculateTotalPrice(orderedItems) {
   let totalPrice = 0;
   orderedItems.forEach(function (value) {
@@ -35,14 +40,13 @@ alert(calculateTotalPrice([412, 371, 94, 63, 176]));
 // array(масив): масив, над яким виконується reduce.
 //
 
-const calculateTotalPrice1 = (orderedItems) =>
-  orderedItems.reduce((acc, num, index, orderedItems) => (acc += num), 0);
+const calculateTotalPrice1 = orderedItems => orderedItems.reduce((acc, num, index, orderedItems) => (acc += num), 0);
 alert(calculateTotalPrice1([412, 371, 94, 63, 176]));
 
 //
 function filterArray1(numbers, value) {
   const filtered = [];
-  numbers.forEach((entity) => entity > value && filtered.push(entity));
+  numbers.forEach(entity => entity > value && filtered.push(entity));
   return filtered;
 }
 console.log(filterArray1([1, 2, 3, 4, 5], 3));
@@ -68,15 +72,10 @@ console.log(add(1, 2, 3));
 //
 // Чиста функція (pure function) - не змінює значення аргументів (мутація вихідних даних). За умови однакових аргументів вона завжди повертає один і той самий результат.
 //
-const changeEven1 = (numbersArray, value) =>
-  numbersArray.map((number) => (number % 2 ? number : number + value));
+const changeEven1 = (numbersArray, value) => numbersArray.map(number => (number % 2 ? number : number + value));
 
 function changeEven(numbersArray, value) {
-  return numbersArray.reduce(
-    (calculatedArray, number) =>
-      calculatedArray.concat(number % 2 ? number : number + value),
-    []
-  );
+  return numbersArray.reduce((calculatedArray, number) => calculatedArray.concat(number % 2 ? number : number + value), []);
 }
 
 function changeEven0(numbersArray, value) {
@@ -92,7 +91,7 @@ console.log(changeEven1([2, 8, 3, 7, 4, 6], 10)); // [12, 18, 3, 7, 14, 16]
 
 // example 1 map
 const planets = ["Earth", "Mars", "Venus", "Jupiter"];
-const planetsLengths = planets.map((planet) => planet.length);
+const planetsLengths = planets.map(planet => planet.length);
 
 // example 2 reduce explicit
 // const planetsLengths = planets.reduce((acc, planet) => {
@@ -108,11 +107,7 @@ const planetsLengths = planets.map((planet) => planet.length);
 
 alert(planetsLengths);
 
-console.log(
-  [...Array(14)].map((_, i) =>
-    "Iceland".replace("c", String.fromCharCode(99 + i))
-  )
-);
+console.log([...Array(14)].map((_, i) => "Iceland".replace("c", String.fromCharCode(99 + i))));
 
 ///* Метод flatMap()
 //
@@ -122,14 +117,14 @@ const students = [
   { name: "Kiwi", courses: ["physics", "biology"] },
 ];
 
-const mappedCourses = students.map((student) => student.courses);
+const mappedCourses = students.map(student => student.courses);
 console.log(mappedCourses); // (3) [["mathematics", "physics"], ["science", "mathematics"], ["physics", "biology"]]
 
-const flattenedCourses = students.flatMap((student) => student.courses);
+const flattenedCourses = students.flatMap(student => student.courses);
 console.log(flattenedCourses); // (6) ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
 console.log([...new Set(flattenedCourses)]); // (4) ['mathematics', 'physics', 'science', 'biology']
 
-const getUserEmails = (users) => users.map((user) => user.email);
+const getUserEmails = users => users.map(user => user.email);
 
 console.log(
   getUserEmails([
@@ -150,8 +145,8 @@ console.log(
 ///* Метод filter() викликає колбек-функцію для кожного елемента вихідного масиву. Якщо результат її виконання true, поточний елемент додається в новий масив.
 //
 const numbers = [17, 24, 82, 61, 36, 18, 47, 52, 73];
-const evenNumbers = numbers.filter((number) => !(number % 2));
-const oddNumbers = numbers.filter((number) => number % 2);
+const evenNumbers = numbers.filter(number => !(number % 2));
+const oddNumbers = numbers.filter(number => number % 2);
 
 //
 const books = [
@@ -176,8 +171,8 @@ const books = [
 const MIN_RATING = 8;
 const AUTHOR = "Bernard Cornwell";
 
-const topRatedBooks = books.filter((book) => book.rating >= MIN_RATING);
-const booksByAuthor = books.filter((book) => book.author === AUTHOR);
+const topRatedBooks = books.filter(book => book.rating >= MIN_RATING);
+const booksByAuthor = books.filter(book => book.author === AUTHOR);
 
 ///* Метод find(callback) використовується для пошуку першого елемента, який задовольняє умову, повертає undefined якщо не знайшов
 //
@@ -205,8 +200,8 @@ const users6 = [
     gender: "female",
   },
 ];
-const isEveryUserActive = (users) => {
-  return users.every((user) => user.isActive === true);
+const isEveryUserActive = users => {
+  return users.every(user => user.isActive === true);
 };
 console.log(isEveryUserActive(users6));
 
@@ -230,10 +225,7 @@ const players56 = [
   { name: "Ajax", playtime: 690, gamesPlayed: 3 },
   { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
 ];
-const totalAveragePlaytimePerGame = players56.reduce(
-  (acc, player) => acc + player.playtime / player.gamesPlayed,
-  0
-);
+const totalAveragePlaytimePerGame = players56.reduce((acc, player) => acc + player.playtime / player.gamesPlayed, 0);
 alert(totalAveragePlaytimePerGame);
 
 ///* Метод toSorted(compareFn) сортує елементи масиву повертачи новий масив. За замовчуванням сортує за зростанням.
@@ -250,9 +242,7 @@ const students57 = [
   { name: "Ajax", score: 37 },
   { name: "Kiwi", score: 94 },
 ];
-const inAscendingScoreOrder = students57.toSorted(
-  (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
-);
+const inAscendingScoreOrder = students57.toSorted((firstStudent, secondStudent) => firstStudent.score - secondStudent.score);
 
 //
 const books58 = [
@@ -282,12 +272,8 @@ const books58 = [
     rating: 8.67,
   },
 ];
-const sortedByAuthorName = books.toSorted((a, b) =>
-  a.author.localeCompare(b.author)
-);
-const sortedByReversedAuthorName = books.toSorted((a, b) =>
-  b.author.localeCompare(a.author)
-);
+const sortedByAuthorName = books.toSorted((a, b) => a.author.localeCompare(b.author));
+const sortedByReversedAuthorName = books.toSorted((a, b) => b.author.localeCompare(a.author));
 const sortedByAscendingRating = books.toSorted((a, b) => a.rating - b.rating);
 const sortedByDescentingRating = books.toSorted((a, b) => b.rating - a.rating);
 console.log(sortedByAuthorName);
@@ -319,8 +305,38 @@ const books59 = [
 ];
 const MIN_BOOK_RATING59 = 8;
 const names59 = books59
-  .filter((book) => book.rating > MIN_BOOK_RATING59)
-  .map((book) => book.author)
+  .filter(book => book.rating > MIN_BOOK_RATING59)
+  .map(book => book.author)
   .toSorted();
 
 console.log(names59);
+
+//* зворотний виклик (callback)
+function calc(a, b, callback) {
+  return callback(a, b);
+}
+
+console.log(
+  calc(1, 5, function (x, y) {
+    return x + y;
+  })
+);
+
+//* зворотний виклик (callback)
+function each(array, callback) {
+  const res = [];
+  for (const item of array) {
+    res.push(callback(item));
+  }
+  return res;
+}
+
+console.log(
+  each([64, 49, 36, 25, 16], function (value) {
+    return value * 2;
+  })
+);
+
+// повернення об'єкту з функції
+const arrowFoo = (a, b) => ({ x: a + b });
+console.log(arrowFoo(10, 20), typeof arrowFoo(10, 20));

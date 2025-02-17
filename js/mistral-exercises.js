@@ -1,26 +1,24 @@
 //1
 function doubleNumbers(numbers) {
-  return numbers.map((number) => number * 2);
+  return numbers.map(number => number * 2);
 }
 console.log(doubleNumbers([1, 2, 3, 4, 5])); // Виведе: [2, 4, 6, 8, 10]
 
 //2
-const sumNumbers = (numbers) =>
-  numbers.reduce((calc, number) => (calc += number), 0);
+const sumNumbers = numbers => numbers.reduce((calc, number) => (calc += number), 0);
 console.log(sumNumbers([1, 2, 3, 4, 5])); // Виведе: 15
 
-const sumNumbers0 = (numbers) =>
-  numbers.reduce((calc, number) => calc + number, 0);
+const sumNumbers0 = numbers => numbers.reduce((calc, number) => calc + number, 0);
 console.log(sumNumbers0([1, 2, 3, 4, 5])); // Виведе: 15
 
 //3
 function filterEvenNumbers(numbers) {
-  return numbers.filter((number) => (number % 2 ? null : number));
+  return numbers.filter(number => (number % 2 ? null : number));
 }
 console.log(filterEvenNumbers([1, 2, 3, 4, 5, 6])); // Виведе: [2, 4, 6]
 
 function filterEvenNumbers0(numbers) {
-  return numbers.filter((number) => number % 2 === 0);
+  return numbers.filter(number => number % 2 === 0);
 }
 console.log(filterEvenNumbers0([1, 2, 3, 4, 5, 6])); // Виведе: [2, 4, 6]
 
@@ -37,7 +35,7 @@ console.log(productNumbers0([1, 2, 3, 4, 5])); // Виведе: 120
 
 //5
 function squareNumbers(numbers) {
-  return numbers.map((num) => num ** 2);
+  return numbers.map(num => num ** 2);
 }
 console.log(squareNumbers([1, 2, 3, 4, 5])); // Виведе: [1, 4, 9, 16, 25]
 
@@ -65,7 +63,7 @@ function getUserNames(users) {
 console.log(getUserNames(users)); // Виведе: ["Alice", "Bob", "Charlie"]
 
 function getUserNames0(users) {
-  return users.map((user) => user.name);
+  return users.map(user => user.name);
 }
 console.log(getUserNames0(users)); // Виведе: ["Alice", "Bob", "Charlie"]
 
@@ -91,7 +89,7 @@ const products1 = [
 ];
 
 function filterExpensiveProducts(products1) {
-  return products1.filter((product) => product.price > 50);
+  return products1.filter(product => product.price > 50);
 }
 console.log(filterExpensiveProducts(products1));
 
@@ -102,14 +100,12 @@ const students = [
   { name: "Charlie", grades: [95, 91, 89] },
 ];
 
-const calculateAverageGrade = (students) =>
-  students
-    .flatMap((student) => student.grades)
-    .reduce((acc, num, _, array) => acc + num / array.length, 0);
+const calculateAverageGrade = students =>
+  students.flatMap(student => student.grades).reduce((acc, num, _, array) => acc + num / array.length, 0);
 console.log(calculateAverageGrade(students)); // Виведе: 88
 
 function calculateAverageGrade0(students) {
-  const grades = students.flatMap((student) => student.grades);
+  const grades = students.flatMap(student => student.grades);
   return grades.reduce((acc, num) => acc + num, 0) / grades.length;
 }
 console.log(calculateAverageGrade0(students)); // Виведе: 88
@@ -123,9 +119,7 @@ const products11 = [
   { name: "Grapes", price: 95, quantity: 12 },
 ];
 function filterAndDoubleQuantity(products11) {
-  return products11
-    .filter((product) => product.price < 100)
-    .map((product) => ({ ...product, quantity: product.quantity * 2 }));
+  return products11.filter(product => product.price < 100).map(product => ({ ...product, quantity: product.quantity * 2 }));
 }
 console.log(filterAndDoubleQuantity(products11));
 
@@ -137,10 +131,8 @@ const students12 = [
 ];
 function sortStudentsByAverageGrade(students12) {
   return [...students].sort((a, b) => {
-    const avgA =
-      a.grades.reduce((sum, grade) => sum + grade, 0) / a.grades.length;
-    const avgB =
-      b.grades.reduce((sum, grade) => sum + grade, 0) / b.grades.length;
+    const avgA = a.grades.reduce((sum, grade) => sum + grade, 0) / a.grades.length;
+    const avgB = b.grades.reduce((sum, grade) => sum + grade, 0) / b.grades.length;
     return avgB - avgA; // Сортуємо за спаданням середнього балу
   });
 }
@@ -193,16 +185,14 @@ function removeDuplicates(numbers17) {
   //   }));
 
   // example 3
-  return numbers.filter(
-    (number, index, array) => array.indexOf(number) === index
-  );
+  return numbers.filter((number, index, array) => array.indexOf(number) === index);
 }
 console.log(removeDuplicates(numbers17));
 
 //18
 const numbers18 = [1, 2, 3, 4, 5, 6];
 function filterEvenNumbers2(numbers18) {
-  return numbers18.filter((number) => !(number % 2));
+  return numbers18.filter(number => !(number % 2));
 }
 console.log(filterEvenNumbers2(numbers18));
 
@@ -222,21 +212,15 @@ function countEvenOddNumbers(numbers19) {
   //   };
   //
   // example 3
-  return numbers19.reduce(
-    (acc, number) => {
-      acc[number % 2 === 0 ? "even" : "odd"]++;
-      // acc[...] — це динамічний доступ до властивості об'єкта acc.
-      // Якщо число парне, acc["even"]++ (або acc.even++) збільшується на 1.
-      // Якщо число непарне, acc["odd"]++ (або acc.odd++) збільшується на 1.
-      return acc;
-    },
-    { even: 0, odd: 0 }
-  );
+  return numbers19.reduce((acc, number) => (acc[number % 2 === 0 ? "even" : "odd"]++, acc), { even: 0, odd: 0 });
+  // acc[...] — це динамічний доступ до властивості об'єкта acc.
+  // Якщо число парне, acc["even"]++ (або acc.even++) збільшується на 1.
+  // Якщо число непарне, acc["odd"]++ (або acc.odd++) збільшується на 1.
 }
 console.log(countEvenOddNumbers(numbers19));
 
 //20
-const numbers20 = [5, 2, 9, 1, -5, 6, 3, 8, 7];
+const numbers20 = [-5, -2, -9, -1, 0, 3, 7];
 function findMinMax(numbers20) {
   //
   // example 1
@@ -256,5 +240,10 @@ function findMinMax(numbers20) {
 }
 console.log(findMinMax(numbers20));
 
-const result = Infinity - Infinity;
-console.log(result);
+//21
+const numbers21 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function sumArray(numbers21) {
+  // Ваш код тут
+}
+
+console.log(sumArray(numbers21)); //55
