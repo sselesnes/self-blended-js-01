@@ -282,7 +282,6 @@ const books58 = [
     rating: 8.67,
   },
 ];
-
 const sortedByAuthorName = books.toSorted((a, b) =>
   a.author.localeCompare(b.author)
 );
@@ -291,6 +290,37 @@ const sortedByReversedAuthorName = books.toSorted((a, b) =>
 );
 const sortedByAscendingRating = books.toSorted((a, b) => a.rating - b.rating);
 const sortedByDescentingRating = books.toSorted((a, b) => b.rating - a.rating);
-
 console.log(sortedByAuthorName);
 console.log(sortedByReversedAuthorName);
+
+//
+const books59 = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  {
+    title: "The Dreams in the Witch House",
+    author: "Howard Lovecraft",
+    rating: 8.67,
+  },
+];
+const MIN_BOOK_RATING59 = 8;
+const names59 = books59
+  .filter((book) => book.rating > MIN_BOOK_RATING59)
+  .map((book) => book.author)
+  .toSorted();
+
+console.log(names59);
