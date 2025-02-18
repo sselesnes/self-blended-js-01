@@ -320,11 +320,21 @@ alert(`//25 isPerfectNumber`);
 // 28 — досконале число, бо його власні дільники (1, 2, 4, 7, 14) у сумі дають 28.
 
 const number25 = 28;
-const isPerfectNumber = number => {
-  // const numberArray = [];
-  // for (let i = 1; i <= number25 / 2; i++) !(number25 % i) && numberArray.push(i);
-  // return number25 === numberArray.reduce((acc, num) => acc + num, 0);
+//example 1
+// const isPerfectNumber = number => {
+// const numberArray = [];
+// for (let i = 1; i <= number25 / 2; i++) !(number25 % i) && numberArray.push(i);
+// return number25 === numberArray.reduce((acc, num) => acc + num, 0);
+// };
 
-  return number === Array.from({ length: number / 2 }, (_, i) => i + 1).reduce((acc, i) => (!(number % i) ? acc + i : acc), 0);
+//example 2
+// return number === Array.from({ length: number / 2 }, (_, i) => i + 1).reduce((acc, i) => (!(number % i) ? acc + i : acc), 0);
+
+//example 3
+const isPerfectNumber = number => {
+  const numberArray = Array.from({ length: number / 2 }, (_, i) => i + 1)
+    .filter(i => number % i === 0)
+    .reduce((acc, num) => acc + num, 0);
+  return number === numberArray;
 };
 console.log(isPerfectNumber(number25)); // Виведе: true
