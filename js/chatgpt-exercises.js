@@ -182,12 +182,9 @@ const students18 = [
 ];
 
 //example 1
-const nameAvg = students18.reduce(
-  (acc, student) => (
-    (acc[student.name] = Math.floor(student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length)), acc
-  ),
-  {}
-);
+const nameAvg = students18.reduce((acc, student) => (
+  (acc[student.name] = Math.floor(student.scores
+    .reduce((sum, score) => sum + score, 0) / student.scores.length)), acc), {});
 const topStudents18 = Object.entries(nameAvg)
   .filter(([name, avg]) => avg > 80)
   .map(([name, avg]) => name);
@@ -195,10 +192,9 @@ console.log(topStudents18);
 
 //example 2 chatgpt
 const avgScores182 = students18.reduce((acc, student) => {
-  acc[student.name] = Math.floor(student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length);
-  return acc;
-}, {});
-
+  acc[student.name] = Math.floor(student.scores
+    .reduce((sum, score) => sum + score, 0) / student.scores.length);
+    return acc}, {});
 const topStudents182 = Object.entries(avgScores182)
   .filter(([_, avg]) => avg > 80)
   .map(([name]) => name);
