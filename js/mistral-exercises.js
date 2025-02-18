@@ -266,18 +266,12 @@ const numbers23 = [5, 2, 9, 1, 5, 6, 3, 8, 7, 6];
 // };
 
 // example 2
-// const findMedian = numbers => {
-//   const sorted = [...numbers].sort((a, b) => a - b);
-//   const mid = Math.floor(sorted.length / 2);
-//   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-// };
+const findMedian = numbers => {
+  const sorted = [...numbers].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+};
 
-// example 3
-const findMedian = numbers => (
-  [...numbers].sort((a, b) => a - b),
-  (mid = Math.floor(numbers.length / 2)),
-  numbers.length % 2 ? numbers[mid] : (numbers[mid - 1] + numbers[mid]) / 2
-);
 console.log(findMedian(numbers23)); // Виведе 5.5
 
 // 24 Просте число (prime number) не вирішив
@@ -327,10 +321,10 @@ const number25 = 28;
 // return number25 === numberArray.reduce((acc, num) => acc + num, 0);
 // };
 
-//example 2
+//example 2 chatgpt
 // return number === Array.from({ length: number / 2 }, (_, i) => i + 1).reduce((acc, i) => (!(number % i) ? acc + i : acc), 0);
 
-//example 3
+//example 3 mistral
 const isPerfectNumber = number => {
   const numberArray = Array.from({ length: number / 2 }, (_, i) => i + 1)
     .filter(i => number % i === 0)
@@ -338,3 +332,13 @@ const isPerfectNumber = number => {
   return number === numberArray;
 };
 console.log(isPerfectNumber(number25)); // Виведе: true
+
+//26
+const numbers26 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const getEvenNumbers = numbers => numbers.filter(number => !(number % 2));
+console.log(getEvenNumbers(numbers26)); // Виведе: [2, 4, 6, 8, 10]
+
+//27
+const words27 = ["apple", "banana", "cat", "dog", "elephant", "fish"];
+const filterLongWords = words => words.filter(word => word.length > 5);
+console.log(filterLongWords(words27)); // Виведе: ["banana", "elephant"]
