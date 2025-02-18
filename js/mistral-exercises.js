@@ -1,3 +1,6 @@
+// init
+const alert = (...args) => console.log(`%c${args}`, "color: yellow;");
+
 //1
 function doubleNumbers(numbers) {
   return numbers.map(number => number * 2);
@@ -242,8 +245,82 @@ console.log(findMinMax(numbers20));
 
 //21
 const numbers21 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-function sumArray(numbers21) {
-  // Ваш код тут
-}
-
+const sumArray = numbers => numbers.reduce((acc, num) => acc + num);
 console.log(sumArray(numbers21)); //55
+
+//22
+const numbers22 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const averageArray = numbers => numbers.reduce((acc, num) => acc + num) / numbers.length;
+console.log(averageArray(numbers22)); // Виведе 5.5
+
+alert(`//22 findMedian`);
+//23 Знаходження медіани масиву. Спочатку відсортуйте масив. Якщо кількість елементів непарна, медіана — це центральний елемент. Якщо парна, медіана — це середнє значення двох центральних елементів.
+const numbers23 = [5, 2, 9, 1, 5, 6, 3, 8, 7, 6];
+
+// example 1
+// const findMedian = numbers => {
+//   const sortedNumbers = numbers.toSorted((a, b) => a - b);
+//   return sortedNumbers.length % 2
+//     ? sortedNumbers[(sortedNumbers.length + 1) / 2 - 1]
+//     : (sortedNumbers[sortedNumbers.length / 2 - 1] + sortedNumbers[sortedNumbers.length / 2]) / 2;
+// };
+
+// example 2
+// const findMedian = numbers => {
+//   const sorted = [...numbers].sort((a, b) => a - b);
+//   const mid = Math.floor(sorted.length / 2);
+//   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+// };
+
+// example 3
+const findMedian = numbers => (
+  [...numbers].sort((a, b) => a - b),
+  (mid = Math.floor(numbers.length / 2)),
+  numbers.length % 2 ? numbers[mid] : (numbers[mid - 1] + numbers[mid]) / 2
+);
+console.log(findMedian(numbers23)); // Виведе 5.5
+
+// 24 Просте число (prime number) не вирішив
+const number24 = 31;
+const isPrime = number => {
+  if (number <= 1) return false; // Числа менше або рівні 1 не є простими
+  if (number <= 3) return true; // 2 і 3 — прості числа
+  if (number % 2 === 0 || number % 3 === 0) return false; // Виключаємо парні числа і кратні 3
+  for (let i = 5; i * i <= number; i += 6) {
+    // Перевіряємо дільники від 5 до √number з кроком 6
+    if (number % i === 0 || number % (i + 2) === 0) return false;
+  }
+
+  return true;
+};
+console.log(isPrime(number24)); // Виведе: true
+
+// 24.1 Формула Біне https://tinyurl.com/2tepa36m не вирішив
+const arrayPrime = n => {
+  const isPrime = Array(n + 1).fill(true);
+  isPrime[0] = isPrime[1] = false; // 0 і 1 не є простими
+  for (let p = 2; p * p <= n; p++) {
+    if (isPrime[p]) {
+      for (let i = p * p; i <= n; i += p) {
+        isPrime[i] = false;
+      }
+    }
+  }
+  return isPrime.map((isPrime, num) => (isPrime ? num : null)).filter(num => num !== null);
+};
+console.log(arrayPrime(31)); // Виведе: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
+
+// 25 перевіряє, чи є число досконалим.
+// Досконале число — це число, яке дорівнює сумі всіх своїх власних дільників (тобто дільників, окрім самого себе). Наприклад:
+// 1. Знайдіть всі власні дільники числа(від 1 до number / 2)
+// 2. Підсумуйте їх.
+// 3. Перевірте, чи дорівнює сума самому числу.
+// 6 — досконале число, бо його власні дільники (1, 2, 3) у сумі дають 6.
+// 28 — досконале число, бо його власні дільники (1, 2, 4, 7, 14) у сумі дають 28.
+
+const number25 = 28;
+const isPerfectNumber = number => {
+  // Ваш код тут
+};
+
+console.log(isPerfectNumber(number25)); // Виведе: true
