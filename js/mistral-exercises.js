@@ -204,10 +204,10 @@ const numbers19 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function countEvenOddNumbers(numbers19) {
   //
   // example 1
-  //   const even = numbers19.reduce((acc, number) => (number % 2 === 0 ? ++acc : acc), 0);
-  //   const odd = numbers19.reduce((acc, number) => (number % 2 !== 0 ? ++acc : acc), 0);
-  //   return { even: even, odd: odd };
-  //
+  const even = numbers19.reduce((acc, number) => (number % 2 === 0 ? ++acc : acc), 0);
+  const odd = numbers19.reduce((acc, number) => (number % 2 !== 0 ? ++acc : acc), 0);
+  return { even: even, odd: odd };
+
   // example 2
   //   return {
   //     even: numbers19.reduce((acc, number) => (number % 2 === 0 ? ++acc : acc), 0),
@@ -310,8 +310,9 @@ const arrayPrime = n => {
 };
 console.log(arrayPrime(31)); // Виведе: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
 
+alert(`//25 isPerfectNumber`);
 // 25 перевіряє, чи є число досконалим.
-// Досконале число — це число, яке дорівнює сумі всіх своїх власних дільників (тобто дільників, окрім самого себе). Наприклад:
+// Досконале число — це число, яке дорівнює сумі всіх своїх власних дільників (тобто дільників, окрім самого себе).
 // 1. Знайдіть всі власні дільники числа(від 1 до number / 2)
 // 2. Підсумуйте їх.
 // 3. Перевірте, чи дорівнює сума самому числу.
@@ -320,7 +321,10 @@ console.log(arrayPrime(31)); // Виведе: [2, 3, 5, 7, 11, 13, 17, 19, 23, 2
 
 const number25 = 28;
 const isPerfectNumber = number => {
-  // Ваш код тут
-};
+  // const numberArray = [];
+  // for (let i = 1; i <= number25 / 2; i++) !(number25 % i) && numberArray.push(i);
+  // return number25 === numberArray.reduce((acc, num) => acc + num, 0);
 
+  return number === Array.from({ length: number / 2 }, (_, i) => i + 1).reduce((acc, i) => (!(number % i) ? acc + i : acc), 0);
+};
 console.log(isPerfectNumber(number25)); // Виведе: true

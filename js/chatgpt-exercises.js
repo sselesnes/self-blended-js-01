@@ -154,3 +154,54 @@ const orders15 = [
 const orderDetails15 = orders15.map(order => ({ [order.product]: order.quantity }));
 // Використовуємо квадратні дужки [order.product] для динамічного створення ключа в об'єкті, який відповідає імені продукту.
 console.log(orderDetails15);
+
+//16
+const users16 = [
+  { name: "Анна", friends: ["Олег", "Ірина"] },
+  { name: "Борис", friends: ["Оксана", "Петро"] },
+  { name: "Віктор", friends: ["Марина", "Стас"] },
+];
+const allFriends16 = users16.flatMap(friend => friend.friends);
+console.log(allFriends16);
+// ["Олег", "Ірина", "Оксана", "Петро", "Марина", "Стас"]
+
+//17
+const products17 = [
+  { name: "Телефон", price: 200 },
+  { name: "Ноутбук", price: 800 },
+  { name: "Планшет", price: 300 },
+];
+const priceByName17 = products17.reduce((acc, product) => ((acc[product.name] = product.price), acc), {});
+console.log(priceByName17); // { Телефон: 200, Ноутбук: 800, Планшет: 300 }
+
+//18
+const students18 = [
+  { name: "Анна", scores: [90, 85, 88] },
+  { name: "Борис", scores: [70, 75, 78] },
+  { name: "Віктор", scores: [80, 82, 84] },
+];
+
+//example 1
+const nameAvg = students18.reduce(
+  (acc, student) => (
+    (acc[student.name] = Math.floor(student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length)), acc
+  ),
+  {}
+);
+const topStudents18 = Object.entries(nameAvg)
+  .filter(([name, avg]) => avg > 80)
+  .map(([name, avg]) => name);
+console.log(topStudents18);
+
+//example 2 chatgpt
+const avgScores182 = students18.reduce((acc, student) => {
+  acc[student.name] = Math.floor(student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length);
+  return acc;
+}, {});
+
+const topStudents182 = Object.entries(avgScores182)
+  .filter(([_, avg]) => avg > 80)
+  .map(([name]) => name);
+console.log(topStudents182);
+
+// ["Анна", "Віктор"]
