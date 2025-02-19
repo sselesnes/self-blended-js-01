@@ -230,7 +230,7 @@ const avgScore20 = students =>
   }));
 console.table(avgScore20(students20));
 
-// 21 не вирішив
+// 21
 const orders21 = [
   { category: "electronics", quantity: 2, price: 100 },
   { category: "clothing", quantity: 3, price: 50 },
