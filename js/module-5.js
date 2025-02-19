@@ -340,3 +340,17 @@ console.log(
 // повернення об'єкту з функції
 const arrowFoo = (a, b) => ({ x: a + b });
 console.log(arrowFoo(10, 20), typeof arrowFoo(10, 20));
+
+//
+
+const arrFruits = ["apple, a", "orange, b", "banana, c", "lemon, d"];
+
+const obj = arrFruits.reduce((acc, item) => {
+  const itemArr = item.split(",");
+  const key = itemArr[0];
+  const value = itemArr[1];
+  acc[key] = value; // Виправлено: додаємо значення до об'єкту
+  return acc; // Повертаємо оновлений об'єкт
+}, {});
+
+console.log(obj);

@@ -230,12 +230,30 @@ const avgScore20 = students =>
   }));
 console.table(avgScore20(students20));
 
-// 21
+// 21 не вирішив - плутанина з назвами ключів у новому масиві
 const orders21 = [
   { category: "electronics", quantity: 2, price: 100 },
   { category: "clothing", quantity: 3, price: 50 },
   { category: "electronics", quantity: 1, price: 200 },
   { category: "clothing", quantity: 2, price: 60 },
+  { category: "spare", quantity: 1, price: 50 },
 ];
 
-const totalPriceByCategory21 = raw => console.table(totalPriceByCategory21(orders21));
+const totalPriceByCategory21 = orders =>
+  orders.reduce((acc, { category, quantity, price }) => {
+    // Шукаємо, чи є вже об'єкт з цією категорією в акумуляторі
+    let existingCategory = acc.find(item => item.category === category);
+
+    if (existingCategory) {
+      // Якщо є, додаємо в нього вартість поточного замовлення
+      existingCategory.price += quantity * price;
+    } else {
+      // Якщо немає, створюємо новий об'єкт і додаємо в масив
+      acc.push({ category, price: quantity * price });
+    }
+
+    return acc;
+  }, []); // Початкове значення - порожній масив
+
+console.table(orders21);
+console.table(totalPriceByCategory21(orders21));
