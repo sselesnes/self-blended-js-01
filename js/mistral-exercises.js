@@ -342,3 +342,37 @@ console.log(getEvenNumbers(numbers26)); // Виведе: [2, 4, 6, 8, 10]
 const words27 = ["apple", "banana", "cat", "dog", "elephant", "fish"];
 const filterLongWords = words => words.filter(word => word.length > 5);
 console.log(filterLongWords(words27)); // Виведе: ["banana", "elephant"]
+
+//28
+const numbers28 = [10, 30, 50, 70, 90];
+const avgNumbers28 = numbers => numbers.reduce((sum, num) => sum + num, 0) / numbers.length;
+console.log(avgNumbers28(numbers28));
+
+//29
+const students29 = [
+  { name: "Alice", scores: [85, 90, 92] },
+  { name: "Bob", scores: [78, 82, 80] },
+  { name: "Charlie", scores: [95, 91, 89] },
+];
+
+const averageScore29 = students =>
+  students.map(student => ({
+    name: student.name,
+    average: student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length,
+  }));
+console.log(averageScore29(students29));
+
+//30
+const books30 = [
+  { title: "Book One", author: "Author A", pages: 250 },
+  { title: "Book Two", author: "Author B", pages: 320 },
+  { title: "Book Three", author: "Author C", pages: 180 },
+];
+
+//example 1
+// const findLargeBook = books => [...books].sort((a, b) => b.pages - a.pages)[0]; //сортує масив зворотньо та повертає [0] - першу запис
+
+//example 2
+const findLargeBook = books => books.reduce((largest, current) => (largest.pages < current.pages ? current : largest)); //, books[0]); // якщо задана intialValue = {} порівняння не працює. Тобто або взагалі без нього або books[0]
+
+console.log(findLargeBook(books30));
