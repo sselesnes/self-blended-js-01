@@ -156,7 +156,7 @@ const orders15 = [
 
 const orderDetails15 = orders15.map(order => ({ [order.product]: order.quantity }));
 // Використовуємо квадратні дужки [order.product] для динамічного створення ключа в об'єкті, який відповідає імені продукту.
-console.log(orderDetails15);
+console.table(orderDetails15);
 
 //16
 const users16 = [
@@ -201,3 +201,41 @@ const topStudents182 = (students, lvl) =>
     .map(student => student.name);
 console.log(topStudents182(students18, 80));
 // ["Анна", "Віктор"]
+
+//19 не вирішив за допомогою .reduce
+const products19 = [
+  { category: "electronics", price: 1200 },
+  { category: "clothing", price: 200 },
+  { category: "electronics", price: 800 },
+  { category: "clothing", price: 100 },
+  { category: "food", price: 50 },
+];
+
+const totalPriceByCategory19 = raw =>
+  raw.reduce((unique, raw) => ((unique[raw.category] = (unique[raw.category] || 0) + raw.price), unique), {});
+console.table(totalPriceByCategory19(products19));
+// { electronics: 2000, clothing: 300, food: 50 }
+// Оператор || 0 тут підстраховує від undefined, щоб уникнути помилок, якщо у unique ще не існує поточної категорії raw.category
+
+//20
+const students20 = [
+  { name: "Анна", scores: [80, 85, 90] },
+  { name: "Віктор", scores: [60, 70, 80] },
+  { name: "Олександр", scores: [90, 95, 100] },
+];
+const avgScore20 = students =>
+  students.map(student => ({
+    name: student.name,
+    avgScore: Math.floor(student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length),
+  }));
+console.table(avgScore20(students20));
+
+// 21 не вирішив
+const orders21 = [
+  { category: "electronics", quantity: 2, price: 100 },
+  { category: "clothing", quantity: 3, price: 50 },
+  { category: "electronics", quantity: 1, price: 200 },
+  { category: "clothing", quantity: 2, price: 60 },
+];
+
+const totalPriceByCategory21 = raw => console.table(totalPriceByCategory21(orders21));
