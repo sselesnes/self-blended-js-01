@@ -183,32 +183,21 @@ const students18 = [
   { name: "Борис", scores: [70, 75, 78] },
   { name: "Віктор", scores: [76, 80.1, 84] },
 ];
-
 //example 1
-const nameAvg = students18.reduce(
-  (acc, student) => ((acc[student.name] = student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length), acc),
-  {}
-);
-const topStudents18 = Object.entries(nameAvg)
-  .filter(([name, avg]) => avg > 80)
-  .map(([name, avg]) => name);
-console.log(topStudents18);
+const topStudents181 = (students, lvl) =>
+  students
+    .map(student => ({
+      name: student.name,
+      average: student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length,
+    }))
+    .filter(student => student.average > lvl)
+    .map(({ name }) => name);
+console.log(topStudents181(students18, 80));
 
-//example 2 chatgpt
-const avgScores182 = students18.reduce((acc, student) => {
-  acc[student.name] = student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length;
-  return acc;
-}, {});
-const topStudents182 = Object.entries(avgScores182)
-  .filter(([_, avg]) => avg > 80)
-  .map(([name]) => name);
-console.log(topStudents182);
-
-const topStudents183 = students18
-  .filter(({ scores }) => {
-    const avgScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
-    return avgScore > 80;
-  })
-  .map(({ name }) => name);
-console.log(topStudents183);
+//example 2
+const topStudents182 = (students, lvl) =>
+  students
+    .filter(student => student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length > lvl)
+    .map(student => student.name);
+console.log(topStudents182(students18, 80));
 // ["Анна", "Віктор"]
