@@ -241,9 +241,9 @@ const orders21 = [
 
 const totalPriceByCategory21 = orders =>
   orders.reduce((acc, { category, quantity, price }) => {
-    // Шукаємо, чи є вже об'єкт з цією категорією в акумуляторі
+    // деструктуризація об'єкта - розкладається на окремі змінні
     let existingCategory = acc.find(item => item.category === category);
-
+    // Шукаємо, чи є вже об'єкт з цією категорією в акумуляторі
     if (existingCategory) {
       // Якщо є, додаємо в нього вартість поточного замовлення
       existingCategory.price += quantity * price;
@@ -251,9 +251,16 @@ const totalPriceByCategory21 = orders =>
       // Якщо немає, створюємо новий об'єкт і додаємо в масив
       acc.push({ category, price: quantity * price });
     }
-
     return acc;
   }, []); // Початкове значення - порожній масив
+console.table(totalPriceByCategory21(orders21));
 
-console.table(orders21);
+const totalPriceByCategory211 = orders =>
+  orders.reduce((acc, { category, quantity, price }) => {
+    acc.find(item =>
+      item.category !== category
+        && acc.push({ category, price: quantity * price })
+        || (item.price += quantity * price)
+    );
+  }, []);
 console.table(totalPriceByCategory21(orders21));
