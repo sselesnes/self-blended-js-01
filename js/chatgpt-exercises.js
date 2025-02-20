@@ -38,7 +38,12 @@ const transactions = [
   { amount: 1000, type: "expense" },
 ];
 const balance = transactions.reduce(
-  (acc, entity) => (entity.type === "income" ? acc + entity.amount : entity.type === "expense" ? acc - entity.amount : acc),
+  (acc, entity) =>
+    entity.type === "income"
+      ? acc + entity.amount
+      : entity.type === "expense"
+      ? acc - entity.amount
+      : acc,
   0
 );
 
@@ -86,12 +91,18 @@ const scores = [
   { name: "Віктор", score: 85 },
   { name: "Діана", score: 95 },
 ];
-const averageScore = (scores.length && scores.reduce((total, student) => total + student.score, 0) / scores.length) || 0;
+const averageScore =
+  (scores.length &&
+    scores.reduce((total, student) => total + student.score, 0) / scores.length) ||
+  0;
 console.log(averageScore); // 86.25
 
 //9
 const words = ["яблуко", "банан", "кавун", "ананас", "виноград"];
-const longestWord = words.reduce((biggest, word) => (word.length > biggest.length ? word : biggest), "");
+const longestWord = words.reduce(
+  (biggest, word) => (word.length > biggest.length ? word : biggest),
+  ""
+);
 console.log(longestWord); // "виноград"
 
 //10
@@ -102,7 +113,8 @@ const transactions10 = [
   { type: "expense", amount: 300 },
 ];
 const balance10 = transactions10.reduce(
-  (balance, record) => (record.type === "income" ? balance + record.amount : balance - record.amount),
+  (balance, record) =>
+    record.type === "income" ? balance + record.amount : balance - record.amount,
   0
 );
 console.log(balance10); // 1000
@@ -134,7 +146,9 @@ const students13 = [
   { name: "Віктор", score: 85 },
   { name: "Діана", score: 60 },
 ];
-const passedStudents13 = students13.filter(student => student.score > 75).map(student => student.name);
+const passedStudents13 = students13
+  .filter(student => student.score > 75)
+  .map(student => student.name);
 console.log(passedStudents13); // ["Анна", "Віктор"]
 
 //14
@@ -145,7 +159,9 @@ const tasks14 = [
   { task: "Подивитись фільм", status: "pending" },
 ];
 
-const completedTasks14 = tasks14.filter(task => task.status === "completed").map(task => task.task);
+const completedTasks14 = tasks14
+  .filter(task => task.status === "completed")
+  .map(task => task.task);
 console.log(completedTasks14); // ["Зробити домашку", "Написати код"]
 //15
 const orders15 = [
@@ -174,7 +190,10 @@ const products17 = [
   { name: "Ноутбук", price: 800 },
   { name: "Планшет", price: 300 },
 ];
-const priceByName17 = products17.reduce((acc, product) => ((acc[product.name] = product.price), acc), {});
+const priceByName17 = products17.reduce(
+  (acc, product) => ((acc[product.name] = product.price), acc),
+  {}
+);
 console.log(priceByName17); // { Телефон: 200, Ноутбук: 800, Планшет: 300 }
 
 //18
@@ -197,7 +216,10 @@ console.log(topStudents181(students18, 80));
 //example 2
 const topStudents182 = (students, lvl) =>
   students
-    .filter(student => student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length > lvl)
+    .filter(
+      student =>
+        student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length > lvl
+    )
     .map(student => student.name);
 console.log(topStudents182(students18, 80));
 // ["Анна", "Віктор"]
@@ -212,7 +234,10 @@ const products19 = [
 ];
 
 const totalPriceByCategory19 = raw =>
-  raw.reduce((unique, raw) => ((unique[raw.category] = (unique[raw.category] || 0) + raw.price), unique), {});
+  raw.reduce(
+    (unique, raw) => ((unique[raw.category] = (unique[raw.category] || 0) + raw.price), unique),
+    {}
+  );
 console.table(totalPriceByCategory19(products19));
 // { electronics: 2000, clothing: 300, food: 50 }
 // Оператор || 0 тут підстраховує від undefined, щоб уникнути помилок, якщо у unique ще не існує поточної категорії raw.category
@@ -226,7 +251,9 @@ const students20 = [
 const avgScore20 = students =>
   students.map(student => ({
     name: student.name,
-    avgScore: Math.floor(student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length),
+    avgScore: Math.floor(
+      student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length
+    ),
   }));
 console.table(avgScore20(students20));
 
@@ -256,11 +283,11 @@ const totalPriceByCategory21 = orders =>
 console.table(totalPriceByCategory21(orders21));
 
 const totalPriceByCategory211 = orders =>
-  orders.reduce((acc, { category, quantity, price }) => {
-    acc.find(item =>
-      item.category !== category
-        && acc.push({ category, price: quantity * price })
-        || (item.price += quantity * price)
+  this.reduce((acc, { category, quantity, price }) => {
+    acc.find(
+      item =>
+        (this.category !== category && acc.push({ category, price: quantity * price })) ||
+        (this.price += quantity * price)
     );
   }, []);
 console.table(totalPriceByCategory21(orders21));
