@@ -424,3 +424,57 @@ const groupProductsByCategory33 = products =>
     {}
   );
 console.table(groupProductsByCategory33(products33));
+
+// 34
+const nestedArray34 = [
+  [1, 2, 3],
+  [4, 5],
+  [6, 7, 8, 9],
+];
+const flattenArray34 = array => array.reduce((acc, item) => (acc.push(...item), acc), []);
+// const flattenArray34 = array => array.reduce((acc, item) => acc.concat(item), []);
+console.table(flattenArray34(nestedArray34)); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 35
+const numbers35 = [1, 2, 3, 4, 5];
+const sumOfSquares35 = numbers => numbers.reduce((acc, num) => acc + num ** 2, 0);
+console.log(sumOfSquares35(numbers35));
+
+// 36
+const data36 = [
+  { name: "item1", value: 10 },
+  { name: "item2", value: 25 },
+  { name: "item3", value: 15 },
+  { name: "item4", value: 30 },
+];
+const findMaxValue36 = data =>
+  data.reduce((max, item) => (item.value > max.value ? item : max, item.name));
+
+const findMaxValue361 = data =>
+  data.reduce((max, item) => (item.value > max.value ? item : max)).name;
+
+console.log(findMaxValue36(data36));
+console.log(findMaxValue361(data36));
+
+// 37
+const items36 = [
+  { value: 5, factor: 2 },
+  { value: 15, factor: 3 },
+  { value: 20, factor: 4 },
+  { value: 8, factor: 5 },
+];
+const filterAndMultiply36 = items =>
+  items.filter(item => item.value > 10)
+    .map(item => ({
+      value: item.value * item.factor,
+      factor: item.factor,
+    }));
+console.table(filterAndMultiply36(items36));
+
+const filterAndMultiply361 = items =>
+  items.filter(({ value }) => value > 10)
+    .map(({ value, factor }) => ({
+      value: value * factor,
+      factor: factor,
+    }));
+console.table(filterAndMultiply361(items36));

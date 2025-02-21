@@ -284,9 +284,10 @@ console.table(totalPriceByCategory21(orders21));
 
 const totalPriceByCategory211 = orders =>
   orders.reduce((acc, { category, quantity, price }) => {
-    acc.find(item => (orders.category !== category
-      && acc.push({ category, price: quantity * price }))
-      || (orders.price += quantity * price)
+    acc.find(
+      item =>
+        (orders.category !== category && acc.push({ category, price: quantity * price })) ||
+        (orders.price += quantity * price)
     );
   }, []);
 console.table(totalPriceByCategory21(orders21));
