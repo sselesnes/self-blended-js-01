@@ -104,7 +104,9 @@ const students = [
 ];
 
 const calculateAverageGrade = students =>
-  students.flatMap(student => student.grades).reduce((acc, num, _, array) => acc + num / array.length, 0);
+  students
+    .flatMap(student => student.grades)
+    .reduce((acc, num, _, array) => acc + num / array.length, 0);
 console.log(calculateAverageGrade(students)); // Виведе: 88
 
 function calculateAverageGrade0(students) {
@@ -122,7 +124,9 @@ const products11 = [
   { name: "Grapes", price: 95, quantity: 12 },
 ];
 function filterAndDoubleQuantity(products11) {
-  return products11.filter(product => product.price < 100).map(product => ({ ...product, quantity: product.quantity * 2 }));
+  return products11
+    .filter(product => product.price < 100)
+    .map(product => ({ ...product, quantity: product.quantity * 2 }));
 }
 console.log(filterAndDoubleQuantity(products11));
 
@@ -215,7 +219,10 @@ function countEvenOddNumbers(numbers19) {
   //   };
   //
   // example 3
-  return numbers19.reduce((acc, number) => (acc[number % 2 === 0 ? "even" : "odd"]++, acc), { even: 0, odd: 0 });
+  return numbers19.reduce((acc, number) => (acc[number % 2 === 0 ? "even" : "odd"]++, acc), {
+    even: 0,
+    odd: 0,
+  });
   // acc[...] — це динамічний доступ до властивості об'єкта acc.
   // Якщо число парне, acc["even"]++ (або acc.even++) збільшується на 1.
   // Якщо число непарне, acc["odd"]++ (або acc.odd++) збільшується на 1.
@@ -373,6 +380,51 @@ const books30 = [
 // const findLargeBook = books => [...books].sort((a, b) => b.pages - a.pages)[0]; //сортує масив зворотньо та повертає [0] - першу запис
 
 //example 2
-const findLargeBook = books => books.reduce((largest, current) => (largest.pages < current.pages ? current : largest)); //, books[0]); // якщо задана intialValue = {} порівняння не працює. Тобто або взагалі без нього або books[0]
+const findLargeBook = books =>
+  books.reduce((largest, current) => (largest.pages < current.pages ? current : largest)); //, books[0]); // якщо задана intialValue = {} порівняння не працює. Тобто або взагалі без нього або books[0]
 
 console.log(findLargeBook(books30));
+
+//31
+const salesData = [
+  { product: "apple", quantity: 10, price: 0.5 },
+  { product: "banana", quantity: 5, price: 0.3 },
+  { product: "orange", quantity: 8, price: 0.7 },
+];
+
+const calculateTotalSales = salesData =>
+  salesData.reduce((total, { quantity, price }) => total + quantity * price, 0);
+console.log(calculateTotalSales(salesData)); // 11.5
+
+//32
+const products32 = [
+  { name: "apple", category: "fruit" },
+  { name: "banana", category: "fruit" },
+  { name: "apple", category: "fruit" },
+  { name: "carrot", category: "vegetable" },
+  { name: "banana", category: "fruit" },
+];
+const getUniqueProducts = products => [...new Set(products.map(product => product.name))];
+console.table(getUniqueProducts(products32)); // ["apple", "banana", "carrot"]
+
+//33
+const products33 = [
+  { name: "apple", category: "fruit" },
+  { name: "carrot", category: "vegetable" },
+  { name: "banana", category: "fruit" },
+  { name: "potato", category: "vegetable" },
+  { name: "orange", category: "fruit" },
+];
+
+const groupProductsByCategory33 = products =>
+  products.reduce((unique, { name, category }) => 
+    (
+      !unique[category] && (unique[category] = []),
+      unique[category].push(name), unique
+    ),
+    {}
+  );
+
+console.table(groupProductsByCategory33(products33));
+
+// console.table(products33);
