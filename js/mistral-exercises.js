@@ -417,14 +417,10 @@ const products33 = [
 ];
 
 const groupProductsByCategory33 = products =>
-  products.reduce((unique, { name, category }) => 
-    (
-      !unique[category] && (unique[category] = []),
-      unique[category].push(name), unique
+  products.reduce(
+    (_, { name, category }) => (
+      !this[category] && (this[category] = []), this[category].push(name), this
     ),
     {}
   );
-
 console.table(groupProductsByCategory33(products33));
-
-// console.table(products33);
