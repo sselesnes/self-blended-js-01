@@ -283,11 +283,25 @@ const totalPriceByCategory21 = orders =>
 console.table(totalPriceByCategory21(orders21));
 
 const totalPriceByCategory211 = orders =>
-  this.reduce((acc, { category, quantity, price }) => {
-    acc.find(
-      item =>
-        (this.category !== category && acc.push({ category, price: quantity * price })) ||
-        (this.price += quantity * price)
+  orders.reduce((acc, { category, quantity, price }) => {
+    acc.find(item => (orders.category !== category
+      && acc.push({ category, price: quantity * price }))
+      || (orders.price += quantity * price)
     );
   }, []);
 console.table(totalPriceByCategory21(orders21));
+
+//22
+const orders22 = [
+  { product: "apple", quantity: 4 },
+  { product: "banana", quantity: 2 },
+  { product: "apple", quantity: 1 },
+  { product: "orange", quantity: 3 },
+  { product: "banana", quantity: 5 },
+];
+const totalQuantityByProduct22 = orders =>
+  orders.reduce((acc, { product, quantity }) =>
+    ((acc[product] = (acc[product] || 0) + quantity), acc),
+    {}
+  );
+console.table(totalQuantityByProduct22(orders22));
