@@ -418,8 +418,8 @@ const products33 = [
 
 const groupProductsByCategory33 = products =>
   products.reduce(
-    (_, { name, category }) => (
-      !this[category] && (this[category] = []), this[category].push(name), this
+    (group, { name, category }) => (
+      !group[category] && (group[category] = []), group[category].push(name), group
     ),
     {}
   );
