@@ -457,24 +457,68 @@ console.log(findMaxValue36(data36));
 console.log(findMaxValue361(data36));
 
 // 37
-const items36 = [
+const items37 = [
   { value: 5, factor: 2 },
   { value: 15, factor: 3 },
   { value: 20, factor: 4 },
   { value: 8, factor: 5 },
 ];
-const filterAndMultiply36 = items =>
-  items.filter(item => item.value > 10)
+const filterAndMultiply37 = items =>
+  items
+    .filter(item => item.value > 10)
     .map(item => ({
       value: item.value * item.factor,
       factor: item.factor,
     }));
-console.table(filterAndMultiply36(items36));
+console.table(filterAndMultiply37(items37));
 
-const filterAndMultiply361 = items =>
-  items.filter(({ value }) => value > 10)
+const filterAndMultiply371 = items =>
+  items
+    .filter(({ value }) => value > 10)
     .map(({ value, factor }) => ({
       value: value * factor,
       factor: factor,
     }));
-console.table(filterAndMultiply361(items36));
+console.table(filterAndMultiply371(items37));
+
+// 38
+const items38 = [
+  { value: 10, factor: 4 },
+  { value: 20, factor: 1 },
+  { value: 10, factor: 3 },
+  { value: 15, factor: 2 },
+];
+const sortByValueAndFactor38 = items =>
+  items.toSorted((a, b) => {
+    if (b.value !== a.value) {
+      return b.value - a.value; // Сортуємо за value у спадному порядку
+    } else {
+      return a.factor - b.factor; // Сортуємо за factor у зростаючому порядку
+    }
+  });
+console.table(sortByValueAndFactor38(items38));
+
+const sortByValueAndFactor381 = items =>
+  items.toSorted((a, b) => b.value - a.value || a.factor - b.factor);
+// Якщо b.value більше за a.value, вираз b.value - a.value повертає додатне число, що означає, що b йде перед a.
+// Якщо b.value менше за a.value, вираз повертає від'ємне число, що означає, що a йде перед b.
+// Якщо b.value дорівнює a.value, вираз повертає 0, що означає, що порядок елементів залишається без змін.
+console.table(sortByValueAndFactor381(items38));
+
+//39 Функція повинна повернути новий об'єкт, де ключами є значення factor, а значеннями — масиви об'єктів, які мають відповідний factor.
+const items39 = [
+  { value: 10, factor: 2 },
+  { value: 15, factor: 3 },
+  { value: 20, factor: 2 },
+  { value: 25, factor: 1 },
+];
+
+const groupByFactor39 = items =>
+  items.reduce(
+    (acc, { factor, value }) => (
+      !acc[factor] && (acc[factor] = []), acc[factor].push({ value, factor }), acc
+    ),
+    {}
+  );
+console.table(groupByFactor39(items39));
+console.log(groupByFactor39(items39));
