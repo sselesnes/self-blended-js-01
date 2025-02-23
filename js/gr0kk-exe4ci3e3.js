@@ -54,7 +54,7 @@ const items33 = [
   { label: "D", enabled: true },
   { label: "E", enabled: undefined }, // значення undefined
 ];
-// Порахуй кількість true і false для ключа "enabled", враховуючи тільки наявні boolean значення.
+// Порахуй кількість true і false для ключа "enabled", враховуючи _тільки_ наявні boolean значення.
 const countIsEnabled33 = items => {
   const enabled = items.filter(item => item.enabled).length;
   return {
@@ -62,7 +62,6 @@ const countIsEnabled33 = items => {
     disabled: items.length - enabled,
   };
 };
-
 console.log(countIsEnabled33(items33));
 
 //3.31
@@ -75,19 +74,17 @@ const countIsEnabled331 = items =>
     },
     { enabled: 0, disabled: 0 }
   );
-
 console.log(countIsEnabled331(items33));
 
-//3.32
-const countIsEnabled332 = items =>
+//5
+const countEnabled50 = items =>
   items.reduce(
     (acc, item) => (
-      item.enabled === false ? acc.disabled++ : item.enabled ? acc.enabled++ : acc, acc
+      item.enabled === false ? ++acc.disabled : item.enabled ? ++acc.enabled : acc, acc
     ),
     { enabled: 0, disabled: 0 }
   );
-
-console.log(countIsEnabled332(items33));
+console.log(countEnabled50(items33));
 
 //4
 const tasks4 = [
@@ -105,3 +102,66 @@ const countCompleted4 = tasks => {
   return result;
 };
 console.log(countCompleted4(tasks4));
+
+// 6
+const products6 = [
+  { name: "Laptop", category: "Electronics", price: 1200 },
+  { name: "Shirt", category: "Clothing", price: 25 },
+  { name: "Phone", category: "Electronics", price: 800 },
+  { name: "Jacket", category: "Clothing", price: 100 },
+  { name: "TV", category: "Electronics", price: 1500 },
+];
+
+const groupAndSort60 = products => {
+  return products.reduce((group, product) => {
+    if (!group[product.category]) {
+      group[product.category] = [];
+    }
+    group[product.category].push(product);
+    group[product.category].sort((a, b) => a.price - b.price);
+    return group;
+  }, {});
+};
+console.table(groupAndSort60(products6));
+
+const groupAndSort61 = products => {
+  const group = products.reduce((group, product) => {
+    if (!group[product.category]) {
+      group[product.category] = [];
+    }
+    group[product.category].push(product);
+    return group;
+  }, {});
+
+  for (const category in group) {
+    group[category].sort((a, b) => a.price - b.price);
+  }
+  return group;
+};
+console.table(groupAndSort61(products6));
+
+const groupAndSort621 = products => {
+  const group = products.reduce((group, product) => {
+    if (!group[product.category]) group[product.category] = [];
+    group[product.category].push(product);
+    return group;
+  }, {});
+
+  console.log(Object.keys(group));
+
+  Object.keys(group).forEach(category => group[category].sort((a, b) => a.price - b.price));
+  return group;
+};
+console.table(groupAndSort621(products6));
+
+const groupAndSort622 = products => {
+  const group = products.reduce((group, product) => {
+    if (!group[product.category]) group[product.category] = [];
+    group[product.category].push(product);
+    return group;
+  }, {});
+
+  Object.values(group).forEach(items => items.sort((a, b) => a.price - b.price));
+  return group;
+};
+console.table(groupAndSort622(products6));
