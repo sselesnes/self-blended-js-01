@@ -187,11 +187,12 @@ const products7 = [
     description: "Adjustable laptop stand for better ergonomics",
   },
 ];
-const formatProductText70 = products => products.map(({ name, price, stock, description }) => ({
-  formattedName: name[0].toUpperCase() + name.slice(1).toLowerCase().slice(0, 14) + (name.length > 15 ? "..." : ""),
-  formattedPrice: `$${price.toFixed(2)}`,
-  stockStatus: stock > 0 ? `In stock: ${stock} items` : `Out of stock`,
-  formattedDescription: description.slice(0, description.length > 30 ? 30 : undefined) + (description.length > 30 ? "..." : "")
-}));
+const formatProductText70 = products =>
+  products.map(({ name, price, stock, description }) => ({
+    formattedName: name[0].toUpperCase() + name.slice(1).toLowerCase().slice(0, 14) + (name.length > 15 ? "..." : ""),
+    formattedPrice: `$${price.toFixed(2)}`,
+    stockStatus: stock > 0 ? `In stock: ${stock} items` : `Out of stock`,
+    formattedDescription: description.slice(0, 30) + (description.length > 30 ? "..." : ""),
+  }));
 console.log(formatProductText70(products7));
 
