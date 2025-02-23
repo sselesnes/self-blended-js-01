@@ -165,3 +165,33 @@ const groupAndSort622 = products => {
   return group;
 };
 console.table(groupAndSort622(products6));
+
+//7
+const products7 = [
+  {
+    name: "Wireless Mouse",
+    price: 29.99,
+    stock: 15,
+    description: "High-quality wireless mouse with ergonomic design",
+  },
+  {
+    name: "Gaming Keyboard",
+    price: 89.5,
+    stock: 0,
+    description: "RGB backlit gaming keyboard with customizable keys",
+  },
+  {
+    name: "Laptop Stand",
+    price: 45.0,
+    stock: 8,
+    description: "Adjustable laptop stand for better ergonomics",
+  },
+];
+const formatProductText70 = products => products.map(({ name, price, stock, description }) => ({
+  formattedName: name[0].toUpperCase() + name.slice(1).toLowerCase().slice(0, 14) + (name.length > 15 ? "..." : ""),
+  formattedPrice: `$${price.toFixed(2)}`,
+  stockStatus: stock > 0 ? `In stock: ${stock} items` : `Out of stock`,
+  formattedDescription: description.slice(0, description.length > 30 ? 30 : undefined) + (description.length > 30 ? "..." : "")
+}));
+console.log(formatProductText70(products7));
+
