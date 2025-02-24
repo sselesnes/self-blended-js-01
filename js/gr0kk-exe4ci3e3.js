@@ -189,9 +189,105 @@ const products7 = [
 ];
 const formatProductText70 = products =>
   products.map(({ name, price, stock, description }) => ({
-    formattedName: name[0].toUpperCase() + name.toLowerCase().slice(1, 14) + (name.length > 15 ? "..." : ""),
+    formattedName:
+      name[0].toUpperCase() + name.toLowerCase().slice(1, 14) + (name.length > 15 ? "..." : ""),
     formattedPrice: `${price.toFixed(2)}`,
     stockStatus: stock > 0 ? `In stock: ${stock} items` : `Out of stock`,
     formattedDescription: description.slice(0, 30) + (description.length > 30 ? "..." : ""),
   }));
 console.log(formatProductText70(products7));
+
+// 8.1
+const obj81 = {
+  name: "Test",
+  sayHello: function () {
+    console.log(`Hello, ${this.name}`);
+  },
+};
+obj81.sayHello(); // "Hello, Test"
+
+obj81.sayHello.call(obj81);
+obj81.sayHello.apply(obj81);
+const fnBind = obj81.sayHello.bind(obj81);
+
+// const fn = obj81.sayHello;
+// Чому fn() виводить undefined? Як можна зафіксувати this для fn, щоб він завжди посилався на obj?
+fnBind(); // "Hello, undefined" (глобальний контекст)
+
+// 8.2
+const obj82 = {
+  name: "ArrowTest",
+  // sayHello: () => {
+  sayHello: function () {
+    console.log(`Hello, ${this.name}`);
+  },
+};
+obj82.sayHello(); // "Hello, undefined"
+// Чому стрілочна функція не бачить name з obj82? Як this працює в стрілочних функціях?
+// стрілочні функції не мають власного this - змінюємо стрілочну на звичайну
+
+// 8.3
+const obj83 = {
+  numbers: [1, 2, 3],
+  logNumbers: function () {
+    // this.numbers.forEach(function (num) {
+    this.numbers.forEach(num => {
+      console.log(`${num} from ${this.name}`);
+    });
+  },
+  name: "CallbackTest",
+};
+
+obj83.logNumbers(); // TypeError: obj3.bind is not a function
+// Чому this.name не працює в колбеці forEach? Як виправити, щоб виводилося "1 from CallbackTest", "2 from CallbackTest", "3 from CallbackTest"?
+// якщо в середені forEach зробити стрілкову функцію замість звичайної - фокус перейде на рівень вверх і з'явиться this від obj83
+
+//8.3.1
+const obj831 = {
+  numbers: [1, 2, 3],
+  logNumbers: function () {
+    // З bind
+    this.numbers.forEach(
+      function (num) {
+        console.log(`${num} from ${this.name}`);
+      }.bind(this)
+    );
+
+    // З call (треба передати кожен num окремо, тому складніше для forEach)
+    // this.numbers.forEach(num => this.logNumbers.call(this, num)); // Потребує окремої логіки
+
+    // З apply (те саме, але з масивом)
+    // this.numbers.forEach(num => this.logNumbers.apply(this, [num])); // Складніше для масивів
+  },
+  name: "CallbackTest",
+};
+
+obj831.logNumbers();
+
+// 8.4
+const obj84 = {
+  name: "BindTest",
+  greet: function (greeting, punctuation) {
+    console.log(`${greeting}, ${this.name}${punctuation}`);
+  },
+};
+
+// 1. call: викликає одразу з аргументами
+obj84.greet.call({ name: "CallTest" }, "Hi", "!"); // "Hi, CallTest!"
+obj81.sayHello.call(obj81);
+
+// 2. apply: викликає одразу з масивом аргументів
+obj84.greet.apply({ name: "ApplyTest" }, ["Hello", "?"]); // "Hello, ApplyTest?"
+obj81.sayHello.apply(obj81);
+
+// 3. bind: створює нову функцію, яку можна викликати пізніше
+const boundGreet = obj84.greet.bind({ name: "BindTest" }, "Hey");
+boundGreet("!"); // "Hey, BindTest!"
+const fnBind2 = obj81.sayHello.bind(obj81);
+fnBind2();
+
+// call може викликати з певним this контекстом та передавати аргументи
+// apply теж саме що call але аргументи передаються як масив
+// bind робе теж саме але за його допомогою можна зробити окрему функцію з вказаним контекстом та аргументами
+
+// 9 async

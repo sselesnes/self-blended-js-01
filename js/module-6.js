@@ -88,4 +88,3 @@ const showThis = () => {
   console.log("this in showThis: ", this);
 };
 showThis(); // this in showThis: Window
-
