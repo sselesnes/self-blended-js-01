@@ -291,3 +291,13 @@ fnBind2();
 // bind робе теж саме але за його допомогою можна зробити окрему функцію з вказаним контекстом та аргументами
 
 // 9 async
+const posts91 = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return response.json();
+};
+posts91().then(console.log);
+
+const posts92 = () => {
+  return fetch("https://jsonplaceholder.typicode.com/posts").then(response => response.json());
+};
+posts92().then(console.log);
