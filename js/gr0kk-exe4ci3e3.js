@@ -301,3 +301,12 @@ const posts92 = () => {
   return fetch("https://jsonplaceholder.typicode.com/posts").then(response => response.json());
 };
 posts92().then(console.log);
+
+const posts93 = () => {
+  let result;
+  fetch("https://jsonplaceholder.typicode.com/posts")
+    .then(response => response.json())
+    .then(data => (result = data));
+  return result; // Не спрацює, бо fetch асинхронний
+};
+console.log(posts93()); // undefined
