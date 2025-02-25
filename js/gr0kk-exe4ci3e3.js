@@ -315,16 +315,15 @@ const fetchAndFormatPosts90 = async () => {
       throw new Error('Network response was not ok')
     }
     
-    // const promise = await response.json();
-    const filteredPosts = (await response.json())
+    const promise = await response.json();
+    return promise
       .slice(0, 5)
       .map(({ id, title, body }) => ({
         postNumber: id,
         title: title[0].toUpperCase() + title.slice(1, 20).toLowerCase() + (title.length > 20 ? "..." : ""),
         body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
       }));
-    return filteredPosts;
-
+     
   } catch (error) {
     console.error("Error:", error);
   }
