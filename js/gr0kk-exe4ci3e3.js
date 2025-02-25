@@ -291,22 +291,39 @@ fnBind2();
 // bind робе теж саме але за його допомогою можна зробити окрему функцію з вказаним контекстом та аргументами
 
 // 9 async
-const posts91 = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  return response.json();
-};
-posts91().then(console.log);
+// const posts91 = async () => {
+//   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+//   return response.json();
+// };
+// posts91().then(console.log);
 
-const posts92 = () => {
-  return fetch("https://jsonplaceholder.typicode.com/posts").then(response => response.json());
-};
-posts92().then(console.log);
+// const posts93 = () => {
+//   let result;
+//   fetch("https://jsonplaceholder.typicode.com/posts")
+//     .then(response => response.json())
+//     .then(data => (result = data));
+//   return result; // Не спрацює, бо fetch асинхронний
+// };
+// console.log(posts93()); // undefined
 
-const posts93 = () => {
-  let result;
-  fetch("https://jsonplaceholder.typicode.com/posts")
-    .then(response => response.json())
-    .then(data => (result = data));
-  return result; // Не спрацює, бо fetch асинхронний
+const fetchAndFormatPosts90 = async () => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const promise = await response.json();
+    // return promise;
+
+    const filteredPosts = promise.slice(0, 5).map(({ id, title, body }) => ({
+      postNumber: id,
+      title:
+        title[0].toUpperCase() +
+        title.slice(1, 20).toLowerCase() +
+        (title.length > 20 ? "..." : ""),
+      body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
+    }));
+    return filteredPosts;
+  } catch (error) {
+    console.error("Error:", error);
+  }
 };
-console.log(posts93()); // undefined
+
+fetchAndFormatPosts90().then(console.log);
