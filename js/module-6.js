@@ -88,3 +88,20 @@ const showThis = () => {
   console.log("this in showThis: ", this);
 };
 showThis(); // this in showThis: Window
+
+const book111 = {
+  updateAuthor(newAuthor) {
+    console.log(this, typeof this); // {updateAuthor: ƒ, name: 'Mango'}
+    console.log(this.name, typeof this.name); // Mango
+  },
+  name: "Mango",
+};
+book111.updateAuthor("Jacob");
+
+const book112 = {
+  updateAuthor: newAuthor => {
+    console.log(this, typeof this); // undefined у 'use strict' mode, Window без нього (vscode пише {} type Object)
+  },
+  name: "Mango",
+};
+book112.updateAuthor("Jacob");
