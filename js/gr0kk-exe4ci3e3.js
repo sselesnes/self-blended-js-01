@@ -307,8 +307,14 @@ fnBind2();
 // console.log(posts93()); // undefined
 
 const fetchAndFormatPosts90 = async () => {
+// async function fetchAndFormatPosts90() {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    
     // const promise = await response.json();
     const filteredPosts = (await response.json())
       .slice(0, 5)
@@ -318,9 +324,12 @@ const fetchAndFormatPosts90 = async () => {
         body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
       }));
     return filteredPosts;
+
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-fetchAndFormatPosts90().then(console.log);
+// fetchAndFormatPosts90().then(console.log);
+const filteredPosts = await fetchAndFormatPosts90()
+console.log(filteredPosts)

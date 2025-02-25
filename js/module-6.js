@@ -105,3 +105,17 @@ const book112 = {
   name: "Mango",
 };
 book112.updateAuthor("Jacob");
+
+// Асинхронна функція для виконання fetch і фільтрації
+async function fetchAndFilterPosts() {
+  try {
+  
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const filteredPosts = (await response.json()).slice(0, 5);
+    return filteredPosts;
+
+  } catch (error) {
+    console.error("Помилка під час виконання запиту:", error);
+  }
+}
+// Викликаємо функцію
