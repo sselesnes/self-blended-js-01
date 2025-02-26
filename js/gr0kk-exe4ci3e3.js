@@ -335,3 +335,5 @@ const fetchAndFormatPosts90 = async () => {
 // fetchAndFormatPosts90().then(console.table);
 const filteredPosts = await fetchAndFormatPosts90()
 console.table(filteredPosts)
+
+// 10
