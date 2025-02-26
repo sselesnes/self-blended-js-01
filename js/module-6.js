@@ -189,11 +189,26 @@ console.log(mango62.email); // undefined
 mango62.changeEmail("sometwo@ukr.net");
 
 class User63 {
+  static roles = {
+    admin: "admin",
+    editor: "editor",
+    basic: "basic",
+  };
+
   #email;
+  #role;
 
   constructor(params) {
     this.name = params.name;
     this.#email = params.email;
+    this.#role = params.role || User63.roles.basic;
+  }
+
+  get role() {
+    return this.#role;
+  }
+  set role(newRole) {
+    this.#role = newRole;
   }
 
   // Геттер email
@@ -214,8 +229,30 @@ class User63 {
 const mango63 = new User63({
   name: "Mango",
   email: "mango@mail.com",
+  // role: User63.roles.admin,
 });
 
 console.log(mango63.email); // mango@mail.com
 mango63.email = "mango@supermail.com";
 console.log(mango63.email); // mango@supermail.com
+
+console.log(mango63.role); // "basic"
+mango63.role = User63.roles.editor;
+console.log(mango63.role); // "editor"
+
+class MyClass65 {
+  static b = 5;
+  constructor(value) {
+    this.a = value;
+  }
+}
+const instance65 = new MyClass65(10);
+console.log(instance65.b); // undefined
+console.log(MyClass65.b); // 5
+
+const person66 = { name: "Mango" };
+function sayHi(age) {
+  return `${this.name} is ${age}`;
+}
+console.log(sayHi.call(person66, 18));
+console.log(sayHi.bind(person66, 18));
