@@ -106,8 +106,41 @@ const book112 = {
 };
 book112.updateAuthor("Jacob");
 
-//* Класи
+// Асинхронна функція для виконання fetch і фільтрації
+async function fetchAndFilterPosts() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const filteredPosts = (await response.json()).slice(0, 5);
+    return filteredPosts;
+  } catch (error) {
+    console.error("Помилка під час виконання запиту:", error);
+  }
+}
+// Own Перебір власних властивостей
+const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
 
+console.log(Object.keys(dog)); // ["name"]
+console.log(Object.values(dog)); // ["Mango"]
+
+for (const key of Object.keys(dog)) {
+  console.log(key);
+} // "name"
+// Методи Object.keys(obj) і Object.values(obj) повертають масив тільки власних ключів або значень тільки власних властивостей об'єкта
+
+// Ланцюжки прототипів
+const objC = { c: "objC prop" };
+const objB = Object.create(objC);
+objB.b = "objB prop";
+const objA = Object.create(objB);
+objA.a = "objA prop";
+
+console.log(objA); // { a: "objA prop", [[Prototype]]: objB } [[Prototype]]: objC
+console.log(objB); // { b: "objB prop", [[Prototype]]: objC }
+console.log(objC); // { c: "objC prop", [[Prototype]]: Object }
+
+//* Класи
 class User61 {
   constructor(name, email) {
     // Метод constructor використовується для ініціалізації власних властивостей екземпляра класу.

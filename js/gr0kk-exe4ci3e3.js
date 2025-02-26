@@ -307,33 +307,34 @@ fnBind2();
 // console.log(posts93()); // undefined
 
 const fetchAndFormatPosts90 = async () => {
-// async function fetchAndFormatPosts90() {
+  // async function fetchAndFormatPosts90() {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    
+
     if (!response.ok) {
-      throw new Error('Network response was not ok')
+      throw new Error("Network response was not ok");
     }
-    
+
     const promise = await response.json();
     return promise
-        .map(({ userId, id, title, body }) => ({
+      .map(({ userId, id, title, body }) => ({
         postNumber: id,
-        user: userId, 
-        title: title[0].toUpperCase() + title.slice(1, 20).toLowerCase() + (title.length > 20 ? "..." : ""),
+        user: userId,
+        title:
+          title[0].toUpperCase() +
+          title.slice(1, 20).toLowerCase() +
+          (title.length > 20 ? "..." : ""),
         body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
       }))
-      .filter(({user}) => (user === 2))
-      .slice(0, 5); 
-
-     
+      .filter(({ user }) => user === 2)
+      .slice(0, 5);
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
 // fetchAndFormatPosts90().then(console.table);
-const filteredPosts = await fetchAndFormatPosts90()
-console.table(filteredPosts)
+const filteredPosts = await fetchAndFormatPosts90();
+console.table(filteredPosts);
 
 // 10
