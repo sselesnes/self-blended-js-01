@@ -189,19 +189,25 @@ console.log(mango62.email); // undefined
 mango62.changeEmail("sometwo@ukr.net");
 
 class User63 {
+  #email;
+  #role;
+
   static roles = {
     admin: "admin",
     editor: "editor",
     basic: "basic",
   };
-
-  #email;
-  #role;
+  static count = 0;
+  static increment() {
+    User63.count += 1;
+    console.log("Total users: ", User63.count);
+  }
 
   constructor(params) {
     this.name = params.name;
     this.#email = params.email;
     this.#role = params.role || User63.roles.basic;
+    User63.increment();
   }
 
   get role() {
@@ -232,6 +238,12 @@ const mango63 = new User63({
   // role: User63.roles.admin,
 });
 
+const mango631 = new User63({
+  name: "Mangolo",
+  email: "mangolo@mail.com",
+  role: User63.roles.admin,
+});
+
 console.log(mango63.email); // mango@mail.com
 mango63.email = "mango@supermail.com";
 console.log(mango63.email); // mango@supermail.com
@@ -256,3 +268,18 @@ function sayHi(age) {
 }
 console.log(sayHi.call(person66, 18));
 console.log(sayHi.bind(person66, 18));
+
+class User64 extends User63 {
+  constructor(params) {
+    super(params); // Виклик конструктора батьківського класу
+    this.status = params.status;
+  }
+}
+
+const mango64 = new User64({
+  name: "Mango",
+  email: "some@ukr.net",
+  role: User63.roles.admin,
+  status: "active",
+});
+console.log(mango64);
