@@ -299,3 +299,41 @@ const mango65 = new User65({
 });
 
 console.log(mango65);
+
+//
+
+class User67 {
+  #email;
+
+  constructor(email) {
+    this.#email = email;
+  }
+
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+class Admin67 extends User67 {
+  constructor(params) {
+    super(params.email); // Викликає конструктор User67
+    this.access = params.access;
+  }
+
+  static role = { BASIC: "basic", SUPERUSER: "superuser" };
+}
+
+console.log(Admin67.role.SUPERUSER); // "superuser"
+console.log(Admin67.role.BASIC); // "basic"
+
+const mango67 = new Admin67({
+  email: "mango@mail.com",
+  access: Admin67.role.SUPERUSER,
+});
+
+console.log(mango67.email); // "mango@mail.com"
+console.log(mango67.access); // "superuser"
