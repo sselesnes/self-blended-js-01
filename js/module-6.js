@@ -283,3 +283,19 @@ const mango64 = new User64({
   status: "active",
 });
 console.log(mango64);
+//
+
+class User65 extends User63 {
+  constructor({ name, ...rest }) {
+    super(rest); // Call the parent class constructor with rest of the params
+    this.name = name + "!";
+  }
+}
+
+const mango65 = new User65({
+  name: "User",
+  email: "new@ukr.net",
+  status: "offline",
+});
+
+console.log(mango65);
