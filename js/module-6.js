@@ -301,7 +301,6 @@ const mango65 = new User65({
 console.log(mango65);
 
 //
-
 class User67 {
   #email;
 
@@ -319,12 +318,25 @@ class User67 {
 }
 
 class Admin67 extends User67 {
+  blacklistedEmails = [];
+  static role = { BASIC: "basic", SUPERUSER: "superuser" };
+
   constructor(params) {
     super(params.email); // Викликає конструктор User67
     this.access = params.access;
+    this.posts = params.posts;
   }
 
-  static role = { BASIC: "basic", SUPERUSER: "superuser" };
+  addPost(post) {
+    this.posts.push(post);
+  }
+
+  blacklist(email) {
+    this.blacklistedEmails.push(email);
+  }
+  isBlacklisted(email) {
+    return this.blacklistedEmails.includes(email);
+  }
 }
 
 console.log(Admin67.role.SUPERUSER); // "superuser"
@@ -333,7 +345,17 @@ console.log(Admin67.role.BASIC); // "basic"
 const mango67 = new Admin67({
   email: "mango@mail.com",
   access: Admin67.role.SUPERUSER,
+  posts: [],
 });
 
 console.log(mango67.email); // "mango@mail.com"
 console.log(mango67.access); // "superuser"
+
+mango67.addPost("post-1");
+mango67.addPost("post-2");
+console.log(mango67.posts);
+
+mango67.blacklist("poly@mail.com");
+console.log(mango67.blacklistedEmails); // ["poly@mail.com"]
+console.log(mango67.isBlacklisted("mango@mail.com")); // false
+console.log(mango67.isBlacklisted("poly@mail.com")); // true
