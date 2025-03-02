@@ -22,9 +22,7 @@ function alert(args) {
 
 function checkPassword(password) {
   const correctPassword = "jqueryismyjam";
-  return password === correctPassword
-    ? "Access granted"
-    : "Access denied, wrong password!";
+  return password === correctPassword ? "Access granted" : "Access denied, wrong password!";
 }
 
 //* switch
@@ -141,16 +139,17 @@ alert(!!null); // false
 // stringText.at(0) або stringText[0] або stringText.charAt(0) - перший символ
 // stringText.at(-1) - останній символ
 
-// stringText.replace("origin", "change_to"); .replace(/World/g, “AnotherWorld”) // регулярний вираз (regExp) у // дужках, g - прапорець глобального пошуку по рядку, а не тільки першого збігу
-// stringText.replaceAll("origin", "change_to");u
+// stringText.replace("origin", "change_to"); // Замінює перше входження "origin" на "change_to" у рядку stringText
+// .replace(/World/g, “AnotherWorld”) // регулярний вираз (regExp) у // дужках, g - прапорець глобального пошуку по рядку, а не тільки першого збігу
+// stringText.replaceAll("origin", "change_to"); // Замінює всі входження "origin" на "change_to" у рядку stringText
+
+// stringText.padStart(count, string) // Додає рядок string на початок stringText, доки довжина stringText не досягне count символів
+
+// stringText.padEnd(count, string) // теж саме на прикинці stringText
 
 //
 function normalizeInput(input, to) {
-  return to == "upper"
-    ? input.toUpperCase()
-    : to == "lower"
-    ? input.toLowerCase()
-    : undefined;
+  return to == "upper" ? input.toUpperCase() : to == "lower" ? input.toLowerCase() : undefined;
 }
 console.log(normalizeInput("SomeText", "lower"));
 
@@ -229,8 +228,7 @@ console.log(number);
 
 //
 function findNumber(start, end, divisor) {
-  for (let calc = start; calc <= end; calc++)
-    if (calc % divisor == 0) return calc;
+  for (let calc = start; calc <= end; calc++) if (calc % divisor == 0) return calc;
 }
 console.log(findNumber(2, 7, 5));
 
@@ -285,8 +283,7 @@ function calculateEvenTotalA(number) {
 
 //
 function calculateEvenTotalB(number) {
-  for (var calc = 0; number > 0; number -= 2)
-    calc += number % 2 ? --number : number;
+  for (var calc = 0; number > 0; number -= 2) calc += number % 2 ? --number : number;
   return calc;
 }
 

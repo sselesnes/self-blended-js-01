@@ -109,19 +109,3 @@ alert(`// maxDigit`);
 //   }
 //   return max;
 // }
-
-class User {
-  email;
-
-  constructor(email) {
-    this.email = email;
-  }
-
-  get email() {
-    return this._email;
-  }
-
-  set email(newEmail) {
-    this._email = newEmail;
-  }
-}
