@@ -65,12 +65,15 @@ console.log(image.getAttribute("alt")); // New world order
 image.removeAttribute("alt");
 console.log(image.hasAttribute("alt")); // false
 
-const newBtn = document.createElement("button");
+// createElement
+const newBtn = document.createElement("button"); // метод createElement(tagName) створює елемент з ім'ям tagName і повертає посилання на його об’єкт як результат свого виконання.
 newBtn.className = "action";
 newBtn.type = "button";
 newBtn.textContent = "Press me";
-newBtn.dataset.action = "magic";
+newBtn.dataset.action = "magic"; //dataset використовується для доступу до атрибутів даних, які починаються з префікса data-
 docBody.appendChild(newBtn);
+
+console.log(newBtn.dataset);
 
 // click listener
 const readBtnClick = document.querySelector("[data-action='magic']");
