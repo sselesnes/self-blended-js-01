@@ -20,9 +20,9 @@ docBody.innerHTML += `<a class="link" id="link" href="https://goit.global">GoIT<
 const link = document.querySelector(".link"); // select by class
 console.log(link.href); // "https://goit.global"
 
-const linkSomeArg = `https://goit.global`;
+const linkSomeArg = `https://goit.globa1`;
 const linkSome = document.querySelector(`.link[href="${linkSomeArg}"]`); // select by class and attribute
-console.log(linkSome.href); // "https://goit.global"
+(linkSome && console.log(linkSome.href)) || console.log(`invalid selector attribute = null`); // "https://goit.global"
 
 link.href = "https://neo.goit.global";
 console.log(link.href); // "https://neo.goit.global"
