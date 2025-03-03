@@ -10,6 +10,8 @@ console.log(sentence);
 
 docBody.innerHTML = `<p>${sentence}</p>`;
 
+console.log(document.querySelector("noneOfAll")); // null
+
 const par = document.querySelector("p"); // select by tag name
 par.textContent = par.textContent.replace("весну", "перемогу України");
 
@@ -17,6 +19,10 @@ docBody.innerHTML += `<a class="link" id="link" href="https://goit.global">GoIT<
 
 const link = document.querySelector(".link"); // select by class
 console.log(link.href); // "https://goit.global"
+
+const linkSomeArg = `https://goit.global`;
+const linkSome = document.querySelector(`.link[href="${linkSomeArg}"]`); // select by class and attribute
+console.log(linkSome.href); // "https://goit.global"
 
 link.href = "https://neo.goit.global";
 console.log(link.href); // "https://neo.goit.global"
@@ -54,6 +60,7 @@ const container = document.createElement("div");
 container.appendChild(newParagraph);
 container.appendChild(newImg);
 container.id = `container`;
+container.className = `container`;
 container.style.display = "flex";
 container.style.flexDirection = "column";
 container.style.backgroundColor = "cyan";
@@ -106,3 +113,95 @@ childForAppend.textContent = "append додає вміст до кінця ко�
 
 // Додаємо текст і новий елемент до кінця контейнера
 container.append(childForAppend, "Текст, доданий після дочірнього елемента append");
+
+console.log(childForPrepend.parentNode.id); // container
+console.log(childForPrepend.parentNode.className); // container
+
+// colorpicker
+const options = [
+  {
+    label: "Red",
+    color: "#f00",
+  },
+  {
+    label: "Green",
+    color: "#0f0",
+  },
+  {
+    label: "Blue",
+    color: "#00f",
+  },
+  {
+    label: "Yellow",
+    color: "#ff0",
+  },
+  {
+    label: "Cyan",
+    color: "#0ff",
+  },
+  {
+    label: "Magenta",
+    color: "#f0f",
+  },
+  {
+    label: "Black",
+    color: "#000",
+  },
+  {
+    label: "White",
+    color: "#fff",
+  },
+];
+
+// Створення контейнера для кнопок
+const colorPickerContainerElement = document.createElement("div");
+colorPickerContainerElement.id = "color-picker-container";
+
+// Створення кнопок на основі масиву options
+const elements = options.map(option => {
+  const buttonEl = document.createElement("button");
+  buttonEl.classList.add("color-picker-style");
+  buttonEl.textContent = option.label;
+  buttonEl.style.backgroundColor = option.color;
+  return buttonEl;
+});
+
+// Додавання кнопок до контейнера
+colorPickerContainerElement.append(...elements);
+
+// Додавання контейнера до body
+document.body.appendChild(colorPickerContainerElement);
+
+// Додавання стилів для кнопок
+const style = document.createElement("style");
+style.innerHTML = `
+  .color-picker-style {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+`;
+document.head.appendChild(style);
+
+// innerHTML
+// Заміна вмісту: innerHTML замінює весь вміст елемента на новий HTML-код.
+// Повернення значення: innerHTML повертає поточний HTML-вміст елемента.
+// Використання: Використовується, коли потрібно повністю замінити вміст елемента.
+
+const innerHTMLContent = ` <a href="https://goit.global">GoIT</a> `;
+newParagraph.innerHTML += innerHTMLContent;
+
+// insertAdjacentHTML
+// Вставка вмісту: insertAdjacentHTML вставляє HTML-код у вказану позицію відносно елемента, не замінюючи його вміст.
+// Позиція вставки: Має чотири можливі позиції для вставки:
+// 'beforebegin': Перед елементом.
+// 'afterbegin': Всередині елемента, перед його вмістом.
+// 'beforeend': Всередині елемента, після його вмісту.
+// 'afterend': Після елемента.
+// Використання: Використовується, коли потрібно вставити HTML-код у конкретне місце відносно елемента, не заміняючи його вміст.
+
+const insertAdjacentHTMLContent = ` <a href="https://goit.global">GoIT</a> `;
+newParagraph.insertAdjacentHTML("afterbegin", insertAdjacentHTMLContent);
