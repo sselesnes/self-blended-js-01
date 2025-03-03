@@ -189,7 +189,7 @@ document.head.appendChild(style);
 // innerHTML
 // Заміна вмісту: innerHTML замінює весь вміст елемента на новий HTML-код.
 // Повернення значення: innerHTML повертає поточний HTML-вміст елемента.
-// Використання: Використовується, коли потрібно повністю замінити вміст елемента.
+// Використовується, коли потрібно повністю замінити вміст елемента.
 
 const innerHTMLContent = ` <a href="https://goit.global">GoIT</a> `;
 newParagraph.innerHTML += innerHTMLContent;
@@ -201,7 +201,7 @@ newParagraph.innerHTML += innerHTMLContent;
 // 'afterbegin': Всередині елемента, перед його вмістом.
 // 'beforeend': Всередині елемента, після його вмісту.
 // 'afterend': Після елемента.
-// Використання: Використовується, коли потрібно вставити HTML-код у конкретне місце відносно елемента, не заміняючи його вміст.
+// Використовується, коли потрібно вставити HTML-код у конкретне місце відносно елемента, не заміняючи його вміст.
 
 const insertAdjacentHTMLContent = ` <a href="https://goit.global">GoIT</a> `;
 newParagraph.insertAdjacentHTML("afterbegin", insertAdjacentHTMLContent);
