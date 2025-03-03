@@ -90,7 +90,7 @@ readImgHover.addEventListener("mouseover", () => {
   console.log("image hovered");
 });
 
-// prepend append prependChild appendChild
+// prepend append prependChild appendChild - приймають декілька аргументів
 // const container = document.querySelector(`#container`); // by id
 
 // Створюємо новий елемент для prepend
@@ -105,4 +105,4 @@ const childForAppend = document.createElement("p");
 childForAppend.textContent = "append додає вміст до кінця контейнера div #container";
 
 // Додаємо текст і новий елемент до кінця контейнера
-container.append("Текст, доданий перед дочірнім елементом append", childForAppend);
+container.append(childForAppend, "Текст, доданий після дочірнього елемента append");
