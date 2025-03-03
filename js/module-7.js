@@ -15,7 +15,7 @@ console.log(document.querySelector("noneOfAll")); // null
 const par = document.querySelector("p"); // select by tag name
 par.textContent = par.textContent.replace("весну", "перемогу України");
 
-docBody.innerHTML += `<a class="link" id="link" href="https://goit.global">GoIT</a>`;
+docBody.innerHTML += `<a class="link" id="link" href="https://goit.global">GoIT</a><br><br>`;
 
 const link = document.querySelector(".link"); // select by class
 console.log(link.href); // "https://goit.global"
@@ -81,6 +81,7 @@ newBtn.className = "action";
 newBtn.type = "button";
 newBtn.textContent = "Press me";
 newBtn.dataset.action = "magic"; //dataset використовується для доступу до атрибутів даних, які починаються з префікса data-
+newBtn.style.margin = "10px 0 10px";
 docBody.appendChild(newBtn);
 
 console.log(newBtn.dataset);
