@@ -54,6 +54,9 @@ const container = document.createElement("div");
 container.appendChild(newParagraph);
 container.appendChild(newImg);
 container.id = `container`;
+container.style.display = "flex";
+container.style.flexDirection = "column";
+container.style.backgroundColor = "cyan";
 docBody.appendChild(container);
 
 const image = document.querySelector(".image"); // by class
@@ -86,3 +89,20 @@ const readImgHover = document.querySelector(`#container .image`);
 readImgHover.addEventListener("mouseover", () => {
   console.log("image hovered");
 });
+
+// prepend append prependChild appendChild
+// const container = document.querySelector(`#container`); // by id
+
+// Створюємо новий елемент для prepend
+const childForPrepend = document.createElement("p");
+childForPrepend.textContent = "prepend додає вміст на початок контейнера div #container";
+
+// Додаємо текст і новий елемент на початок контейнера
+container.prepend("Текст, доданий перед дочірнім елементом prepend", childForPrepend);
+
+// Створюємо новий елемент для append
+const childForAppend = document.createElement("p");
+childForAppend.textContent = "append додає вміст до кінця контейнера div #container";
+
+// Додаємо текст і новий елемент до кінця контейнера
+container.append("Текст, доданий перед дочірнім елементом append", childForAppend);
