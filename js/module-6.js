@@ -359,3 +359,15 @@ mango67.blacklist("poly@mail.com");
 console.log(mango67.blacklistedEmails); // ["poly@mail.com"]
 console.log(mango67.isBlacklisted("mango@mail.com")); // false
 console.log(mango67.isBlacklisted("poly@mail.com")); // true
+
+//
+function showName() {
+  this.name = "John";
+  this.showName = () => {
+    console.log(this.name);
+  };
+}
+
+const result = new showName();
+const output = result.showName;
+output(); // John
