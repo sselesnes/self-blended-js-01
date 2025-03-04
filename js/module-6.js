@@ -369,6 +369,17 @@ function showName() {
 }
 
 const result = new showName();
-// result(); // undefined error
 const output = result.showName;
 output(); // John
+
+//
+function showName2() {
+  this.name = "John";
+  this.showName2 = function () {
+    console.log(this.name);
+  };
+}
+
+const result2 = new showName2();
+const output2 = result2.showName2;
+output2();

@@ -301,8 +301,37 @@ const orders22 = [
   { product: "banana", quantity: 5 },
 ];
 const totalQuantityByProduct22 = orders =>
-  orders.reduce((acc, { product, quantity }) =>
-    ((acc[product] = (acc[product] || 0) + quantity), acc),
+  orders.reduce(
+    (acc, { product, quantity }) => ((acc[product] = (acc[product] || 0) + quantity), acc),
     {}
   );
 console.table(totalQuantityByProduct22(orders22));
+
+//
+const toCamelCase = str =>
+  str
+    .split(/[-_]/)
+    .reduce(
+      (acc, word, index) =>
+        acc +
+        ((index && word.charAt(0).toUpperCase()) || word.charAt(0).toLowerCase()) +
+        word.slice(1),
+      ""
+    );
+
+console.log(toCamelCase("the-stealth-warrior")); //"theStealthWarrior"
+console.log(toCamelCase("The_Stealth_Warrior")); // "theStealthWarrior"
+console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
+console.log(toCamelCase("A-B-C")); // "aBC"
+
+//
+const getVowelCount = sentence =>
+  sentence.split(/[aeiouAEIOU\s.,]/g).reduce((acc, word) => acc + word).length;
+console.log(getVowelCount(`Lorem, ipsum. Dolor`)); // виведе: 9
+
+//
+const getVowelCount1 = sentence => {
+  const symbols = sentence.match(/[aeiouAEIOU\s.,]/g);
+  return symbols ? symbols.length : 0;
+};
+console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // не виведе: 9 =))
