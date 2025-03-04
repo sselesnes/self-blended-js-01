@@ -369,5 +369,6 @@ function showName() {
 }
 
 const result = new showName();
+// result(); // undefined error
 const output = result.showName;
 output(); // John
