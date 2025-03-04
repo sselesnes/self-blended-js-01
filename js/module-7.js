@@ -34,8 +34,7 @@ linkId.href = "https://edu.goit.global";
 linkId.style.color = `rgb(255, 107, 10)`;
 linkId.style.backgroundColor = `rgb(0, 0, 0)`; // властивості записуються в camelCase нотації (backgroundColor), замість дефісів (background-color), які використовуються в CSS
 console.log(linkId.href);
-console.log(link.classList);
-console.log(link.classList.contains("link"));
+console.log(linkId.classList.contains("link"));
 
 link.classList.add("special");
 console.log(link.classList);
