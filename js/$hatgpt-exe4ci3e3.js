@@ -325,13 +325,8 @@ console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
 console.log(toCamelCase("A-B-C")); // "aBC"
 
 //
-const getVowelCount = sentence =>
-  sentence.split(/[aeiouAEIOU\s.,]/g).reduce((acc, word) => acc + word).length;
-console.log(getVowelCount(`Lorem, ipsum. Dolor`)); // виведе: 9
+const getVowelCount1 = sentence => sentence.match(/[aeiouAEIOU]/g).length;
+console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // 6
 
-//
-const getVowelCount1 = sentence => {
-  const symbols = sentence.match(/[aeiouAEIOU\s.,]/g);
-  return symbols ? symbols.length : 0;
-};
-console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // не виведе: 9 =))
+const getVowelCount2 = sentence => sentence.replace(/[^aeiouAEIOU]/g, "").length;
+console.log(getVowelCount2(`Lorem, ipsum. Dolor`)); // 6
