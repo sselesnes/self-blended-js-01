@@ -310,14 +310,14 @@ console.table(totalQuantityByProduct22(orders22));
 //
 const toCamelCase = str =>
   str
-    .split(/[-_]/)                          // прибираємо '-' і ' ' та розкладуємо на окремі слова
-    .reduce(                                // працюємо з окремимі словами
+    .split(/[-_]/) // прибираємо '-' і ' ' та розкладуємо на окремі слова
+    .reduce(
       (acc, word, index) =>
         acc +
-        ((index &&                          // якщо index true тобто не перше слово
-          word.charAt(0).toUpperCase()) ||  // робимо перший символ слова великим
-          word.charAt(0).toLowerCase()) +   // інакше маленьким
-        word.slice(1),                      // додаємо залишок слова без першого символу
+        ((index && // якщо index true тобто не перше слово
+          word.charAt(0).toUpperCase()) || // робимо перший символ слова великим
+          word.charAt(0).toLowerCase()) + // інакше маленьким
+        word.slice(1), // додаємо залишок слова без першого символу
       ""
     );
 
