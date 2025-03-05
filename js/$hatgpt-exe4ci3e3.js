@@ -317,7 +317,7 @@ const toCamelCase = str =>
         ((index &&                          // якщо index true тобто не перше слово
           word.charAt(0).toUpperCase()) ||  // робимо перший символ слова великим
           word.charAt(0).toLowerCase()) +   // інакше маленьким
-        word.slice(1),                      // додаємо залишок слова без першого знаку
+        word.slice(1),                      // додаємо залишок слова без першого символу
       ""
     );
 
