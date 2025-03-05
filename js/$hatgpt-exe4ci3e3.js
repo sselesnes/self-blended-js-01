@@ -310,16 +310,18 @@ console.table(totalQuantityByProduct22(orders22));
 //
 const toCamelCase = str =>
   str
-    .split(/[-_]/)
-    .reduce(
+    .split(/[-_]/)                          // прибираємо '-' і ' ' та розкладуємо на окремі слова
+    .reduce(                                // працюємо з окремимі словами
       (acc, word, index) =>
         acc +
-        ((index && word.charAt(0).toUpperCase()) || word.charAt(0).toLowerCase()) +
-        word.slice(1),
+        ((index &&                          // якщо index true тобто не перше слово
+          word.charAt(0).toUpperCase()) ||  // робимо перший символ слова великим
+          word.charAt(0).toLowerCase()) +   // інакше маленьким
+        word.slice(1),                      // додаємо залишок слова без першого знаку
       ""
     );
 
-console.log(toCamelCase("the-stealth-warrior")); //"theStealthWarrior"
+console.log(toCamelCase("the-stealth-warrior")); // "theStealthWarrior"
 console.log(toCamelCase("The_Stealth_Warrior")); // "theStealthWarrior"
 console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
 console.log(toCamelCase("A-B-C")); // "aBC"
