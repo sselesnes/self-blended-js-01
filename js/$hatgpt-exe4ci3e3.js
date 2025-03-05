@@ -327,7 +327,7 @@ console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
 console.log(toCamelCase("A-B-C")); // "aBC"
 
 // рахуємо голосні (не приголосні)
-const getVowelCount1 = sentence => sentence.toLowerCase().match(/[aeiou]/g).length;
+const getVowelCount1 = sentence => sentence.match(/[aeiou]/gi).length; // RegExp g - шукати всі збіги (не тільки перший), i - ігнорування регістра (великі маленьки)
 console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // 6
 
 const getVowelCount2 = sentence => sentence.replace(/[^aeiouAEIOU]/g, "").length;
