@@ -76,7 +76,7 @@ console.log(image.hasAttribute("alt")); // false
 
 // createElement
 const newBtn = document.createElement("button"); // метод createElement(tagName) створює елемент з ім'ям tagName і повертає посилання на його об’єкт як результат свого виконання.
-newBtn.className = "action";
+newBtn.className = "js-click";
 newBtn.type = "button";
 newBtn.textContent = "Press me";
 newBtn.dataset.action = "magic"; //dataset використовується для доступу до атрибутів даних, які починаються з префікса data-
@@ -93,8 +93,25 @@ readBtnClick.addEventListener("click", () => {
 
 // hover listener
 const readImgHover = document.querySelector(`#container .image`);
+// mouseover mouseout - вкладені елементи
 readImgHover.addEventListener("mouseover", () => {
-  console.log("image hovered");
+  console.log("image mouseeover");
+});
+
+readImgHover.addEventListener("mouseout", () => {
+  console.log("image mouseout");
+});
+
+readImgHover.addEventListener("mouseenter", () => {
+  console.log("image mouseenter");
+});
+
+readImgHover.addEventListener("mouseleave", () => {
+  console.log("image mouseleave");
+});
+
+readImgHover.addEventListener("mousemove", () => {
+  console.log("image mousemove");
 });
 
 // prepend append prependChild appendChild - приймають декілька аргументів
@@ -205,3 +222,97 @@ newParagraph.innerHTML += innerHTMLContent;
 
 const insertAdjacentHTMLContent = ` <a href="https://goit.global">GoIT</a> `;
 newParagraph.insertAdjacentHTML("afterbegin", insertAdjacentHTMLContent);
+
+//
+const btn = document.querySelector(".js-click");
+const box = document.querySelector(".image");
+
+let step = 0;
+btn.addEventListener("click", () => {
+  step += 50;
+  console.log(step);
+});
+
+// Створення форми
+const form = document.createElement("form");
+
+// Створення текстового поля
+const inputBoxCreate = document.createElement("input");
+inputBoxCreate.type = "text";
+inputBoxCreate.className = "js-input";
+inputBoxCreate.placeholder = "Enter text";
+inputBoxCreate.name = "submitName";
+
+// Додавання текстового поля до форми
+form.appendChild(inputBoxCreate);
+
+// Створення кнопки
+const subscribeButton = document.createElement("button");
+subscribeButton.type = "submit";
+subscribeButton.textContent = "Subscribe";
+
+// Додавання кнопки до форми
+form.appendChild(subscribeButton);
+
+// Додавання форми до тіла документа
+docBody.appendChild(form);
+
+// Отримання посилання на текстове поле за класом
+const inputBox = document.querySelector(".js-input");
+
+// Додавання обробника подій для події input
+inputBox.addEventListener("input", event => {
+  console.log("Input value:", event.target.value);
+  console.log("Input element by name:", event.target.form.elements.submitName.value);
+});
+
+// Додавання обробника подій для події focus
+inputBox.addEventListener("focus", event => {
+  console.log("focus");
+});
+
+// Додавання обробника подій для події blur
+inputBox.addEventListener("blur", event => {
+  console.log("blur");
+});
+
+// Додавання обробника подій для події focusin
+inputBox.addEventListener("focusin", event => {
+  console.log("focusin");
+});
+
+// Додавання обробника подій для події focusout
+inputBox.addEventListener("focusout", event => {
+  console.log("focusout");
+});
+
+// Додавання обробника подій для події keydown
+inputBox.addEventListener("keydown", event => {
+  console.log("keydown:", event.key);
+});
+
+// Додавання обробника подій для події keypress
+inputBox.addEventListener("keypress", event => {
+  console.log("keypress:", event.key);
+});
+
+// Додавання обробника подій для події keyup
+inputBox.addEventListener("keyup", event => {
+  console.log("keyup:", event.key);
+});
+
+// Додавання обробника подій для події submit для форми
+form.addEventListener("submit", event => {
+  event.preventDefault(); // Заборона стандартної поведінки форми
+  const inputValue = inputBoxCreate.value;
+  console.log("Input value:", inputValue);
+  // Очищення текстового поля після введення
+  inputBoxCreate.value = "";
+});
+
+document.addEventListener("keydown", event => {
+  console.log(event.code);
+  console.log(event.key);
+  console.log(event); // shiftKey ctrlKey altKey meta(це win-key)
+  event.preventDefault(); // Заборона стандартної поведінки
+});
