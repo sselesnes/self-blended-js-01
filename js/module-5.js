@@ -40,7 +40,8 @@ alert(calculateTotalPrice([412, 371, 94, 63, 176]));
 // array(масив): масив, над яким виконується reduce.
 //
 
-const calculateTotalPrice1 = orderedItems => orderedItems.reduce((acc, num, index, orderedItems) => (acc += num), 0);
+const calculateTotalPrice1 = orderedItems =>
+  orderedItems.reduce((acc, num, index, orderedItems) => (acc += num), 0);
 alert(calculateTotalPrice1([412, 371, 94, 63, 176]));
 
 //
@@ -72,10 +73,14 @@ console.log(add(1, 2, 3));
 //
 // Чиста функція (pure function) - не змінює значення аргументів (мутація вихідних даних). За умови однакових аргументів вона завжди повертає один і той самий результат.
 //
-const changeEven1 = (numbersArray, value) => numbersArray.map(number => (number % 2 ? number : number + value));
+const changeEven1 = (numbersArray, value) =>
+  numbersArray.map(number => (number % 2 ? number : number + value));
 
 function changeEven(numbersArray, value) {
-  return numbersArray.reduce((calculatedArray, number) => calculatedArray.concat(number % 2 ? number : number + value), []);
+  return numbersArray.reduce(
+    (calculatedArray, number) => calculatedArray.concat(number % 2 ? number : number + value),
+    []
+  );
 }
 
 function changeEven0(numbersArray, value) {
@@ -225,7 +230,10 @@ const players56 = [
   { name: "Ajax", playtime: 690, gamesPlayed: 3 },
   { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
 ];
-const totalAveragePlaytimePerGame = players56.reduce((acc, player) => acc + player.playtime / player.gamesPlayed, 0);
+const totalAveragePlaytimePerGame = players56.reduce(
+  (acc, player) => acc + player.playtime / player.gamesPlayed,
+  0
+);
 alert(totalAveragePlaytimePerGame);
 
 ///* Метод toSorted(compareFn) сортує елементи масиву повертачи новий масив. За замовчуванням сортує за зростанням.
@@ -242,7 +250,9 @@ const students57 = [
   { name: "Ajax", score: 37 },
   { name: "Kiwi", score: 94 },
 ];
-const inAscendingScoreOrder = students57.toSorted((firstStudent, secondStudent) => firstStudent.score - secondStudent.score);
+const inAscendingScoreOrder = students57.toSorted(
+  (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+);
 
 //
 const books58 = [

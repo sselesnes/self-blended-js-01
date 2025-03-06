@@ -369,6 +369,7 @@ function showName() {
 }
 
 const result = new showName();
-// result(); // undefined error
+result; // undefined error
 const output = result.showName;
 output(); // John
+console.log(result.name);
