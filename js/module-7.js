@@ -306,6 +306,7 @@ form.addEventListener("submit", event => {
   event.preventDefault(); // Заборона стандартної поведінки форми
   const inputValue = inputBoxCreate.value;
   console.log("Input value:", inputValue);
+
   // Очищення текстового поля після введення
   inputBoxCreate.value = "";
 });
@@ -314,5 +315,9 @@ document.addEventListener("keydown", event => {
   console.log(event.code);
   console.log(event.key);
   console.log(event); // shiftKey ctrlKey altKey meta(це win-key)
-  event.preventDefault(); // Заборона стандартної поведінки
+  // event.preventDefault(); // Заборона стандартної поведінки
+});
+
+form.addEventListener("change", event => {
+  console.log(event); // подія відбувається після втрати фокусу за умови, що відбулася зміна значення в елементі
 });
