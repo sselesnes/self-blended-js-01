@@ -301,8 +301,34 @@ const orders22 = [
   { product: "banana", quantity: 5 },
 ];
 const totalQuantityByProduct22 = orders =>
-  orders.reduce((acc, { product, quantity }) =>
-    ((acc[product] = (acc[product] || 0) + quantity), acc),
+  orders.reduce(
+    (acc, { product, quantity }) => ((acc[product] = (acc[product] || 0) + quantity), acc),
     {}
   );
 console.table(totalQuantityByProduct22(orders22));
+
+//
+const toCamelCase = str =>
+  str
+    .split(/[-_]/) // прибираємо '-' і ' ' та розкладуємо на окремі слова
+    .reduce(
+      (acc, word, index) =>
+        acc +
+        ((index && // якщо index true тобто не перше слово
+          word.charAt(0).toUpperCase()) || // робимо перший символ слова великим
+          word.charAt(0).toLowerCase()) + // інакше маленьким
+        word.slice(1), // додаємо залишок слова без першого символу
+      ""
+    );
+
+console.log(toCamelCase("the-stealth-warrior")); // "theStealthWarrior"
+console.log(toCamelCase("The_Stealth_Warrior")); // "theStealthWarrior"
+console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
+console.log(toCamelCase("A-B-C")); // "aBC"
+
+// рахуємо голосні (не приголосні)
+const getVowelCount1 = sentence => sentence.match(/[aeiou]/gi).length; // RegExp g - шукати всі збіги (не тільки перший), i - ігнорування регістра (великі маленьки)
+console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // 6
+
+const getVowelCount2 = sentence => sentence.replace(/[^aeiouAEIOU]/g, "").length;
+console.log(getVowelCount2(`Lorem, ipsum. Dolor`)); // 6
