@@ -324,19 +324,6 @@ form.addEventListener("change", event => {
 
 //
 const createBoxes1 = amount => {
-  const boxesHTML = Array.from(
-    { length: amount },
-    (_, index) =>
-      `<div style="width: ${30 + index * 10}px;
-        height: ${30 + index * 10}px;
-        background-color: ${getRandomHexColor()};"></div>`
-  ).join("");
-  boxesDiv.innerHTML = "";
-  boxesDiv.innerHTML = boxesHTML;
-};
-
-//
-const createBoxes2 = amount => {
   const boxesHTML = Array.from({ length: amount }, (_, index) => {
     const size = 30 + index * 10;
     return `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()};"></div>`;
@@ -345,7 +332,7 @@ const createBoxes2 = amount => {
 };
 
 //
-const createBoxes3 = amount => {
+const createBoxes2 = amount => {
   const boxes = [];
   for (let i = 0; i < amount; i++) {
     const box = document.createElement("div");
