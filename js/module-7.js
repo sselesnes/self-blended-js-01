@@ -91,11 +91,19 @@ readBtnClick.addEventListener("click", () => {
   console.log("button pressed");
 });
 
-// hover listener
+// hover listener - на мобілках заліпає - використовуємо :active та pointer
+// @media (pointer: fine) { // миша, тачпад, стилус
+//   .button:hover {
+//
+// @media (pointer: coarse) { // сенсорний екран смартфона або планшет
+//   .button:active {
+//
+// замість event "mouseover", "mouseout" допомогає "pointerover", "pointerout"
+//
 const readImgHover = document.querySelector(`#container .image`);
-// mouseover mouseout - вкладені елементи
+
 readImgHover.addEventListener("mouseover", () => {
-  console.log("image mouseeover");
+  console.log("image mouseover");
 });
 
 readImgHover.addEventListener("mouseout", () => {
