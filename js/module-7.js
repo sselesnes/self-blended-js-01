@@ -321,3 +321,39 @@ document.addEventListener("keydown", event => {
 form.addEventListener("change", event => {
   console.log(event); // подія відбувається після втрати фокусу за умови, що відбулася зміна значення в елементі
 });
+
+//
+const createBoxes1 = amount => {
+  const boxesHTML = Array.from(
+    { length: amount },
+    (_, index) =>
+      `<div style="width: ${30 + index * 10}px;
+        height: ${30 + index * 10}px;
+        background-color: ${getRandomHexColor()};"></div>`
+  ).join("");
+  boxesDiv.innerHTML = "";
+  boxesDiv.innerHTML = boxesHTML;
+};
+
+//
+const createBoxes2 = amount => {
+  const boxesHTML = Array.from({ length: amount }, (_, index) => {
+    const size = 30 + index * 10;
+    return `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()};"></div>`;
+  }).join("");
+  boxesDiv.innerHTML = boxesHTML;
+};
+
+//
+const createBoxes3 = amount => {
+  const boxes = [];
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement("div");
+    box.style.width = `${30 + i * 10}px`;
+    box.style.height = `${30 + i * 10}px`;
+    box.style.backgroundColor = getRandomHexColor();
+    boxes.push(box);
+  }
+  boxesDiv.innerHTML = "";
+  boxesDiv.append(...boxes);
+};
