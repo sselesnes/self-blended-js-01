@@ -20,7 +20,7 @@ function itemListListener() {
   });
 }
 
-//
+// keyboard mouse
 const eventTypes = ["click", "keydown"];
 
 eventTypes.forEach(eventType => {
@@ -35,7 +35,18 @@ eventTypes.forEach(eventType => {
   });
 });
 
-//
+// window
+const windowEventTypes = ["load", "resize", "scroll", "unload"];
+
+function handleWindowEvent(event) {
+  console.log(`Подія: ${event.type}`);
+}
+
+windowEventTypes.forEach(eventType => {
+  window.addEventListener(eventType, handleWindowEvent);
+});
+
+// делегування
 function handleEvent(event) {
   if (event.target.matches(".specific-class")) {
     console.log(
