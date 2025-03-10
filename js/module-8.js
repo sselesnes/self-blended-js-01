@@ -1,25 +1,3 @@
-function parent() {
-  someElement.addEventListener("click", event => {
-    console.log("event.target: ", event.target); // це завжди вихідний (і найглибший) елемент, на якому був клік
-    console.log("event.currentTarget: ", event.currentTarget); // елемент, до якого подія спливла, і обробник її перехопив, тобто елемент, який ми прослуховуємо
-  });
-}
-
-/* <ul id="list">
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
-</ul> */
-
-function itemListListener() {
-  document.getElementById("list").addEventListener("click", function (event) {
-    if (event.target.tagName === "LI") {
-      console.log("Clicked on: ", event.currentTarget); // Виведе <ul id="list">
-      console.log("Specific list item: ", event.target.textContent); // Виведе текст конкретного елемента списку
-    }
-  });
-}
-
 // keyboard mouse
 const eventTypes = ["click", "keydown"];
 
@@ -46,7 +24,12 @@ windowEventTypes.forEach(eventType => {
   window.addEventListener(eventType, handleWindowEvent);
 });
 
-// делегування
+// event delegation - делегування
+const bodyElement = document.querySelector("body");
+eventTypes.forEach(eventType => {
+  bodyElement.addEventListener(eventType, handleEvent);
+});
+
 function handleEvent(event) {
   if (event.target.matches(".specific-class")) {
     console.log(
@@ -61,8 +44,41 @@ function handleEvent(event) {
   }
 }
 
-const bodyElement = document.querySelector("body");
+//
+function parent() {
+  someElement.addEventListener("click", event => {
+    console.log("event.target: ", event.target); // це завжди вихідний (і найглибший) елемент, на якому був клік
+    console.log("event.currentTarget: ", event.currentTarget); // елемент, до якого подія спливла, і обробник її перехопив, тобто елемент, який ми прослуховуємо
+  });
+}
 
-eventTypes.forEach(eventType => {
-  bodyElement.addEventListener(eventType, handleEvent);
-});
+//
+/* <ul id="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul> */
+
+function itemListListener() {
+  document.getElementById("list").addEventListener("click", function (event) {
+    if (event.target.tagName === "LI") {
+      console.log("Clicked on: ", event.currentTarget); // Виведе <ul id="list">
+      console.log("Specific list item: ", event.target.textContent); // Виведе текст конкретного елемента списку
+    }
+  });
+}
+
+//
+const container = document.querySelector(".container");
+
+function itemListListener2() {
+  // [...container.children] === Array.from(container.children)
+  [...container.children].forEach(item => {
+    item.addEventListener("click", handleClick);
+  });
+}
+
+function handleClick(event) {
+  const color = event.target.style.color;
+  console.log(color);
+}
