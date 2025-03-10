@@ -19,3 +19,39 @@ function itemListListener() {
     }
   });
 }
+
+//
+const eventTypes = ["click", "keydown"];
+
+eventTypes.forEach(eventType => {
+  document.querySelector("body").addEventListener(eventType, event => {
+    console.log(`event.type:`, event.type);
+    console.log("event.code", event.code);
+    console.log("event.key", event.key);
+    console.log(`event.target:`, event.target);
+    console.log(`event.target.tagName:`, event.target.tagName);
+    console.log(`event.target.className:`, event.target.className);
+    console.log(`event.target.id:`, event.target.id);
+  });
+});
+
+//
+function handleEvent(event) {
+  if (event.target.matches(".specific-class")) {
+    console.log(
+      `event.type: ${event.type}, event.target: ${event.target}, event.target.tagName: ${event.target.tagName}, event.target.className: ${event.target.className}, event.target.id: ${event.target.id}`
+    );
+  } else if (event.target.matches(".another-class")) {
+    // Обробка подій для елементів з класом .another-class
+    console.log(`Another class event: ${event.type}`);
+  } else {
+    // Обробка подій для інших елементів
+    console.log(`Other event: ${event.type}`);
+  }
+}
+
+const bodyElement = document.querySelector("body");
+
+eventTypes.forEach(eventType => {
+  bodyElement.addEventListener(eventType, handleEvent);
+});
