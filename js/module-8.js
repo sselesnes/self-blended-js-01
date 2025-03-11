@@ -82,3 +82,22 @@ function handleClick(event) {
   const color = event.target.style.color;
   console.log(color);
 }
+
+function destructuring() {
+  const book = {
+    title: "The Last Kingdom",
+    coverImage: "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+  };
+
+  // Деструктуризуємо, змінивши ім'я змінної та додавши значення за замовчуванням
+  const { title, coverImage: bookCoverImage = "https://via.placeholder.com/640/480" } = book;
+
+  console.log(title); // "The Last Kingdom"
+  console.log(bookCoverImage); // "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg"
+
+  for (const { title, author, rating } of books) {
+    console.log(title);
+    console.log(author);
+    console.log(rating);
+  }
+}
