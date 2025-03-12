@@ -14,7 +14,7 @@ eventTypes.forEach(eventType => {
 });
 
 // window
-const windowEventTypes = ["load", "resize", "scroll", "unload"];
+const windowEventTypes = ["load", "resize", "scroll", "beforeunload", "unload"];
 
 function handleWindowEvent(event) {
   console.log(`Подія: ${event.type}`);
@@ -69,7 +69,7 @@ function itemListListener() {
 }
 
 //
-const container = document.querySelector(".container");
+const container = document.querySelector("body");
 
 function itemListListener2() {
   // [...container.children] === Array.from(container.children)
@@ -79,8 +79,27 @@ function itemListListener2() {
 }
 
 function handleClick(event) {
-  const color = event.target.style.color;
-  console.log(color);
+  const closest = event.target.closest(".some-class");
+  console.log(closest);
+}
+
+function destructuring() {
+  const book = {
+    title: "The Last Kingdom",
+    coverImage: "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+  };
+
+  // Деструктуризуємо, змінивши ім'я змінної та додавши значення за замовчуванням
+  const { title, coverImage: bookCoverImage = "https://via.placeholder.com/640/480" } = book;
+
+  console.log(title); // "The Last Kingdom"
+  console.log(bookCoverImage); // "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg"
+
+  for (const { title, author, rating } of books) {
+    console.log(title);
+    console.log(author);
+    console.log(rating);
+  }
 }
 
 // Деструктуризація об'єктів
