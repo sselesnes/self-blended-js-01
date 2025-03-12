@@ -83,6 +83,7 @@ function handleClick(event) {
   console.log(color);
 }
 
+// Деструктуризація об'єктів
 function destructuring() {
   const book = {
     title: "The Last Kingdom",
@@ -100,4 +101,54 @@ function destructuring() {
     console.log(author);
     console.log(rating);
   }
+
+  //
+  function doStuffWithBook({ title, pages, downloads, rating, isPublic }) {
+    console.log(title);
+    console.log(pages);
+  }
+
+  //
+  const user = {
+    name: "Jacques Gluke",
+    tag: "jgluke",
+    stats: {
+      followers: 5603,
+      views: 4827,
+      likes: 1308,
+    },
+  };
+
+  //
+  const {
+    name,
+    tag,
+    stats: { followers = 0, views: userViews = 0, likes: userLikes = 0 },
+  } = user;
+
+  const { name1, isOnline, ...otherProps } = user;
+
+  console.log(name); // Jacques Gluke
+  console.log(tag); // jgluke
+  console.log(followers); // 5603
+  console.log(userViews); // 4827
+  console.log(userLikes); // 1308
+
+  // Деструктуризація масивів
+  const color = [200, 100, 255];
+  const [red, green, blue, alfa = 0.3] = color;
+  console.log(`rgba: (${red}, ${green}, ${blue}, ${alfa})`);
+  // rgba: (200, 255, 100, 0.3)
+
+  //
+  const rgb1 = [200, 100, 255];
+  const [, , blue1] = rgb;
+  console.log(`Blue: ${blue1}`); // "Blue: 255"
+
+  //
+  const color1 = [200, 255, 100];
+  const [red1, ...otherColors] = color1;
+
+  console.log(red1); // 200
+  console.log(otherColors); // [255, 100]
 }
