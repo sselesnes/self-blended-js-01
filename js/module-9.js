@@ -29,5 +29,47 @@ function localStorageExample() {
   // localStorage.getItem("key");
   // localStorage.removeItem("key");
   // localStorage.clear();
+
+  const settings = {
+    theme: "dark",
+    isAuthenticated: true,
+    options: [1, 2, 3],
+  };
+  localStorage.setItem("settings", JSON.stringify(settings));
+
+  const savedSettings = localStorage.getItem("settings");
+  console.log(savedSettings); // A string
+
+  const parsedSettings = JSON.parse(savedSettings);
+  console.log(parsedSettings); // Settings object
+
+  // Якщо необхідно зберегти щось, окрім рядка, наприклад, масив або об'єкт, необхідно перетворити їх у рядок методом JSON.stringify().
+
+  localStorage.removeItem("settings");
+  console.log(localStorage.getItem("settings")); // null
+
+  localStorage.clear();
+  console.log(localStorage); // Storage {length: 0}
 }
-localStorageExample();
+// localStorageExample();
+
+//
+function feedbackFormExample() {
+  const form = document.querySelector(".feedback-form");
+  const textarea = form.elements.message;
+  const localStorageKey = "goit-example-message";
+
+  textarea.value = localStorage.getItem(localStorageKey) ?? "";
+
+  form.addEventListener("input", evt => {
+    localStorage.setItem(localStorageKey, evt.target.value);
+  });
+
+  form.addEventListener("submit", evt => {
+    evt.preventDefault();
+    console.log(evt.target.elements.message.value);
+    localStorage.removeItem(localStorageKey);
+    form.reset();
+  });
+}
+feedbackFormExample();

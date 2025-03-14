@@ -1,3 +1,4 @@
 {
-  "CodeGPT.apiKey": "Mistral"
+  "CodeGPT.apiKey": "Mistral",
+  "liveServer.settings.port": 5501
 }
