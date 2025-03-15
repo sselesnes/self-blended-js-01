@@ -55,11 +55,16 @@ function localStorageExample() {
 
 //
 function feedbackFormExample() {
-  const form = document.querySelector(".feedback-form");
-  const textarea = form.elements.message;
-  const localStorageKey = "goit-example-message";
+  const form2 = document.querySelector(".feedback-farm");
+  const textarea2 = form2?.elementr.massage; //Опціональний ланцюжок (?.) Якщо будь-яка з проміжних властивостей дорівнює null або undefined, вираз повертає undefined замість того, щоб викликати помилку TypeError.
+  console.log(textarea2); // undefined
 
-  textarea.value = localStorage.getItem(localStorageKey) ?? "";
+  const form = document.querySelector(".feedback-form");
+  const textarea = form?.elements.message;
+  const localStorageKey = "goit-example-message";
+  console.log(`localStorage`, localStorage.getItem(localStorageKey));
+
+  textarea.value = localStorage.getItem(localStorageKey) ?? ""; // оператор нульового злиття (nullish coalescing operator) в JavaScript. Він використовується для надання значення за замовчуванням, якщо лівий операнд є null або undefined.
 
   form.addEventListener("input", evt => {
     localStorage.setItem(localStorageKey, evt.target.value);
@@ -73,3 +78,27 @@ function feedbackFormExample() {
   });
 }
 feedbackFormExample();
+
+// vite init
+// https://www.edu.goit.global/uk/learn/29773997/18936918/20332333/training?blockId=20332348
+
+// node --version
+// npm --version
+// npm config set init-author-name "YOUR_NAME"
+// npm config set init-author-email "YOUR_EMAIL"
+// npm config get
+
+// npm create vite@latest
+// Vanilla
+// JavaScript
+
+// npm install // npm i // package.json "dependencies": {}
+// npm install package-name --save // залежність, яка увійде до фінального продукту
+// npm install package-name --save-dev // залежність розробки, яка не увійде до фінального продукту
+// npm uninstall // npm r
+// npm run dev
+
+// import { userNames } from "./module-9-makeMessage.js"; // імпорт декількох значень з одного файлу
+import makeMessage, { userNames as names } from "./module-9-makeMessage.js"; // An import declaration can only be used at the top level of a module.
+// console.log(makeMessage("Jacob")); // "Welcome, Jacob!"
+names.forEach(name => console.log(makeMessage(name))); // "Welcome, Mikola!"; "Welcome, Alice!"; "Welcome, Robin!"
