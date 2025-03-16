@@ -1,4 +1,8 @@
-export default function makeMessage(username) {
+export default function cookMessage(username) {
+  return `Not welcome, ${username}!`;
+}
+
+export function makeMessage(username) {
   return `Welcome, ${username}!`;
 }
 

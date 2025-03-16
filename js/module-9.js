@@ -98,7 +98,12 @@ feedbackFormExample();
 // npm uninstall // npm r
 // npm run dev
 
-// import { userNames } from "./module-9-makeMessage.js"; // імпорт декількох значень з одного файлу
-import makeMessage, { userNames as names } from "./module-9-makeMessage.js"; // An import declaration can only be used at the top level of a module.
-// console.log(makeMessage("Jacob")); // "Welcome, Jacob!"
+import cookMessage, { makeMessage, userNames as names } from "./module-9-makeMessage.js";
+// An import declaration can only be used at the top level of a module.
+// import - імпорт за замовчуванням (export default)
+// import {} - іменований імпорт (export)
+console.log(cookMessage("Jacob")); // "Welcome, Jacob!
 names.forEach(name => console.log(makeMessage(name))); // "Welcome, Mikola!"; "Welcome, Alice!"; "Welcome, Robin!"
+
+import * as userSpecs from "./module-9-namespace.js";
+console.log(userSpecs); // {name: "Mango", age: 2, email: "mango@mail.com}
