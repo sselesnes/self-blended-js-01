@@ -29,6 +29,7 @@ function localStorageExample() {
   // localStorage.getItem("key");
   // localStorage.removeItem("key");
   // localStorage.clear();
+  // якщо нема такого ключа повертає null (не undefined) який можна обробляти через ??
 
   const settings = {
     theme: "dark",
