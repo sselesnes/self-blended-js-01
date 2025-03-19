@@ -13,6 +13,7 @@ clearTimeout(timerId1);
 //const intervalId = setInterval(callback, delay, arg1, arg2, ...);
 const timerId5 = setInterval(greet, 1000, `John`);
 setTimeout(() => clearInterval(timerId5), 5000);
+console.log(`timer cleared`);
 
 /// date
 const dateTemp = new Date();
