@@ -46,4 +46,22 @@ console.log(typeof timeNow, timeNow);
 // date.setHours(14, 25, 0); // Встановлюємо 14:25:00
 
 /// promises
-// const promise = new Promise((resolve, reject) => {
+// const promise = new Promise((resolve, reject) => { }
+// Очікування (pending) — початковий стан під час створення промісу.
+// Виконано (fulfilled) — операція виконана успішно з будь-яким результатом.
+// Відхилено (rejected) — операція відхилена з помилкою.
+
+const promiseExample = () => {
+  const isSuccess = true;
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve("Success! Value passed to resolve function");
+      } else {
+        reject("Error! Error passed to reject function");
+      }
+    }, 2000);
+  });
+  console.log(promise); // Об'єкт промісу
+};
+promiseExample();
