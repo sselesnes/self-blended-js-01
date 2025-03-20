@@ -363,49 +363,45 @@ fetchPosts().then(markupPosts);
 
 // 9.1
 async function fetchAndMarkupPosts2() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts").then(
-      response => {
-        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
-        return response.json();
-      }
-    );
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts").then(response => {
+    console.log(`Network response was ${response.status}`);
+    return response.json();
+  });
 
-    const markup = response
-      .filter(({ userId }) => userId === 3)
-      .slice(2, 5)
-      .map(({ userId, id, title, body }) => {
-        const formatTitle =
-          title[0].toUpperCase() +
-          title.slice(1, 32).toLowerCase() +
-          (title.length > 32 ? "..." : "");
-        const formatBody = body.slice(0, 64) + (body.length > 50 ? "..." : "");
-        return `<tr>
+  const markup = response
+    .filter(({ userId }) => userId === 3)
+    .slice(2, 5)
+    .map(({ userId, id, title, body }) => {
+      const formatTitle =
+        title[0].toUpperCase() +
+        title.slice(1, 32).toLowerCase() +
+        (title.length > 32 ? "..." : "");
+      const formatBody = body.slice(0, 64) + (body.length > 50 ? "..." : "");
+      return `<tr>
           <td>${id}</td>
           <td>${userId}</td>
           <td>${formatTitle}</td>
           <td>${formatBody}</td>
         </tr>`;
-      })
-      .join("");
+    })
+    .join("");
 
-    let table2 = document.querySelector(".table92");
-    if (!table2) {
-      table2 = document.createElement("table");
-      table2.classList.add("table92");
-      document.body.appendChild(table2);
-    }
+  let table2 = document.querySelector(".table92");
+  if (!table2) {
+    table2 = document.createElement("table");
+    table2.classList.add("table92");
+    document.body.appendChild(table2);
+  }
 
-    table2.innerHTML = `<thead><tr>
+  table2.innerHTML = `<thead><tr>
     <th>id</th>
     <th>user</th>
     <th>title</th>
     <th>body</th>
     </tr></thead>
     ${markup}`;
-  } catch (error) {
-    console.error("Error:", error);
-  }
 }
-
 fetchAndMarkupPosts2();
+
+//
+console.log("Hello, world!");
