@@ -403,5 +403,38 @@ async function fetchAndMarkupPosts2() {
 }
 fetchAndMarkupPosts2();
 
+// 9.2
+// import axios from "axios";
+// import _ from "lodash";
+async function fetchDataAndDisplay() {
+  try {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    const data = response.data;
+
+    const filteredData = _.filter(data, { userId: 5 });
+    const takePosts = _.take(filteredData, 5);
+    const processedData = _.map(takePosts, post => {
+      const truncatedTitle = _.truncate(post.title, { length: 32 });
+      const truncatedBody = _.truncate(post.body, { length: 64 });
+      return `<tr><td>${post.id}</td><td>${post.userId}</td><td>${truncatedTitle}</td><td>${truncatedBody}</td></tr>`;
+    });
+
+    const tableMarkup = `<thead><tr><th>id</th><th>user</th><th>title</th><th>body</th></tr></thead><tbody>${processedData.join(
+      ""
+    )}</tbody>`;
+
+    let tableElement = document.querySelector(".table93");
+    if (!tableElement) {
+      tableElement = document.createElement("table");
+      tableElement.classList.add("table93");
+      document.body.appendChild(tableElement);
+    }
+    tableElement.innerHTML = tableMarkup;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+fetchDataAndDisplay();
+
 //
-console.log("Hello, world!");
