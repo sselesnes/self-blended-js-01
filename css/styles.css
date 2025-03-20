@@ -98,4 +98,16 @@ textarea::placeholder {
 
 table {
   margin-top: 24px;
+  border-collapse: collapse;
+  border: 1px solid grey;
+}
+th,
+td {
+  font-family: monospace;
+  text-align: left;
+  border: 1px solid grey;
+}
+tr,
+td:nth-child(2) {
+  text-align: center;
 }

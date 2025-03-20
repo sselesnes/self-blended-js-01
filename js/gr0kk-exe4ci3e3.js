@@ -352,12 +352,12 @@ function markupPosts(posts) {
 const table =
   document.querySelector("table") ?? document.body.appendChild(document.createElement("table"));
 
-table.innerHTML = `<tr">
+table.innerHTML = `<thead><tr>
       <th>id</th>
       <th>user</th>
       <th>title</th>
       <th>body</th>
-    </tr>`;
+    </tr></thead>`;
 
 fetchPosts().then(markupPosts);
 
@@ -366,7 +366,7 @@ async function fetchAndMarkupPosts2() {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts").then(
       response => {
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
         return response.json();
       }
     );
@@ -377,9 +377,9 @@ async function fetchAndMarkupPosts2() {
       .map(({ userId, id, title, body }) => {
         const formatTitle =
           title[0].toUpperCase() +
-          title.slice(1, 20).toLowerCase() +
-          (title.length > 20 ? "..." : "");
-        const formatBody = body.slice(0, 50) + (body.length > 50 ? "..." : "");
+          title.slice(1, 32).toLowerCase() +
+          (title.length > 32 ? "..." : "");
+        const formatBody = body.slice(0, 64) + (body.length > 50 ? "..." : "");
         return `<tr>
           <td>${id}</td>
           <td>${userId}</td>
@@ -396,12 +396,12 @@ async function fetchAndMarkupPosts2() {
       document.body.appendChild(table2);
     }
 
-    table2.innerHTML = `<tr>
+    table2.innerHTML = `<thead><tr>
     <th>id</th>
     <th>user</th>
     <th>title</th>
     <th>body</th>
-    </tr>
+    </tr></thead>
     ${markup}`;
   } catch (error) {
     console.error("Error:", error);
