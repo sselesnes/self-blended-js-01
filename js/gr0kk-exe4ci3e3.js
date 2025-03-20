@@ -349,12 +349,8 @@ function markupPosts(posts) {
   }
 }
 
-let table = document.querySelector("table .table90");
-if (!table) {
-  table = document.createElement("table");
-  table.classList.add("table90");
-  document.body.appendChild(table);
-}
+const table =
+  document.querySelector("table") ?? document.body.appendChild(document.createElement("table"));
 
 table.innerHTML = `<tr">
       <th>id</th>
@@ -366,54 +362,50 @@ table.innerHTML = `<tr">
 fetchPosts().then(markupPosts);
 
 // 9.1
-async function fetchAndMarkupPosts() {
+async function fetchAndMarkupPosts2() {
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const promise = await response.json();
-    return promise
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts").then(
+      response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      }
+    );
 
-      .map(({ userId, id, title, body }) => ({
-        postNumber: id,
-        user: userId,
-        title:
+    const markup = response
+      .filter(({ userId }) => userId === 3)
+      .slice(2, 5)
+      .map(({ userId, id, title, body }) => {
+        const formatTitle =
           title[0].toUpperCase() +
           title.slice(1, 20).toLowerCase() +
-          (title.length > 20 ? "..." : ""),
-        body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
-      }))
-      .filter(({ user }) => user === 2)
-      .slice(0, 5);
+          (title.length > 20 ? "..." : "");
+        const formatBody = body.slice(0, 50) + (body.length > 50 ? "..." : "");
+        return `<tr>
+          <td>${id}</td>
+          <td>${userId}</td>
+          <td>${formatTitle}</td>
+          <td>${formatBody}</td>
+        </tr>`;
+      })
+      .join("");
+
+    let table2 = document.querySelector(".table92");
+    if (!table2) {
+      table2 = document.createElement("table");
+      table2.classList.add("table92");
+      document.body.appendChild(table2);
+    }
+
+    table2.innerHTML = `<tr>
+    <th>id</th>
+    <th>user</th>
+    <th>title</th>
+    <th>body</th>
+    </tr>
+    ${markup}`;
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
-function markupPosts2(posts) {
-  const table = document.querySelector("table");
-  if (table) {
-    const tableFilteredPosts = posts.map(({ postNumber, user, title, body }) => {
-      return `<tr>
-          <td>${postNumber}</td>
-          <td>${user}</td>
-          <td>${title}</td>
-          <td>${body}</td>
-        </tr>`;
-    });
-    table.innerHTML += tableFilteredPosts.join("");
-  }
-}
-
-// const table2 =
-//   document.querySelector("table") ?? document.body.appendChild(document.createElement("table"));
-
-// table.innerHTML = `<tr>
-//       <th>id</th>
-//       <th>user</th>
-//       <th>title</th>
-//       <th>body</th>
-//     </tr>`;
-
-// fetchAndMarkupPosts().then(markupPosts2);
+fetchAndMarkupPosts2();
