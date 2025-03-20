@@ -80,6 +80,13 @@ function feedbackFormExample() {
 }
 feedbackFormExample();
 
+// node.js install
+// node -v
+
+// git clone `git-hub-teamRepoLink`
+// git remote -v
+// git remote set-url origin `git-hub-myRepoLink`
+
 // vite init
 // https://www.edu.goit.global/uk/learn/29773997/18936918/20332333/training?blockId=20332348
 

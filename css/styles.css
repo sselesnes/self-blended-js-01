@@ -95,3 +95,7 @@ textarea::placeholder {
     background: #6c8cff;
   }
 }
+
+table {
+  margin-top: 24px;
+}

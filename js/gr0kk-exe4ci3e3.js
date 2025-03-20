@@ -302,19 +302,20 @@ fnBind2();
 //   fetch("https://jsonplaceholder.typicode.com/posts")
 //     .then(response => response.json())
 //     .then(data => (result = data));
+
 //   return result; // Не спрацює, бо fetch асинхронний
 // };
 // console.log(posts93()); // undefined
 
-const fetchAndFormatPosts90 = async () => {
-  // async function fetchAndFormatPosts90() {
+// const fetchPosts = async () => {
+// const markupPosts = await fetchPosts();
+
+async function fetchPosts() {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-
     const promise = await response.json();
     return promise
       .map(({ userId, id, title, body }) => ({
@@ -331,10 +332,88 @@ const fetchAndFormatPosts90 = async () => {
   } catch (error) {
     console.error("Error:", error);
   }
-};
+}
 
-// fetchAndFormatPosts90().then(console.table);
-const filteredPosts = await fetchAndFormatPosts90();
-console.table(filteredPosts);
+function markupPosts(posts) {
+  const table = document.querySelector("table");
+  if (table) {
+    const tableFilteredPosts = posts.map(({ postNumber, user, title, body }) => {
+      return `<tr>
+          <td>${postNumber}</td>
+          <td>${user}</td>
+          <td>${title}</td>
+          <td>${body}</td>
+        </tr>`;
+    });
+    table.innerHTML += tableFilteredPosts.join("");
+  }
+}
 
-// 10
+let table = document.querySelector("table .table90");
+if (!table) {
+  table = document.createElement("table");
+  table.classList.add("table90");
+  document.body.appendChild(table);
+}
+
+table.innerHTML = `<tr">
+      <th>id</th>
+      <th>user</th>
+      <th>title</th>
+      <th>body</th>
+    </tr>`;
+
+fetchPosts().then(markupPosts);
+
+// 9.1
+async function fetchAndMarkupPosts() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const promise = await response.json();
+    return promise
+
+      .map(({ userId, id, title, body }) => ({
+        postNumber: id,
+        user: userId,
+        title:
+          title[0].toUpperCase() +
+          title.slice(1, 20).toLowerCase() +
+          (title.length > 20 ? "..." : ""),
+        body: body.slice(0, 50) + (body.length > 50 ? "..." : ""),
+      }))
+      .filter(({ user }) => user === 2)
+      .slice(0, 5);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function markupPosts2(posts) {
+  const table = document.querySelector("table");
+  if (table) {
+    const tableFilteredPosts = posts.map(({ postNumber, user, title, body }) => {
+      return `<tr>
+          <td>${postNumber}</td>
+          <td>${user}</td>
+          <td>${title}</td>
+          <td>${body}</td>
+        </tr>`;
+    });
+    table.innerHTML += tableFilteredPosts.join("");
+  }
+}
+
+// const table2 =
+//   document.querySelector("table") ?? document.body.appendChild(document.createElement("table"));
+
+// table.innerHTML = `<tr>
+//       <th>id</th>
+//       <th>user</th>
+//       <th>title</th>
+//       <th>body</th>
+//     </tr>`;
+
+// fetchAndMarkupPosts().then(markupPosts2);
