@@ -446,11 +446,9 @@ async function fetchDataAndDisplay() {
     const tableMarkup = `<thead><tr><th>id</th><th>user</th><th>title</th><th>body</th></tr></thead>
     <tbody>${processedData.join("")}</tbody>`;
 
-    const processedStats = [
-      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}, ${postIdMean}`,
-    ];
+    const processedStats = `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}, ${postIdMean}`;
     const tableStats = `<thead><tr><th>min</th><th>max</th><th>sum, mean</th></thead>
-    <tbody>${processedStats.join("")}</tbody>`;
+    <tbody>${[processedStats].join("")}</tbody>`;
 
     let table93 = document.querySelector(".table93");
     table93 = document.createElement("table");
@@ -461,7 +459,6 @@ async function fetchDataAndDisplay() {
     console.error("Error fetching data:", error);
   }
 }
-
 fetchDataAndDisplay();
 
 //

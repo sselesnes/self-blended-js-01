@@ -308,6 +308,7 @@ const totalQuantityByProduct22 = orders =>
 console.table(totalQuantityByProduct22(orders22));
 
 //
+// toCamelCase
 const toCamelCase = str =>
   str
     .split(/[-_]/) // прибираємо '-' і ' ' та розкладуємо на окремі слова
@@ -326,9 +327,21 @@ console.log(toCamelCase("The_Stealth_Warrior")); // "theStealthWarrior"
 console.log(toCamelCase("the_stealth-warrior")); // "theStealthWarrior"
 console.log(toCamelCase("A-B-C")); // "aBC"
 
+//
+// import _ from "lodash";
+const toCamelCase2 = str => _.camelCase(str);
+
+console.log(toCamelCase2("the-stealth-warrior")); // "theStealthWarrior"
+console.log(toCamelCase2("The_Stealth_Warrior")); // "theStealthWarrior"
+console.log(toCamelCase2("the_stealth-warrior")); // "theStealthWarrior"
+console.log(toCamelCase2("A-B-C")); // "aBC"
+
+//
 // рахуємо голосні (не приголосні)
 const getVowelCount1 = sentence => sentence.match(/[aeiou]/gi).length; // RegExp g - шукати всі збіги (не тільки перший), i - ігнорування регістра (великі маленьки)
 console.log(getVowelCount1(`Lorem, ipsum. Dolor`)); // 6
 
 const getVowelCount2 = sentence => sentence.replace(/[^aeiouAEIOU]/g, "").length;
 console.log(getVowelCount2(`Lorem, ipsum. Dolor`)); // 6
+
+//

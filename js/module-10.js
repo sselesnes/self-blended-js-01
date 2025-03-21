@@ -65,3 +65,47 @@ const promiseExample = () => {
   console.log(promise); // Об'єкт промісу
 };
 promiseExample();
+
+// promise fulfilled / rejected / fulfilled or rejected
+//
+// promise.then(onResolve, onReject)
+// promise.then(onResolve).catch(onReject)
+// promise.then(onResolve).catch(onReject).finally(onFinally)
+
+function promiseExample2() {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(5);
+    }, 2000);
+  });
+
+  promise
+    .then(value => {
+      console.log(value); // 5
+      return value * 2;
+    })
+    .then(value => {
+      console.log(value); // 10
+      return value * 3;
+    })
+    .then(value => {
+      console.log(value); // 30
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      console.log("finally");
+    });
+}
+promiseExample2();
+
+//Промісифікація — це перетворення функції з колбеками таким чином, щоб вона не приймала колбеки, а повертала проміс. Така функція називається промісифікована.
+
+// Колбеки — це функції, проміси — це об'єкти.
+// Колбеки передаються як аргументи функції, що виконує асинхронну операцію, а проміси створюються всередині цієї функції і повертаються як її результат.
+// Колбеки обробляють успішне або неуспішне завершення операції, проміси нічого не обробляють, тільки зберігають поточний стан асинхронної операції.
+// Колбеки можуть обробляти декілька подій, проміси пов'язані тільки з однією подією.
+// Колбеки не мають методів then, catch, finally, проміси мають.
+// Колбеки не мають стану, проміси мають.
+// Колбеки не можуть бути скасовані, проміси можуть.
