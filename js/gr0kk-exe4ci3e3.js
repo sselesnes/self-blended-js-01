@@ -411,7 +411,7 @@ async function fetchDataAndDisplay() {
     const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
     const data = response.data;
 
-    const lightenWord = "dolorum";
+    const lightenWord = "delectus";
 
     function lightenToBold(text) {
       return _.replace(
@@ -427,8 +427,14 @@ async function fetchDataAndDisplay() {
       });
     });
 
+    let postIdMin, postIdMax, postIdSum;
+
     const takePosts = _.take(filteredData, 5);
     const processedData = _.map(takePosts, post => {
+      postIdMin = _.min([post.id, postIdMin]);
+      postIdMax = _.max([post.id, postIdMax]);
+      postIdSum = _.sum([post.id, postIdSum]);
+
       const formattedTitle = lightenToBold(post.title);
       const truncatedTitle = _.truncate(formattedTitle, { length: 32 });
       const formattedBody = lightenToBold(post.body);
@@ -439,13 +445,19 @@ async function fetchDataAndDisplay() {
     const tableMarkup = `<thead><tr><th>id</th><th>user</th><th>title</th><th>body</th></tr></thead>
     <tbody>${processedData.join("")}</tbody>`;
 
+    const processedStats = [
+      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}</td>`,
+    ];
+    const tableStats = `<thead><tr><th>min</th><th>max</th><th>sum</th></thead>
+    <tbody>${processedStats.join("")}</tbody>`;
+
     let tableElement = document.querySelector(".table93");
     if (!tableElement) {
       tableElement = document.createElement("table");
       tableElement.classList.add("table93");
       document.body.appendChild(tableElement);
     }
-    tableElement.innerHTML = tableMarkup;
+    tableElement.innerHTML = tableMarkup + tableStats;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
