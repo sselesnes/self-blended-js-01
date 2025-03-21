@@ -427,18 +427,19 @@ async function fetchDataAndDisplay() {
       });
     });
 
-    let postIdMin, postIdMax, postIdSum;
+    let postIdMin, postIdMax, postIdSum, postIdMean;
 
     const takePosts = _.take(filteredData, 5);
     const processedData = _.map(takePosts, post => {
       postIdMin = _.min([post.id, postIdMin]);
       postIdMax = _.max([post.id, postIdMax]);
       postIdSum = _.sum([post.id, postIdSum]);
+      postIdMean = _.round(_.mean([post.id, postIdMean]), 2);
 
       const formattedTitle = lightenToBold(post.title);
-      const truncatedTitle = _.truncate(formattedTitle, { length: 32 });
+      const truncatedTitle = _.truncate(formattedTitle, { length: 64 });
       const formattedBody = lightenToBold(post.body);
-      const truncatedBody = _.truncate(formattedBody, { length: 128 });
+      const truncatedBody = _.truncate(formattedBody, { length: 160 });
       return `<tr><td>${post.id}</td><td>${post.userId}</td><td>${truncatedTitle}</td><td>${truncatedBody}</td></tr>`;
     });
 
@@ -446,9 +447,8 @@ async function fetchDataAndDisplay() {
     <tbody>${processedData.join("")}</tbody>`;
 
     const processedStats = [
-      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}</td>`,
-    ];
-    const tableStats = `<thead><tr><th>min</th><th>max</th><th>sum</th></thead>
+      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}, ${postIdMean}`];
+    const tableStats = `<thead><tr><th>min</th><th>max</th><th>sum, mean</th></thead>
     <tbody>${processedStats.join("")}</tbody>`;
 
     let tableElement = document.querySelector(".table93");
