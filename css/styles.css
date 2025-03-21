@@ -103,12 +103,15 @@ table {
 }
 th,
 td {
-  font-family: monospace;
+  font-family: arial;
   text-align: left;
-  border: 1px solid grey;
+  border: 1px dashed grey;
 }
 th,
 tr,
 td:nth-child(2) {
   text-align: center;
+}
+strong {
+  color: goldenrod;
 }

@@ -439,7 +439,7 @@ async function fetchDataAndDisplay() {
       const formattedTitle = lightenToBold(post.title);
       const truncatedTitle = _.truncate(formattedTitle, { length: 64 });
       const formattedBody = lightenToBold(post.body);
-      const truncatedBody = _.truncate(formattedBody, { length: 160 });
+      const truncatedBody = _.truncate(formattedBody, { length: 180 });
       return `<tr><td>${post.id}</td><td>${post.userId}</td><td>${truncatedTitle}</td><td>${truncatedBody}</td></tr>`;
     });
 
@@ -447,17 +447,16 @@ async function fetchDataAndDisplay() {
     <tbody>${processedData.join("")}</tbody>`;
 
     const processedStats = [
-      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}, ${postIdMean}`];
+      `<tr><td>${postIdMin}</td><td>${postIdMax}</td><td>${postIdSum}, ${postIdMean}`,
+    ];
     const tableStats = `<thead><tr><th>min</th><th>max</th><th>sum, mean</th></thead>
     <tbody>${processedStats.join("")}</tbody>`;
 
-    let tableElement = document.querySelector(".table93");
-    if (!tableElement) {
-      tableElement = document.createElement("table");
-      tableElement.classList.add("table93");
-      document.body.appendChild(tableElement);
-    }
-    tableElement.innerHTML = tableMarkup + tableStats;
+    let table93 = document.querySelector(".table93");
+    table93 = document.createElement("table");
+    table93.classList.add("table93");
+    document.body.appendChild(table93);
+    table93.innerHTML = tableMarkup + tableStats;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
