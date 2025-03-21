@@ -411,17 +411,33 @@ async function fetchDataAndDisplay() {
     const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
     const data = response.data;
 
-    const filteredData = _.filter(data, { userId: 5 });
+    const lightenWord = "dolorum";
+
+    function lightenToBold(text) {
+      return _.replace(
+        text,
+        new RegExp(`\\b${lightenWord}\\b`, "gi"),
+        `<strong>${lightenWord}</strong>`
+      );
+    }
+
+    const filteredData = _.filter(data, item => {
+      return _.some(item, value => {
+        return _.includes(String(value).toLowerCase(), lightenWord);
+      });
+    });
+
     const takePosts = _.take(filteredData, 5);
     const processedData = _.map(takePosts, post => {
-      const truncatedTitle = _.truncate(post.title, { length: 32 });
-      const truncatedBody = _.truncate(post.body, { length: 64 });
+      const formattedTitle = lightenToBold(post.title);
+      const truncatedTitle = _.truncate(formattedTitle, { length: 32 });
+      const formattedBody = lightenToBold(post.body);
+      const truncatedBody = _.truncate(formattedBody, { length: 128 });
       return `<tr><td>${post.id}</td><td>${post.userId}</td><td>${truncatedTitle}</td><td>${truncatedBody}</td></tr>`;
     });
 
-    const tableMarkup = `<thead><tr><th>id</th><th>user</th><th>title</th><th>body</th></tr></thead><tbody>${processedData.join(
-      ""
-    )}</tbody>`;
+    const tableMarkup = `<thead><tr><th>id</th><th>user</th><th>title</th><th>body</th></tr></thead>
+    <tbody>${processedData.join("")}</tbody>`;
 
     let tableElement = document.querySelector(".table93");
     if (!tableElement) {
