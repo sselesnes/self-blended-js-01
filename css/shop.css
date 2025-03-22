@@ -108,3 +108,9 @@
 .cart-item:hover {
   transform: translateY(-5px);
 }
+
+.total-headline {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

@@ -28,8 +28,8 @@ function createMarkup(arr) {
             <h2>${name}</h2>
             <p>Quantity: ${qty}</p>
             <p>Total price: ${qty * price} грн</p><div class="qty-buttons">
-            <button class="clear-cart-btn js-remove-item-btn" data-id="${id}">-1</button>
-            <button class="clear-cart-btn js-add-item-btn" data-id="${id}">+1</button>
+            <button class="clear-cart-btn js-remove-item-btn" data-id="${id}">-</button>
+            <button class="clear-cart-btn js-add-item-btn" data-id="${id}">+</button>
             </div></li>
     `
     )
