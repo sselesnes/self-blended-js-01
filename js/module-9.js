@@ -21,6 +21,50 @@ function jsonExample() {
 jsonExample();
 
 //
+class User {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  greet() {
+    return `Hello, ${this.name}!`;
+  }
+}
+
+const user = new User("John", 30);
+console.log(user.greet());
+
+// Серіалізація
+const jsonClassSerializated = JSON.stringify(user);
+console.log(jsonClassSerializated);
+
+// Десеріалізація з `reviver` (функція-відроджувач)
+const parsedUser = JSON.parse(jsonClassSerializated, (key, value) =>
+  key ? value : new User(value.name, value.age)
+);
+console.log(parsedUser.greet()); // "Hello, John!"
+
+//
+function someFunctionExample() {
+  console.log("someFunctionExample");
+}
+console.log(someFunctionExample);
+
+// Серіалізація з `replacer`
+const jsonSomeFunctionExample = JSON.stringify(someFunctionExample, (key, value) => {
+  return typeof value === "function" ? value.toString() : value;
+});
+console.log(jsonSomeFunctionExample); // "function someFunctionExample() {\r\n  console.log(\"someFunctionExample\");\r\n}"
+
+// десеріалізація з reviver
+const parsedSomeFunctionExample = JSON.parse(jsonSomeFunctionExample, (key, value) => {
+  return typeof value === "string" && value.startsWith("function") ? eval(`(${value})`) : value;
+});
+// код використовує JSON.parse() з функцією-відроджувачем (reviver function) для обробки значень JSON. Якщо значення є рядком, який починається з "function" - використовуємо eval() для перетворення цього рядка на функцію JavaScript. eval() виконує рядок як код JavaScript і повертає результат виконання.
+console.log(parsedSomeFunctionExample);
+parsedSomeFunctionExample();
+
+//
 function localStorageExample() {
   console.log(window.localStorage);
   console.log(localStorage);
