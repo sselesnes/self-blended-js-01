@@ -100,7 +100,7 @@ function promiseExample2() {
 }
 promiseExample2();
 
-//Промісифікація — це перетворення функції з колбеками таким чином, щоб вона не приймала колбеки, а повертала проміс. Така функція називається промісифікована.
+// Промісифікація — це перетворення функції з колбеками таким чином, щоб вона не приймала колбеки, а повертала проміс. Така функція називається промісифікована.
 
 // Колбеки — це функції, проміси — це об'єкти.
 // Колбеки передаються як аргументи функції, що виконує асинхронну операцію, а проміси створюються всередині цієї функції і повертаються як її результат.
@@ -109,3 +109,121 @@ promiseExample2();
 // Колбеки не мають методів then, catch, finally, проміси мають.
 // Колбеки не мають стану, проміси мають.
 // Колбеки не можуть бути скасовані, проміси можуть.
+
+// проміс через new Promise()
+new Promise(resolve => resolve("success value"))
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+new Promise((resolve, reject) => reject("error"))
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+/// Promise.resolve() і Promise.reject() — це статичні методи для створення промісів, що миттєво успішно виконуються або відхиляються. Вони працюють аналогічно new Promise(), повертають проміс, але мають коротший синтаксис
+
+Promise.resolve("success value")
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+Promise.reject("error")
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+//
+function promiseExample3() {
+  const makePromise = ({ value, delay, shouldResolve = true }) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (shouldResolve) {
+          resolve(value);
+        } else {
+          reject(value);
+        }
+      }, delay);
+    });
+  };
+
+  makePromise({ value: "A", delay: 1000 })
+    .then(value => console.log(value)) // "A"
+    .catch(error => console.log(error));
+
+  makePromise({ value: "B", delay: 3000 })
+    .then(value => console.log(value)) // "B"
+    .catch(error => console.log(error));
+
+  makePromise({ value: "C", delay: 2000, shouldResolve: false })
+    .then(value => console.log(value))
+    .catch(error => console.log(error)); // "C"
+}
+promiseExample3();
+
+//
+function promiseExample4() {
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Fulfilled A");
+    }, 1000);
+  })
+    .then(value => console.log(value))
+    .catch(error => console.log(error));
+
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Fulfilled B");
+    }, 3000);
+  })
+    .then(value => console.log(value))
+    .catch(error => console.log(error));
+
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject("Rejected C");
+    }, 2000);
+  })
+    .then(value => console.log(value))
+    .catch(error => console.log(error)); // "Rejected C"
+}
+promiseExample4();
+
+/// Обробка множинних промісів метод Promise.all()
+//  Promise.all очікує виконання всіх переданих промісів, і якщо хоча б один із промісів відхилено (завершено з помилкою), то Promise.all також відхилиться та поверне відхилення.
+
+function promiseExample5() {
+  const p1 = Promise.resolve(1);
+  const p2 = Promise.resolve(2);
+  const p3 = Promise.resolve(3);
+
+  Promise.all([p1, p2, p3])
+    .then(values => console.log(values)) // [1, 2, 3]
+    .catch(error => console.log(error));
+}
+promiseExample5();
+
+// метод Promise.allSettled() чекає виконання всіх промісів незалежно від того, чи були деякі або навіть всі проміси відхилені.
+
+function promiseExample6() {
+  const p1 = Promise.resolve(1);
+  const p2 = Promise.reject("Rejected promise 2");
+  const p3 = Promise.resolve(3);
+
+  Promise.allSettled([p1, p2, p3]).then(values => console.log(values));
+}
+promiseExample6();
+
+/// Метод Promise.race()
+// Метод Promise.race приймає масив промісів і повертає "найшвидший", тобто перший виконаний або відхилений проміс з переданих, разом зі значенням або причиною його відхилення.
+
+function promiseExample7() {
+  const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(1), 2000);
+  });
+
+  const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => reject(2), 1000);
+  });
+
+  Promise.race([p1, p2])
+    .then(value => console.log(value))
+    .catch(error => console.log(error)); // 2
+}
+promiseExample7();
