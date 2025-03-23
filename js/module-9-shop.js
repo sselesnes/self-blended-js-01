@@ -68,10 +68,10 @@ function createMarkup(arr) {
   return arr
     .map(
       ({ id, img, name, price, description }) => `
-        <li class="product-card js-product" data-id="${id}">
+        <li class="product-card js-product" data-id="${id}"><div>
             <img src="${img}" alt="${name}" class="product-img"/>
             <h2 class="product-title">${name}</h2>
-            <p class="product-description">${description}</p>
+            <p class="product-description">${description}</p></div>
             <div><p class="product-price">${price} грн</p>
             <button class="product-add-btn js-add">Add to basket</button></div>
         </li>
