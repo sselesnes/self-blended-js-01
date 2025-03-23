@@ -53,12 +53,20 @@
   transition: background-color 0.3s ease;
 }
 
-.product-add-btn:hover {
-  background-color: #0056b3;
+@media (pointer: fine) {
+  .product-add-btn:hover {
+    background-color: #0056b3;
+  }
+}
+
+@media (pointer: coarse) {
+  .product-add-btn:active {
+    background-color: #0056b3;
+  }
 }
 
 .total-price-label {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   color: #333;
   margin-top: 10px;
