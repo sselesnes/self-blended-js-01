@@ -347,6 +347,7 @@ function markupPosts(posts) {
     });
     table.innerHTML += tableFilteredPosts.join("");
   }
+  console.log(`%cfetchPosts ${new Date() - dateStart0} ms`, "color: green;");
 }
 
 const table =
@@ -359,10 +360,12 @@ table.innerHTML = `<thead><tr>
       <th>body</th>
     </tr></thead>`;
 
+const dateStart0 = new Date();
 fetchPosts().then(markupPosts);
 
 // 9.1
 async function fetchAndMarkupPosts2() {
+  const dateStart = new Date();
   const response = await fetch("https://jsonplaceholder.typicode.com/posts").then(response => {
     console.log(`Network response was ${response.status}`);
     return response.json();
@@ -400,6 +403,7 @@ async function fetchAndMarkupPosts2() {
     <th>body</th>
     </tr></thead>
     ${markup}`;
+  console.log(`%cfetchAndMarkupPosts2 ${new Date() - dateStart} ms`, "color: green;");
 }
 fetchAndMarkupPosts2();
 
@@ -407,6 +411,7 @@ fetchAndMarkupPosts2();
 // import axios from "axios";
 // import _ from "lodash";
 async function fetchDataAndDisplay() {
+  const dateStart = new Date();
   try {
     const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
     const data = response.data;
@@ -458,7 +463,9 @@ async function fetchDataAndDisplay() {
   } catch (error) {
     console.error("Error fetching data:", error);
   }
+  console.log(`%cfetchDataAndDisplay ${new Date() - dateStart} ms`, "color: green;");
 }
+
 fetchDataAndDisplay();
 
 //
