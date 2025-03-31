@@ -13,6 +13,9 @@ body {
   font-weight: 400;
   /* letter-spacing: 0.04em; */
 }
+a {
+  text-decoration: none;
+}
 button,
 input,
 textarea {

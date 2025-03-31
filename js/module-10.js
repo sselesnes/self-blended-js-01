@@ -227,3 +227,23 @@ function promiseExample7() {
     .catch(error => console.log(error)); // 2
 }
 promiseExample7();
+
+function promiseExample8() {
+  const lalala = new Promise((resolve, reject) => {
+    const random = Math.random();
+    setTimeout(() => {
+      if (random > 0.5) {
+        resolve("Ok");
+      }
+      reject("oops");
+    }, 1000);
+  });
+
+  console.log(lalala);
+
+  lalala
+    .then(tototo => console.log("then", tototo))
+    .catch(error => console.log("catch", error))
+    .finally(() => console.log("finally"));
+}
+promiseExample8();
