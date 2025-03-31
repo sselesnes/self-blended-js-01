@@ -50,3 +50,44 @@ function asynсExample2() {
   console.log("4"); // макропроцес
 }
 asynсExample2(); // 1 4 3 2
+
+function asynсExample3() {
+  const startTime = Date.now();
+  const res1 = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const currentTime = Date.now();
+        const deltaTime = currentTime - startTime;
+        resolve({ title: "first", time: deltaTime });
+      }, 2000);
+    });
+  };
+
+  const res2 = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const currentTime = Date.now();
+        const deltaTime = currentTime - startTime;
+        resolve({ title: "second", time: deltaTime });
+      }, 3000);
+    });
+  };
+
+  const res3 = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const currentTime = Date.now();
+        const deltaTime = currentTime - startTime;
+        resolve({ title: "third", time: deltaTime });
+      }, 4000);
+    });
+  };
+
+  //promise.all, promise.race, promise.allSettled, promise.any
+
+  Promise.all([res1(), res2(), res3()])
+    .then(res => console.log(res))
+    .catch(error => console.log("catch", error))
+    .finally(() => console.log("finally"));
+}
+asynсExample3();
