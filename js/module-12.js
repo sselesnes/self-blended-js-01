@@ -68,7 +68,7 @@ function asynсExample3() {
       setTimeout(() => {
         const currentTime = Date.now();
         const deltaTime = currentTime - startTime;
-        resolve({ title: "second", time: deltaTime });
+        reject({ title: "second", time: deltaTime });
       }, 3000);
     });
   };
@@ -83,11 +83,14 @@ function asynсExample3() {
     });
   };
 
-  //promise.all, promise.race, promise.allSettled, promise.any
+  // promise.all, promise.race, promise.allSettled, promise.any
 
   Promise.all([res1(), res2(), res3()])
     .then(res => console.log(res))
     .catch(error => console.log("catch", error))
     .finally(() => console.log("finally"));
+
+  // promise.allSettled - повертає масив об'єктів, в яких буде вказана успішність або помилка.
+  Promise.allSettled([res1(), res2(), res3()]).then(res => console.log(res));
 }
 asynсExample3();
