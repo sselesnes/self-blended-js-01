@@ -69,3 +69,31 @@ function axiosExample() {
     .catch(error => console.log(error));
 }
 axiosExample();
+
+function axiosExample2() {
+  const instanceJSON = axios.create({
+    baseURL: "https://jsonplaceholder.typicode.com/",
+    headers: {
+      authorization: "SomeOneIsHere",
+    },
+  });
+
+  instanceJSON
+    .get("posts", {
+      params: {
+        _limit: 5,
+      },
+    })
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error));
+
+  instanceJSON
+    .get("users", {
+      params: {
+        _limit: 3,
+      },
+    })
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error));
+}
+axiosExample2();
