@@ -10,7 +10,8 @@ $(document).ready(function () {
     }, 1000);
 
     counter++;
-    $("body").append(`<p class="counter-text">pressed ${counter}</p>`);
+    $createBtn.after(`<p class="counter-text">pressed ${counter}</p>`);
+    // $("body").append(`<p class="counter-text">pressed ${counter}</p>`);
   });
 
   $destroyBtn.on("click", function () {
