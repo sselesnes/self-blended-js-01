@@ -126,3 +126,10 @@ body > a:first-of-type {
   display: block;
   margin-bottom: 24px;
 }
+p.counter-text {
+  margin: 5px 0;
+  color: #333;
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 10px;
+}
