@@ -133,3 +133,8 @@ p.counter-text {
   display: inline-block;
   margin-left: 10px;
 }
+.jquery-controls {
+  display: inline-flex;
+  gap: 4px;
+  flex-direction: column;
+}

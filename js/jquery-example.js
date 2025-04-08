@@ -11,6 +11,7 @@ $(document).ready(function () {
       onComplete: () => {
         gsap.to($(this), {
           duration: 0.5,
+          fontSize: "16px",
           backgroundColor: "#4e75ff",
         });
       },
