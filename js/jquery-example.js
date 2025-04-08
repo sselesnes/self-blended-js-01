@@ -4,10 +4,17 @@ $(document).ready(function () {
   let counter = 0;
 
   $createBtn.on("click", function () {
-    $(this).css("backgroundColor", "#FFFFFF");
-    setTimeout(() => {
-      $(this).css("backgroundColor", ""); // CSS button property
-    }, 1000);
+    gsap.to($(this), {
+      duration: 0.3,
+      fontSize: "1.2em",
+      backgroundColor: "#f00",
+      onComplete: () => {
+        gsap.to($(this), {
+          duration: 0.5,
+          backgroundColor: "#4e75ff",
+        });
+      },
+    });
 
     counter++;
 
